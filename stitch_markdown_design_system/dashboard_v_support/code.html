@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>V-Support - Beranda</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#633f0f",
+                        "on-surface": "#1a1c1e",
+                        "secondary-fixed-dim": "#4edea3",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container": "#efedf1",
+                        "accent-amber": "#F59E0B",
+                        "primary-container": "#1a365d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "on-tertiary-fixed": "#2b1700",
+                        "primary-fixed": "#d6e3ff",
+                        "inverse-primary": "#adc7f7",
+                        "surface-dim": "#dad9dd",
+                        "tertiary-fixed-dim": "#f2bc82",
+                        "primary-fixed-dim": "#adc7f7",
+                        "tertiary-container": "#4f2e00",
+                        "surface": "#faf9fd",
+                        "on-primary": "#ffffff",
+                        "text-main": "#1E293B",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#c6955e",
+                        "on-secondary-container": "#00714d",
+                        "on-primary-container": "#86a0cd",
+                        "on-secondary": "#ffffff",
+                        "outline": "#74777f",
+                        "surface-bright": "#faf9fd",
+                        "on-background": "#1a1c1e",
+                        "background": "#faf9fd",
+                        "surface-container-highest": "#e3e2e6",
+                        "surface-container-low": "#f4f3f7",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-secondary-fixed-variant": "#005236",
+                        "inverse-on-surface": "#f1f0f4",
+                        "primary": "#002045",
+                        "on-secondary-fixed": "#002113",
+                        "inverse-surface": "#2f3033",
+                        "secondary": "#006c49",
+                        "on-surface-variant": "#43474e",
+                        "surface-card": "#FFFFFF",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffddba",
+                        "surface-tint": "#455f88",
+                        "surface-container-high": "#e9e7eb",
+                        "surface-variant": "#e3e2e6",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#6cf8bb",
+                        "tertiary": "#321b00",
+                        "on-primary-fixed": "#001b3c",
+                        "error": "#ba1a1a",
+                        "text-muted": "#64748B",
+                        "on-error-container": "#93000a",
+                        "surface-bg": "#F8F9FA"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "touch-target-min": "2.75rem",
+                        "margin-page": "1rem",
+                        "gutter-stack": "1rem",
+                        "padding-card": "1.25rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "odometer-display": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["28px", { "lineHeight": "34px", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "label-bold": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "odometer-display": ["32px", { "lineHeight": "40px", "fontWeight": "800" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #F8F9FA; }
+        .ambient-shadow { box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .fab-shadow { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface pb-[80px]">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-surface-dim shadow-sm flex justify-between items-center px-margin-page h-14 z-40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed">motorcycle</span>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">V-Support</h1>
+</div>
+<div class="flex items-center">
+<button class="flex items-center gap-2 bg-surface-container-high px-3 py-1.5 rounded-full text-primary text-sm font-medium hover:bg-surface-variant transition-colors">
+                Honda Vario 150
+                <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+</header>
+<main class="p-margin-page space-y-gutter-stack">
+<!-- Greeting -->
+<div class="pt-2">
+<h2 class="font-headline-lg text-headline-lg text-text-main">Halo, Pengguna!</h2>
+<p class="font-body-md text-body-md text-text-muted mt-1">Berikut ringkasan kondisi kendaraan Anda.</p>
+</div>
+<!-- Hero Card: Health Status & Odometer -->
+<div class="bg-surface-card rounded-xl ambient-shadow p-padding-card flex flex-col items-center">
+<div class="relative w-32 h-32 mb-4">
+<!-- Simple SVG Gauge representation -->
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="#e3e2e6" stroke-width="10"></circle>
+<circle class="transition-all duration-1000" cx="50" cy="50" fill="none" r="45" stroke="#006c49" stroke-dasharray="283" stroke-dashoffset="56" stroke-width="10"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-3xl">check_circle</span>
+<span class="font-label-bold text-label-bold text-secondary mt-1">Kondisi Prima</span>
+</div>
+</div>
+<div class="text-center">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider block mb-1">Total Jarak Tempuh</span>
+<span class="font-odometer-display text-odometer-display text-primary">24.500 <span class="text-lg text-text-muted font-normal">KM</span></span>
+</div>
+</div>
+<!-- Section: Perlu Perhatian -->
+<div>
+<h3 class="font-headline-md text-headline-md text-text-main mb-3">Perlu Perhatian</h3>
+<div class="space-y-3">
+<!-- Reminder Card 1 -->
+<div class="bg-surface-card rounded-lg ambient-shadow p-4 flex items-center justify-between border-l-4 border-accent-amber">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">oil_barrel</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-text-main font-medium">Oli Mesin</h4>
+<p class="font-label-sm text-label-sm text-text-muted">Sisa 150 KM lagi</p>
+</div>
+</div>
+<div class="text-right">
+<span class="bg-tertiary-fixed-dim/20 text-on-tertiary-container px-2 py-1 rounded text-xs font-semibold">Rp 65.000</span>
+</div>
+</div>
+<!-- Reminder Card 2 -->
+<div class="bg-surface-card rounded-lg ambient-shadow p-4 flex items-center justify-between border-l-4 border-error">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-error-container">receipt_long</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-text-main font-medium">Pajak Tahunan</h4>
+<p class="font-label-sm text-label-sm text-text-muted">Jatuh tempo 12 Des</p>
+</div>
+</div>
+<div class="text-right">
+<span class="bg-error-container text-on-error-container px-2 py-1 rounded text-xs font-semibold">Segera Bayar</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-[80px] right-margin-page w-14 h-14 bg-primary text-on-primary rounded-full fab-shadow flex items-center justify-center hover:bg-on-primary-fixed-variant transition-colors active:scale-95 z-40">
+<span class="material-symbols-outlined text-2xl">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 bg-surface-container-lowest dark:bg-surface-container shadow-[0_-2px_8px_rgba(0,0,0,0.05)] h-14 z-50">
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim bg-primary-container/10 rounded-xl px-3 py-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-bold text-label-bold mt-1">Beranda</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-xl px-3 py-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-sm text-label-sm mt-1">Riwayat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-xl px-3 py-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">directions_bike</span>
+<span class="font-label-sm text-label-sm mt-1">Kendaraan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-xl px-3 py-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profil</span>
+</a>
+</nav>
+</body></html>

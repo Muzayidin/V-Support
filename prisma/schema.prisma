@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String    @id @default(cuid())
+  name      String
+  email     String    @unique
+  vehicles  Vehicle[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Vehicle {
+  id             String          @id @default(cuid())
+  userId         String
+  user           User            @relation(fields: [userId], references: [id])
+  name           String          // e.g. "Honda Vario 150"
+  licensePlate   String?
+  currentMileage Int             // Odometer
+  serviceRecords ServiceRecord[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+model ServiceRecord {
+  id             String          @id @default(cuid())
+  vehicleId      String
+  vehicle        Vehicle         @relation(fields: [vehicleId], references: [id])
+  date           DateTime        @default(now())
+  mileage        Int             // Odometer saat servis dilakukan
+  totalCost      Int             @default(0)
+  details        ServiceDetail[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+model ServiceDetail {
+  id              String        @id @default(cuid())
+  serviceRecordId String
+  serviceRecord   ServiceRecord @relation(fields: [serviceRecordId], references: [id], onDelete: Cascade)
+  componentName   String        // e.g. "Oli Mesin", "Kampas Rem"
+  cost            Int
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}

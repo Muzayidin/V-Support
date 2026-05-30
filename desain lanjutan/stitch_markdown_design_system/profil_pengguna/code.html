@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>V-Support Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bg": "#F8F9FA",
+                        "primary-container": "#1a365d",
+                        "surface-container-low": "#f4f3f7",
+                        "on-secondary": "#ffffff",
+                        "text-main": "#1E293B",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#dad9dd",
+                        "surface-container": "#efedf1",
+                        "secondary": "#006c49",
+                        "on-tertiary-fixed": "#2b1700",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#86a0cd",
+                        "on-primary-fixed": "#001b3c",
+                        "secondary-fixed-dim": "#4edea3",
+                        "inverse-on-surface": "#f1f0f4",
+                        "tertiary-fixed": "#ffddba",
+                        "surface-variant": "#e3e2e6",
+                        "on-tertiary-fixed-variant": "#633f0f",
+                        "primary": "#002045",
+                        "on-background": "#1a1c1e",
+                        "on-primary": "#ffffff",
+                        "surface-card": "#FFFFFF",
+                        "on-surface-variant": "#43474e",
+                        "outline-variant": "#c4c6cf",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#321b00",
+                        "surface-container-highest": "#e3e2e6",
+                        "tertiary-container": "#4f2e00",
+                        "on-surface": "#1a1c1e",
+                        "secondary-fixed": "#6ffbbe",
+                        "inverse-primary": "#adc7f7",
+                        "on-secondary-fixed-variant": "#005236",
+                        "inverse-surface": "#2f3033",
+                        "primary-fixed": "#d6e3ff",
+                        "surface": "#faf9fd",
+                        "primary-fixed-dim": "#adc7f7",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e9e7eb",
+                        "accent-amber": "#F59E0B",
+                        "surface-tint": "#455f88",
+                        "secondary-container": "#6cf8bb",
+                        "on-secondary-fixed": "#002113",
+                        "surface-bright": "#faf9fd",
+                        "outline": "#74777f",
+                        "on-secondary-container": "#00714d",
+                        "text-muted": "#64748B",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#f2bc82",
+                        "background": "#faf9fd",
+                        "on-tertiary-container": "#c6955e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "touch-target-min": "2.75rem",
+                        "padding-card": "1.25rem",
+                        "margin-page": "1rem",
+                        "gutter-stack": "1rem"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "odometer-display": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-bold": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "odometer-display": ["32px", {"lineHeight": "40px", "fontWeight": "800"}],
+                        "headline-lg": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        [data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-bg text-on-surface antialiased pb-20">
+<!-- TopAppBar -->
+<header class="flex items-center justify-between px-margin-page h-14 w-full bg-surface-bg sticky top-0 z-40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="motorcycle" data-weight="fill">motorcycle</span>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">V-Support</h1>
+</div>
+</header>
+<main class="px-margin-page py-4 flex flex-col gap-gutter-stack">
+<!-- Profile Header -->
+<section class="bg-surface-card rounded-xl p-padding-card shadow-[0_2px_8px_rgba(0,0,0,0.05)] flex items-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-surface-container-high bg-surface-container-high relative">
+<img alt="Profile Picture" class="w-full h-full object-cover" data-alt="A professional headshot of a modern Asian male in a bright, clean corporate setting. The lighting is soft and flattering, highlighting a friendly expression. The background is a minimalist light gray wall, adhering to a clean, modern aesthetic with a focus on realism and trust." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9jnawtGqrs8KI6gVUkFEhhW7Uj2J6mO4BXQVwD7sBinZd79mwMjhMBTX_45uKe1b-eUIfF8M9BvAGdN99F7n3uZSSqHY76Ak-OrS_9gf5l06_NK7Op2i4h564r1KneQERymMNLh8PALkT-ed8n6lfkrBNI22tk-A4Nrubncazc6S5NzxcBrFOZAKsz6wiXudq5ThetPmSmOaj7TRv2-nE8jxpMrQJJ-TwbyISs-uT4p1ezepaSK9ZesjsnrCzflLDV_3ZfdPx8qbg"/>
+</div>
+<div class="flex-1">
+<h2 class="text-headline-md font-headline-md text-on-surface">Budi Pratama</h2>
+<div class="inline-flex items-center gap-1 bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded-full mt-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" data-weight="fill">verified</span>
+<span class="text-label-sm font-label-sm font-semibold">Premium Member</span>
+</div>
+</div>
+</section>
+<!-- Account Settings -->
+<section class="flex flex-col gap-2 mt-2">
+<h3 class="text-label-bold font-label-bold text-text-muted px-2 uppercase tracking-wider">Pengaturan Akun</h3>
+<div class="bg-surface-card rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.05)] overflow-hidden flex flex-col">
+<button class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors min-h-[touch-target-min] border-b border-surface-container-high last:border-0 group">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[20px]" data-icon="person_edit">person_edit</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface font-medium">Edit Profil</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors min-h-[touch-target-min] border-b border-surface-container-high last:border-0 group">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[20px]" data-icon="lock">lock</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface font-medium">Ubah Kata Sandi</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors min-h-[touch-target-min] border-b border-surface-container-high last:border-0 group">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface font-medium">Pengaturan Notifikasi</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- App Info -->
+<section class="flex flex-col gap-2 mt-2">
+<h3 class="text-label-bold font-label-bold text-text-muted px-2 uppercase tracking-wider">Info Aplikasi</h3>
+<div class="bg-surface-card rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.05)] overflow-hidden flex flex-col">
+<button class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors min-h-[touch-target-min] border-b border-surface-container-high last:border-0 group">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="help">help</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface font-medium">Pusat Bantuan</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors min-h-[touch-target-min] border-b border-surface-container-high last:border-0 group">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="policy">policy</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface font-medium">Kebijakan Privasi</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Logout & Version -->
+<div class="mt-6 flex flex-col items-center gap-4">
+<button class="w-full min-h-[touch-target-min] border border-error-container text-error rounded-lg text-body-lg font-body-lg font-semibold flex items-center justify-center gap-2 hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Keluar
+            </button>
+<p class="text-label-sm font-label-sm text-text-muted">Versi 1.2.0</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center bg-surface-card h-14 shadow-[0_-2px_8px_0_rgba(0,0,0,0.05)] md:hidden">
+<a class="flex flex-col items-center justify-center text-text-muted font-label-sm w-full h-full hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform duration-200" data-icon="home">home</span>
+<span>Beranda</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted font-label-sm w-full h-full hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform duration-200" data-icon="history">history</span>
+<span>Riwayat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted font-label-sm w-full h-full hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform duration-200" data-icon="directions_bike">directions_bike</span>
+<span>Kendaraan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-label-bold w-full h-full hover:bg-surface-container-low transition-colors scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person" data-weight="fill">person</span>
+<span>Profil</span>
+</a>
+</nav>
+</body></html>
