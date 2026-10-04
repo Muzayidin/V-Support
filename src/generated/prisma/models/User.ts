@@ -43,6 +43,7 @@ export type UserMinAggregateOutputType = {
   password: string | null
   role: string | null
   odometerReminderDays: number | null
+  odometerReminderTime: string | null
   odometerReminderEnabled: boolean | null
   componentReminderEnabled: boolean | null
   taxReminderEnabled: boolean | null
@@ -59,6 +60,7 @@ export type UserMaxAggregateOutputType = {
   password: string | null
   role: string | null
   odometerReminderDays: number | null
+  odometerReminderTime: string | null
   odometerReminderEnabled: boolean | null
   componentReminderEnabled: boolean | null
   taxReminderEnabled: boolean | null
@@ -75,6 +77,7 @@ export type UserCountAggregateOutputType = {
   password: number
   role: number
   odometerReminderDays: number
+  odometerReminderTime: number
   odometerReminderEnabled: number
   componentReminderEnabled: number
   taxReminderEnabled: number
@@ -101,6 +104,7 @@ export type UserMinAggregateInputType = {
   password?: true
   role?: true
   odometerReminderDays?: true
+  odometerReminderTime?: true
   odometerReminderEnabled?: true
   componentReminderEnabled?: true
   taxReminderEnabled?: true
@@ -117,6 +121,7 @@ export type UserMaxAggregateInputType = {
   password?: true
   role?: true
   odometerReminderDays?: true
+  odometerReminderTime?: true
   odometerReminderEnabled?: true
   componentReminderEnabled?: true
   taxReminderEnabled?: true
@@ -133,6 +138,7 @@ export type UserCountAggregateInputType = {
   password?: true
   role?: true
   odometerReminderDays?: true
+  odometerReminderTime?: true
   odometerReminderEnabled?: true
   componentReminderEnabled?: true
   taxReminderEnabled?: true
@@ -236,6 +242,7 @@ export type UserGroupByOutputType = {
   password: string | null
   role: string
   odometerReminderDays: number
+  odometerReminderTime: string
   odometerReminderEnabled: boolean
   componentReminderEnabled: boolean
   taxReminderEnabled: boolean
@@ -275,6 +282,7 @@ export type UserWhereInput = {
   password?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.StringFilter<"User"> | string
   odometerReminderDays?: Prisma.IntFilter<"User"> | number
+  odometerReminderTime?: Prisma.StringFilter<"User"> | string
   odometerReminderEnabled?: Prisma.BoolFilter<"User"> | boolean
   componentReminderEnabled?: Prisma.BoolFilter<"User"> | boolean
   taxReminderEnabled?: Prisma.BoolFilter<"User"> | boolean
@@ -294,6 +302,7 @@ export type UserOrderByWithRelationInput = {
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   odometerReminderDays?: Prisma.SortOrder
+  odometerReminderTime?: Prisma.SortOrder
   odometerReminderEnabled?: Prisma.SortOrder
   componentReminderEnabled?: Prisma.SortOrder
   taxReminderEnabled?: Prisma.SortOrder
@@ -316,6 +325,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.StringFilter<"User"> | string
   odometerReminderDays?: Prisma.IntFilter<"User"> | number
+  odometerReminderTime?: Prisma.StringFilter<"User"> | string
   odometerReminderEnabled?: Prisma.BoolFilter<"User"> | boolean
   componentReminderEnabled?: Prisma.BoolFilter<"User"> | boolean
   taxReminderEnabled?: Prisma.BoolFilter<"User"> | boolean
@@ -335,6 +345,7 @@ export type UserOrderByWithAggregationInput = {
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   odometerReminderDays?: Prisma.SortOrder
+  odometerReminderTime?: Prisma.SortOrder
   odometerReminderEnabled?: Prisma.SortOrder
   componentReminderEnabled?: Prisma.SortOrder
   taxReminderEnabled?: Prisma.SortOrder
@@ -359,6 +370,7 @@ export type UserScalarWhereWithAggregatesInput = {
   password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   role?: Prisma.StringWithAggregatesFilter<"User"> | string
   odometerReminderDays?: Prisma.IntWithAggregatesFilter<"User"> | number
+  odometerReminderTime?: Prisma.StringWithAggregatesFilter<"User"> | string
   odometerReminderEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   componentReminderEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   taxReminderEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
@@ -375,6 +387,7 @@ export type UserCreateInput = {
   password?: string | null
   role?: string
   odometerReminderDays?: number
+  odometerReminderTime?: string
   odometerReminderEnabled?: boolean
   componentReminderEnabled?: boolean
   taxReminderEnabled?: boolean
@@ -394,6 +407,7 @@ export type UserUncheckedCreateInput = {
   password?: string | null
   role?: string
   odometerReminderDays?: number
+  odometerReminderTime?: string
   odometerReminderEnabled?: boolean
   componentReminderEnabled?: boolean
   taxReminderEnabled?: boolean
@@ -413,6 +427,7 @@ export type UserUpdateInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -432,6 +447,7 @@ export type UserUncheckedUpdateInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -451,6 +467,7 @@ export type UserCreateManyInput = {
   password?: string | null
   role?: string
   odometerReminderDays?: number
+  odometerReminderTime?: string
   odometerReminderEnabled?: boolean
   componentReminderEnabled?: boolean
   taxReminderEnabled?: boolean
@@ -467,6 +484,7 @@ export type UserUpdateManyMutationInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -483,6 +501,7 @@ export type UserUncheckedUpdateManyInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -499,6 +518,7 @@ export type UserCountOrderByAggregateInput = {
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
   odometerReminderDays?: Prisma.SortOrder
+  odometerReminderTime?: Prisma.SortOrder
   odometerReminderEnabled?: Prisma.SortOrder
   componentReminderEnabled?: Prisma.SortOrder
   taxReminderEnabled?: Prisma.SortOrder
@@ -519,6 +539,7 @@ export type UserMaxOrderByAggregateInput = {
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
   odometerReminderDays?: Prisma.SortOrder
+  odometerReminderTime?: Prisma.SortOrder
   odometerReminderEnabled?: Prisma.SortOrder
   componentReminderEnabled?: Prisma.SortOrder
   taxReminderEnabled?: Prisma.SortOrder
@@ -535,6 +556,7 @@ export type UserMinOrderByAggregateInput = {
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
   odometerReminderDays?: Prisma.SortOrder
+  odometerReminderTime?: Prisma.SortOrder
   odometerReminderEnabled?: Prisma.SortOrder
   componentReminderEnabled?: Prisma.SortOrder
   taxReminderEnabled?: Prisma.SortOrder
@@ -630,6 +652,7 @@ export type UserCreateWithoutAccountsInput = {
   password?: string | null
   role?: string
   odometerReminderDays?: number
+  odometerReminderTime?: string
   odometerReminderEnabled?: boolean
   componentReminderEnabled?: boolean
   taxReminderEnabled?: boolean
@@ -648,6 +671,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   password?: string | null
   role?: string
   odometerReminderDays?: number
+  odometerReminderTime?: string
   odometerReminderEnabled?: boolean
   componentReminderEnabled?: boolean
   taxReminderEnabled?: boolean
@@ -682,6 +706,7 @@ export type UserUpdateWithoutAccountsInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -700,6 +725,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -718,6 +744,7 @@ export type UserCreateWithoutSessionsInput = {
   password?: string | null
   role?: string
   odometerReminderDays?: number
+  odometerReminderTime?: string
   odometerReminderEnabled?: boolean
   componentReminderEnabled?: boolean
   taxReminderEnabled?: boolean
@@ -736,6 +763,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   password?: string | null
   role?: string
   odometerReminderDays?: number
+  odometerReminderTime?: string
   odometerReminderEnabled?: boolean
   componentReminderEnabled?: boolean
   taxReminderEnabled?: boolean
@@ -770,6 +798,7 @@ export type UserUpdateWithoutSessionsInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -788,6 +817,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -806,6 +836,7 @@ export type UserCreateWithoutVehiclesInput = {
   password?: string | null
   role?: string
   odometerReminderDays?: number
+  odometerReminderTime?: string
   odometerReminderEnabled?: boolean
   componentReminderEnabled?: boolean
   taxReminderEnabled?: boolean
@@ -824,6 +855,7 @@ export type UserUncheckedCreateWithoutVehiclesInput = {
   password?: string | null
   role?: string
   odometerReminderDays?: number
+  odometerReminderTime?: string
   odometerReminderEnabled?: boolean
   componentReminderEnabled?: boolean
   taxReminderEnabled?: boolean
@@ -858,6 +890,7 @@ export type UserUpdateWithoutVehiclesInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -876,6 +909,7 @@ export type UserUncheckedUpdateWithoutVehiclesInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
   odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -943,6 +977,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   password?: boolean
   role?: boolean
   odometerReminderDays?: boolean
+  odometerReminderTime?: boolean
   odometerReminderEnabled?: boolean
   componentReminderEnabled?: boolean
   taxReminderEnabled?: boolean
@@ -963,6 +998,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   role?: boolean
   odometerReminderDays?: boolean
+  odometerReminderTime?: boolean
   odometerReminderEnabled?: boolean
   componentReminderEnabled?: boolean
   taxReminderEnabled?: boolean
@@ -979,6 +1015,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   role?: boolean
   odometerReminderDays?: boolean
+  odometerReminderTime?: boolean
   odometerReminderEnabled?: boolean
   componentReminderEnabled?: boolean
   taxReminderEnabled?: boolean
@@ -995,6 +1032,7 @@ export type UserSelectScalar = {
   password?: boolean
   role?: boolean
   odometerReminderDays?: boolean
+  odometerReminderTime?: boolean
   odometerReminderEnabled?: boolean
   componentReminderEnabled?: boolean
   taxReminderEnabled?: boolean
@@ -1002,7 +1040,7 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "password" | "role" | "odometerReminderDays" | "odometerReminderEnabled" | "componentReminderEnabled" | "taxReminderEnabled" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "password" | "role" | "odometerReminderDays" | "odometerReminderTime" | "odometerReminderEnabled" | "componentReminderEnabled" | "taxReminderEnabled" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
@@ -1028,6 +1066,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     password: string | null
     role: string
     odometerReminderDays: number
+    odometerReminderTime: string
     odometerReminderEnabled: boolean
     componentReminderEnabled: boolean
     taxReminderEnabled: boolean
@@ -1467,6 +1506,7 @@ export interface UserFieldRefs {
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'String'>
   readonly odometerReminderDays: Prisma.FieldRef<"User", 'Int'>
+  readonly odometerReminderTime: Prisma.FieldRef<"User", 'String'>
   readonly odometerReminderEnabled: Prisma.FieldRef<"User", 'Boolean'>
   readonly componentReminderEnabled: Prisma.FieldRef<"User", 'Boolean'>
   readonly taxReminderEnabled: Prisma.FieldRef<"User", 'Boolean'>

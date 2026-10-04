@@ -9,6 +9,7 @@ import {
 import VehicleDropdown from '@/components/VehicleDropdown'
 import QuickOdometerModal from '@/components/QuickOdometerModal'
 import NotificationModal from '@/components/NotificationModal'
+import NotificationScheduler from '@/components/NotificationScheduler'
 import { getUserNotifications } from '@/lib/notifications'
 import { formatThousands } from '@/lib/formatters'
 import { Suspense } from 'react'
@@ -163,6 +164,11 @@ export default async function DashboardPage({
 
   return (
     <>
+      <NotificationScheduler
+        scheduledTime={userNotificationsData.settings.odometerReminderTime}
+        enabled={userNotificationsData.settings.odometerReminderEnabled}
+        notifications={userNotificationsData.notifications}
+      />
       {/* Header */}
       <header className="w-full top-0 sticky bg-background border-b-2 border-border shadow-[0_2px_0px_0px_var(--border)] flex justify-between items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 z-40 md:max-w-md md:mx-auto">
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">

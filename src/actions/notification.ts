@@ -6,6 +6,7 @@ import { revalidatePath } from 'next/cache'
 
 export async function updateNotificationSettings(data: {
   odometerReminderDays: number
+  odometerReminderTime?: string
   odometerReminderEnabled: boolean
   componentReminderEnabled: boolean
   taxReminderEnabled: boolean
@@ -16,11 +17,15 @@ export async function updateNotificationSettings(data: {
   }
 
   const days = Math.max(1, Math.min(90, Number(data.odometerReminderDays) || 7))
+  const time = data.odometerReminderTime && /^\d{2}:\d{2}$/.test(data.odometerReminderTime)
+    ? data.odometerReminderTime
+    : '09:00'
 
   await prisma.user.update({
     where: { id: session.user.id },
     data: {
       odometerReminderDays: days,
+      odometerReminderTime: time,
       odometerReminderEnabled: Boolean(data.odometerReminderEnabled),
       componentReminderEnabled: Boolean(data.componentReminderEnabled),
       taxReminderEnabled: Boolean(data.taxReminderEnabled)

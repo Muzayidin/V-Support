@@ -21,6 +21,7 @@ model User {
   
   // Pengaturan Notifikasi
   odometerReminderDays     Int      @default(7) // Interval hari pengingat odometer
+  odometerReminderTime     String   @default("09:00") // Jam notifikasi (HH:mm format 24 jam)
   odometerReminderEnabled  Boolean  @default(true)
   componentReminderEnabled Boolean  @default(true)
   taxReminderEnabled       Boolean  @default(true)
