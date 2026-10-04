@@ -20,8 +20,18 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  odometerReminderDays: number | null
+}
+
+export type UserSumAggregateOutputType = {
+  odometerReminderDays: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -32,6 +42,10 @@ export type UserMinAggregateOutputType = {
   image: string | null
   password: string | null
   role: string | null
+  odometerReminderDays: number | null
+  odometerReminderEnabled: boolean | null
+  componentReminderEnabled: boolean | null
+  taxReminderEnabled: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -44,6 +58,10 @@ export type UserMaxAggregateOutputType = {
   image: string | null
   password: string | null
   role: string | null
+  odometerReminderDays: number | null
+  odometerReminderEnabled: boolean | null
+  componentReminderEnabled: boolean | null
+  taxReminderEnabled: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -56,11 +74,23 @@ export type UserCountAggregateOutputType = {
   image: number
   password: number
   role: number
+  odometerReminderDays: number
+  odometerReminderEnabled: number
+  componentReminderEnabled: number
+  taxReminderEnabled: number
   createdAt: number
   updatedAt: number
   _all: number
 }
 
+
+export type UserAvgAggregateInputType = {
+  odometerReminderDays?: true
+}
+
+export type UserSumAggregateInputType = {
+  odometerReminderDays?: true
+}
 
 export type UserMinAggregateInputType = {
   id?: true
@@ -70,6 +100,10 @@ export type UserMinAggregateInputType = {
   image?: true
   password?: true
   role?: true
+  odometerReminderDays?: true
+  odometerReminderEnabled?: true
+  componentReminderEnabled?: true
+  taxReminderEnabled?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -82,6 +116,10 @@ export type UserMaxAggregateInputType = {
   image?: true
   password?: true
   role?: true
+  odometerReminderDays?: true
+  odometerReminderEnabled?: true
+  componentReminderEnabled?: true
+  taxReminderEnabled?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -94,6 +132,10 @@ export type UserCountAggregateInputType = {
   image?: true
   password?: true
   role?: true
+  odometerReminderDays?: true
+  odometerReminderEnabled?: true
+  componentReminderEnabled?: true
+  taxReminderEnabled?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -137,6 +179,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -167,6 +221,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -179,9 +235,15 @@ export type UserGroupByOutputType = {
   image: string | null
   password: string | null
   role: string
+  odometerReminderDays: number
+  odometerReminderEnabled: boolean
+  componentReminderEnabled: boolean
+  taxReminderEnabled: boolean
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -212,6 +274,10 @@ export type UserWhereInput = {
   image?: Prisma.StringNullableFilter<"User"> | string | null
   password?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.StringFilter<"User"> | string
+  odometerReminderDays?: Prisma.IntFilter<"User"> | number
+  odometerReminderEnabled?: Prisma.BoolFilter<"User"> | boolean
+  componentReminderEnabled?: Prisma.BoolFilter<"User"> | boolean
+  taxReminderEnabled?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   accounts?: Prisma.AccountListRelationFilter
@@ -227,6 +293,10 @@ export type UserOrderByWithRelationInput = {
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
+  odometerReminderDays?: Prisma.SortOrder
+  odometerReminderEnabled?: Prisma.SortOrder
+  componentReminderEnabled?: Prisma.SortOrder
+  taxReminderEnabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   accounts?: Prisma.AccountOrderByRelationAggregateInput
@@ -245,6 +315,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   image?: Prisma.StringNullableFilter<"User"> | string | null
   password?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.StringFilter<"User"> | string
+  odometerReminderDays?: Prisma.IntFilter<"User"> | number
+  odometerReminderEnabled?: Prisma.BoolFilter<"User"> | boolean
+  componentReminderEnabled?: Prisma.BoolFilter<"User"> | boolean
+  taxReminderEnabled?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   accounts?: Prisma.AccountListRelationFilter
@@ -260,11 +334,17 @@ export type UserOrderByWithAggregationInput = {
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
+  odometerReminderDays?: Prisma.SortOrder
+  odometerReminderEnabled?: Prisma.SortOrder
+  componentReminderEnabled?: Prisma.SortOrder
+  taxReminderEnabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -278,6 +358,10 @@ export type UserScalarWhereWithAggregatesInput = {
   image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   role?: Prisma.StringWithAggregatesFilter<"User"> | string
+  odometerReminderDays?: Prisma.IntWithAggregatesFilter<"User"> | number
+  odometerReminderEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  componentReminderEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  taxReminderEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -290,6 +374,10 @@ export type UserCreateInput = {
   image?: string | null
   password?: string | null
   role?: string
+  odometerReminderDays?: number
+  odometerReminderEnabled?: boolean
+  componentReminderEnabled?: boolean
+  taxReminderEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
@@ -305,6 +393,10 @@ export type UserUncheckedCreateInput = {
   image?: string | null
   password?: string | null
   role?: string
+  odometerReminderDays?: number
+  odometerReminderEnabled?: boolean
+  componentReminderEnabled?: boolean
+  taxReminderEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
@@ -320,6 +412,10 @@ export type UserUpdateInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
@@ -335,6 +431,10 @@ export type UserUncheckedUpdateInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -350,6 +450,10 @@ export type UserCreateManyInput = {
   image?: string | null
   password?: string | null
   role?: string
+  odometerReminderDays?: number
+  odometerReminderEnabled?: boolean
+  componentReminderEnabled?: boolean
+  taxReminderEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -362,6 +466,10 @@ export type UserUpdateManyMutationInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -374,6 +482,10 @@ export type UserUncheckedUpdateManyInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -386,8 +498,16 @@ export type UserCountOrderByAggregateInput = {
   image?: Prisma.SortOrder
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  odometerReminderDays?: Prisma.SortOrder
+  odometerReminderEnabled?: Prisma.SortOrder
+  componentReminderEnabled?: Prisma.SortOrder
+  taxReminderEnabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type UserAvgOrderByAggregateInput = {
+  odometerReminderDays?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -398,6 +518,10 @@ export type UserMaxOrderByAggregateInput = {
   image?: Prisma.SortOrder
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  odometerReminderDays?: Prisma.SortOrder
+  odometerReminderEnabled?: Prisma.SortOrder
+  componentReminderEnabled?: Prisma.SortOrder
+  taxReminderEnabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -410,8 +534,16 @@ export type UserMinOrderByAggregateInput = {
   image?: Prisma.SortOrder
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  odometerReminderDays?: Prisma.SortOrder
+  odometerReminderEnabled?: Prisma.SortOrder
+  componentReminderEnabled?: Prisma.SortOrder
+  taxReminderEnabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type UserSumOrderByAggregateInput = {
+  odometerReminderDays?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -429,6 +561,18 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -485,6 +629,10 @@ export type UserCreateWithoutAccountsInput = {
   image?: string | null
   password?: string | null
   role?: string
+  odometerReminderDays?: number
+  odometerReminderEnabled?: boolean
+  componentReminderEnabled?: boolean
+  taxReminderEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -499,6 +647,10 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   image?: string | null
   password?: string | null
   role?: string
+  odometerReminderDays?: number
+  odometerReminderEnabled?: boolean
+  componentReminderEnabled?: boolean
+  taxReminderEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -529,6 +681,10 @@ export type UserUpdateWithoutAccountsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -543,6 +699,10 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -557,6 +717,10 @@ export type UserCreateWithoutSessionsInput = {
   image?: string | null
   password?: string | null
   role?: string
+  odometerReminderDays?: number
+  odometerReminderEnabled?: boolean
+  componentReminderEnabled?: boolean
+  taxReminderEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
@@ -571,6 +735,10 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   image?: string | null
   password?: string | null
   role?: string
+  odometerReminderDays?: number
+  odometerReminderEnabled?: boolean
+  componentReminderEnabled?: boolean
+  taxReminderEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
@@ -601,6 +769,10 @@ export type UserUpdateWithoutSessionsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
@@ -615,6 +787,10 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -629,6 +805,10 @@ export type UserCreateWithoutVehiclesInput = {
   image?: string | null
   password?: string | null
   role?: string
+  odometerReminderDays?: number
+  odometerReminderEnabled?: boolean
+  componentReminderEnabled?: boolean
+  taxReminderEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
@@ -643,6 +823,10 @@ export type UserUncheckedCreateWithoutVehiclesInput = {
   image?: string | null
   password?: string | null
   role?: string
+  odometerReminderDays?: number
+  odometerReminderEnabled?: boolean
+  componentReminderEnabled?: boolean
+  taxReminderEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
@@ -673,6 +857,10 @@ export type UserUpdateWithoutVehiclesInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
@@ -687,6 +875,10 @@ export type UserUncheckedUpdateWithoutVehiclesInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  odometerReminderDays?: Prisma.IntFieldUpdateOperationsInput | number
+  odometerReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  componentReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxReminderEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -750,6 +942,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   image?: boolean
   password?: boolean
   role?: boolean
+  odometerReminderDays?: boolean
+  odometerReminderEnabled?: boolean
+  componentReminderEnabled?: boolean
+  taxReminderEnabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
@@ -766,6 +962,10 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   image?: boolean
   password?: boolean
   role?: boolean
+  odometerReminderDays?: boolean
+  odometerReminderEnabled?: boolean
+  componentReminderEnabled?: boolean
+  taxReminderEnabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -778,6 +978,10 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   image?: boolean
   password?: boolean
   role?: boolean
+  odometerReminderDays?: boolean
+  odometerReminderEnabled?: boolean
+  componentReminderEnabled?: boolean
+  taxReminderEnabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -790,11 +994,15 @@ export type UserSelectScalar = {
   image?: boolean
   password?: boolean
   role?: boolean
+  odometerReminderDays?: boolean
+  odometerReminderEnabled?: boolean
+  componentReminderEnabled?: boolean
+  taxReminderEnabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "password" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "password" | "role" | "odometerReminderDays" | "odometerReminderEnabled" | "componentReminderEnabled" | "taxReminderEnabled" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
@@ -819,6 +1027,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     image: string | null
     password: string | null
     role: string
+    odometerReminderDays: number
+    odometerReminderEnabled: boolean
+    componentReminderEnabled: boolean
+    taxReminderEnabled: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1254,6 +1466,10 @@ export interface UserFieldRefs {
   readonly image: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'String'>
+  readonly odometerReminderDays: Prisma.FieldRef<"User", 'Int'>
+  readonly odometerReminderEnabled: Prisma.FieldRef<"User", 'Boolean'>
+  readonly componentReminderEnabled: Prisma.FieldRef<"User", 'Boolean'>
+  readonly taxReminderEnabled: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }

@@ -8,6 +8,9 @@ import {
 } from '@/lib/calculations'
 import VehicleDropdown from '@/components/VehicleDropdown'
 import QuickOdometerModal from '@/components/QuickOdometerModal'
+import NotificationModal from '@/components/NotificationModal'
+import { getUserNotifications } from '@/lib/notifications'
+import { formatThousands } from '@/lib/formatters'
 import { Suspense } from 'react'
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
@@ -137,6 +140,12 @@ export default async function DashboardPage({
     ? Math.ceil((new Date(vehicle.stnkFiveYearDueDate).getTime() - todayZero.getTime()) / (1000 * 60 * 60 * 24))
     : null
 
+  // Notifikasi Pengingat Odometer & Komponen
+  const userNotificationsData = await getUserNotifications(user.id)
+  const currentVehicleOdoNotif = userNotificationsData.notifications.find(
+    (n) => n.type === 'ODOMETER' && n.vehicleId === vehicle.id
+  )
+
   const isTaxAlert = (taxDaysLeft !== null && taxDaysLeft <= 30) || (fiveYearDaysLeft !== null && fiveYearDaysLeft <= 30)
   const isAnyOverdue = (taxDaysLeft !== null && taxDaysLeft < 0) || (fiveYearDaysLeft !== null && fiveYearDaysLeft < 0)
 
@@ -160,10 +169,15 @@ export default async function DashboardPage({
           <CruzLogo className="w-8 h-8 sm:w-9 sm:h-9" />
           <span className="font-black text-base sm:text-lg text-foreground tracking-tight">Cruz</span>
         </div>
-        <div className="flex items-center relative min-w-0">
+        <div className="flex items-center gap-2 relative min-w-0">
           <Suspense fallback={<div className="w-24 sm:w-28 h-7 sm:h-8 bg-secondary-background border-2 border-border animate-pulse rounded-[var(--radius-base)]" />}>
             <VehicleDropdown vehicles={allVehicles} activeVehicleId={vehicle.id} />
           </Suspense>
+          <NotificationModal
+            notifications={userNotificationsData.notifications}
+            counts={userNotificationsData.counts}
+            vehicles={allVehicles.map((v) => ({ id: v.id, name: v.name, currentMileage: v.currentMileage }))}
+          />
         </div>
       </header>
       
@@ -193,6 +207,31 @@ export default async function DashboardPage({
             </span>
           )}
         </div>
+
+        {/* Peringatan Update Odometer jika sudah jatuh tempo */}
+        {currentVehicleOdoNotif && (
+          <div className="rounded-[var(--radius-base)] p-3 sm:p-3.5 bg-main border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] flex items-center justify-between gap-2.5 text-black">
+            <div className="flex items-center gap-2.5 min-w-0 flex-1">
+              <div className="w-8 h-8 rounded-[var(--radius-base)] bg-black text-white border-2 border-border flex items-center justify-center shrink-0 shadow-[1px_1px_0px_0px_var(--border)]">
+                <Gauge className="w-4 h-4 stroke-[2.5]" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <span className="font-black text-[9px] uppercase tracking-wider bg-black text-white px-1.5 py-0.2 rounded-[var(--radius-base)] shrink-0">
+                  Update Odometer
+                </span>
+                <p className="text-[11px] font-black mt-0.5 truncate">
+                  Sudah {currentVehicleOdoNotif.daysSinceLastUpdate} hari belum diupdate ({formatThousands(vehicle.currentMileage)} km)
+                </p>
+              </div>
+            </div>
+            <QuickOdometerModal
+              vehicleId={vehicle.id}
+              vehicleName={vehicle.name}
+              currentMileage={vehicle.currentMileage}
+              buttonClassName="px-2.5 py-1 bg-background hover:bg-slate-200 text-foreground border-2 border-border text-[10px] sm:text-xs font-black rounded-[var(--radius-base)] shadow-[2px_2px_0px_0px_var(--border)] shrink-0 cursor-pointer transition-all"
+            />
+          </div>
+        )}
 
         {/* Peringatan Jatuh Tempo Pajak STNK (H-30 atau Terlambat) */}
         {isTaxAlert && (

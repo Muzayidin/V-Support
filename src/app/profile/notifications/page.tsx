@@ -1,61 +1,72 @@
-'use client'
-
+import prisma from '@/lib/prisma'
+import { auth } from '@/auth'
+import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import CruzLogo from '@/components/CruzLogo'
+import NotificationSettingsForm from './NotificationSettingsForm'
+import { ArrowLeft, Bell } from 'lucide-react'
 
-export default function ProfileNotifications() {
+export const dynamic = 'force-dynamic'
+
+export default async function ProfileNotificationsPage() {
+  const session = await auth()
+  if (!session?.user?.id) {
+    redirect('/login')
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: {
+      odometerReminderDays: true,
+      odometerReminderEnabled: true,
+      componentReminderEnabled: true,
+      taxReminderEnabled: true
+    }
+  })
+
+  const initialSettings = {
+    odometerReminderDays: user?.odometerReminderDays ?? 7,
+    odometerReminderEnabled: user?.odometerReminderEnabled ?? true,
+    componentReminderEnabled: user?.componentReminderEnabled ?? true,
+    taxReminderEnabled: user?.taxReminderEnabled ?? true
+  }
+
   return (
     <>
-      <header className="sticky top-0 z-40 bg-surface shadow-sm px-margin-page h-14 flex items-center gap-4 md:max-w-md md:mx-auto">
-        <Link href="/profile" className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center w-10 h-10 -ml-2 rounded-full active:bg-surface-container-high">
-          <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 0"}}>arrow_back</span>
-        </Link>
-        <h1 className="font-headline-md text-headline-md text-on-surface">Notifikasi</h1>
-      </header>
-
-      <main className="p-margin-page flex flex-col gap-6 md:max-w-md md:mx-auto pb-24">
-        
-        <div className="bg-surface-card rounded-xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-surface-container-low flex flex-col gap-4">
-          
-          <div className="flex items-center justify-between">
-            <div className="flex flex-col gap-1">
-              <span className="font-body-md text-body-md text-on-surface font-semibold">Pengingat Servis</span>
-              <span className="font-label-sm text-label-sm text-text-muted">Notifikasi saat jadwal servis mendekat</span>
-            </div>
-            {/* Custom toggle switch */}
-            <div className="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" className="sr-only peer" defaultChecked />
-              <div className="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-            </div>
+      {/* Header */}
+      <header className="flex items-center justify-between px-4 h-16 w-full bg-background sticky top-0 z-40 border-b-2 border-border shadow-[0_2px_0px_0px_var(--border)] md:max-w-md md:mx-auto">
+        <div className="flex items-center gap-3">
+          <Link
+            href="/profile"
+            className="p-1.5 rounded-[var(--radius-base)] border-2 border-border bg-secondary-background hover:bg-background text-foreground transition-all shadow-[2px_2px_0px_0px_var(--border)]"
+          >
+            <ArrowLeft className="w-4 h-4 stroke-[2.5]" />
+          </Link>
+          <div className="flex items-center gap-2">
+            <CruzLogo className="w-7 h-7" />
+            <h1 className="text-base font-black text-foreground tracking-tight">
+              Pengaturan Notifikasi
+            </h1>
           </div>
-          
-          <hr className="border-surface-container-highest" />
-
-          <div className="flex items-center justify-between">
-            <div className="flex flex-col gap-1">
-              <span className="font-body-md text-body-md text-on-surface font-semibold">Pengingat Pajak</span>
-              <span className="font-label-sm text-label-sm text-text-muted">Notifikasi perpanjangan STNK & Pajak tahunan</span>
-            </div>
-            <div className="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" className="sr-only peer" defaultChecked />
-              <div className="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-            </div>
-          </div>
-          
-          <hr className="border-surface-container-highest" />
-
-          <div className="flex items-center justify-between">
-            <div className="flex flex-col gap-1">
-              <span className="font-body-md text-body-md text-on-surface font-semibold">Promo & Penawaran</span>
-              <span className="font-label-sm text-label-sm text-text-muted">Informasi diskon bengkel rekanan</span>
-            </div>
-            <div className="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" className="sr-only peer" />
-              <div className="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-            </div>
-          </div>
-
         </div>
 
+        <div className="w-8 h-8 rounded-[var(--radius-base)] bg-main border-2 border-border flex items-center justify-center text-black font-black shadow-[1.5px_1.5px_0px_0px_var(--border)]">
+          <Bell className="w-4 h-4" />
+        </div>
+      </header>
+
+      {/* Main Container */}
+      <main className="px-4 py-5 flex flex-col gap-5 pb-28 md:max-w-md md:mx-auto">
+        <div className="space-y-1">
+          <h2 className="text-sm font-black text-foreground tracking-tight">
+            Preferensi & Jadwal Pengingat
+          </h2>
+          <p className="text-xs font-bold text-foreground/60 leading-relaxed">
+            Atur kapan sistem Cruz mengingatkan Anda untuk memasukkan kilometer odometer dan melakukan servis berkala.
+          </p>
+        </div>
+
+        <NotificationSettingsForm initialSettings={initialSettings} />
       </main>
     </>
   )
