@@ -82,6 +82,10 @@ export const UserScalarFieldEnum = {
   image: 'image',
   password: 'password',
   role: 'role',
+  odometerReminderDays: 'odometerReminderDays',
+  odometerReminderEnabled: 'odometerReminderEnabled',
+  componentReminderEnabled: 'componentReminderEnabled',
+  taxReminderEnabled: 'taxReminderEnabled',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

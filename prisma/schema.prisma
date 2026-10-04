@@ -19,6 +19,12 @@ model User {
   password      String?
   role          String    @default("USER") // "USER" atau "ADMIN"
   
+  // Pengaturan Notifikasi
+  odometerReminderDays     Int      @default(7) // Interval hari pengingat odometer
+  odometerReminderEnabled  Boolean  @default(true)
+  componentReminderEnabled Boolean  @default(true)
+  taxReminderEnabled       Boolean  @default(true)
+  
   accounts      Account[]
   sessions      Session[]
   vehicles      Vehicle[]
