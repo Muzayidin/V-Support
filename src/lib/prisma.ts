@@ -1,8 +1,16 @@
 import { PrismaClient } from '@/generated/prisma/client'
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
 
 const prismaClientSingleton = () => {
-  const adapter = new PrismaBetterSqlite3({ url: 'file:./dev.db' })
+  const dbUrl = process.env.DATABASE_URL || 'file:./dev.db'
+
+  // Jika koneksi MySQL / Remote Database
+  if (dbUrl.startsWith('mysql:') || dbUrl.startsWith('postgresql:')) {
+    return new PrismaClient()
+  }
+
+  // Fallback ke SQLite untuk lingkungan lokal
+  const { PrismaBetterSqlite3 } = require('@prisma/adapter-better-sqlite3')
+  const adapter = new PrismaBetterSqlite3({ url: dbUrl })
   return new PrismaClient({ adapter })
 }
 
