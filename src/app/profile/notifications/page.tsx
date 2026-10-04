@@ -18,6 +18,7 @@ export default async function ProfileNotificationsPage() {
     where: { id: session.user.id },
     select: {
       odometerReminderDays: true,
+      odometerReminderTime: true,
       odometerReminderEnabled: true,
       componentReminderEnabled: true,
       taxReminderEnabled: true
@@ -26,6 +27,7 @@ export default async function ProfileNotificationsPage() {
 
   const initialSettings = {
     odometerReminderDays: user?.odometerReminderDays ?? 7,
+    odometerReminderTime: user?.odometerReminderTime ?? '09:00',
     odometerReminderEnabled: user?.odometerReminderEnabled ?? true,
     componentReminderEnabled: user?.componentReminderEnabled ?? true,
     taxReminderEnabled: user?.taxReminderEnabled ?? true

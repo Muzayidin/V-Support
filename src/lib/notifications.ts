@@ -29,6 +29,7 @@ export async function getUserNotifications(userId: string): Promise<{
   }
   settings: {
     odometerReminderDays: number
+    odometerReminderTime: string
     odometerReminderEnabled: boolean
     componentReminderEnabled: boolean
     taxReminderEnabled: boolean
@@ -54,6 +55,7 @@ export async function getUserNotifications(userId: string): Promise<{
       counts: { total: 0, odometer: 0, components: 0, tax: 0, critical: 0 },
       settings: {
         odometerReminderDays: 7,
+        odometerReminderTime: '09:00',
         odometerReminderEnabled: true,
         componentReminderEnabled: true,
         taxReminderEnabled: true
@@ -183,6 +185,7 @@ export async function getUserNotifications(userId: string): Promise<{
     counts,
     settings: {
       odometerReminderDays: user.odometerReminderDays,
+      odometerReminderTime: user.odometerReminderTime || '09:00',
       odometerReminderEnabled: user.odometerReminderEnabled,
       componentReminderEnabled: user.componentReminderEnabled,
       taxReminderEnabled: user.taxReminderEnabled
