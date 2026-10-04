@@ -1,0 +1,54 @@
+{
+  "name": "Cruz — Asisten Perawatan Motor",
+  "short_name": "Cruz",
+  "description": "Aplikasi pendamping cerdas untuk Motor Bensin (ICE) dan Motor Listrik (EV). Pantau kondisi komponen, riwayat servis, dan estimasi biaya perawatan kendaraan Anda.",
+  "start_url": "/dashboard",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFE500",
+  "lang": "id",
+  "dir": "ltr",
+  "categories": ["utilities", "lifestyle", "productivity"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/icon.svg",
+      "sizes": "540x960",
+      "type": "image/svg+xml",
+      "form_factor": "narrow",
+      "label": "Dashboard Cruz"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Beranda",
+      "description": "Lihat status kesehatan kendaraan",
+      "url": "/dashboard",
+      "icons": [{ "src": "/icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Catat Servis",
+      "short_name": "Servis",
+      "description": "Catat servis kendaraan baru",
+      "url": "/add-service",
+      "icons": [{ "src": "/icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Riwayat Servis",
+      "short_name": "Riwayat",
+      "description": "Lihat riwayat servis kendaraan",
+      "url": "/history",
+      "icons": [{ "src": "/icon.svg", "sizes": "any" }]
+    }
+  ]
+}

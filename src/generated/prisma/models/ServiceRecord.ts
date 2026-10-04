@@ -29,11 +29,13 @@ export type AggregateServiceRecord = {
 export type ServiceRecordAvgAggregateOutputType = {
   mileage: number | null
   totalCost: number | null
+  laborCost: number | null
 }
 
 export type ServiceRecordSumAggregateOutputType = {
   mileage: number | null
   totalCost: number | null
+  laborCost: number | null
 }
 
 export type ServiceRecordMinAggregateOutputType = {
@@ -42,6 +44,7 @@ export type ServiceRecordMinAggregateOutputType = {
   date: Date | null
   mileage: number | null
   totalCost: number | null
+  laborCost: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -52,6 +55,7 @@ export type ServiceRecordMaxAggregateOutputType = {
   date: Date | null
   mileage: number | null
   totalCost: number | null
+  laborCost: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -62,6 +66,7 @@ export type ServiceRecordCountAggregateOutputType = {
   date: number
   mileage: number
   totalCost: number
+  laborCost: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -71,11 +76,13 @@ export type ServiceRecordCountAggregateOutputType = {
 export type ServiceRecordAvgAggregateInputType = {
   mileage?: true
   totalCost?: true
+  laborCost?: true
 }
 
 export type ServiceRecordSumAggregateInputType = {
   mileage?: true
   totalCost?: true
+  laborCost?: true
 }
 
 export type ServiceRecordMinAggregateInputType = {
@@ -84,6 +91,7 @@ export type ServiceRecordMinAggregateInputType = {
   date?: true
   mileage?: true
   totalCost?: true
+  laborCost?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -94,6 +102,7 @@ export type ServiceRecordMaxAggregateInputType = {
   date?: true
   mileage?: true
   totalCost?: true
+  laborCost?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -104,6 +113,7 @@ export type ServiceRecordCountAggregateInputType = {
   date?: true
   mileage?: true
   totalCost?: true
+  laborCost?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -201,6 +211,7 @@ export type ServiceRecordGroupByOutputType = {
   date: Date
   mileage: number
   totalCost: number
+  laborCost: number
   createdAt: Date
   updatedAt: Date
   _count: ServiceRecordCountAggregateOutputType | null
@@ -234,6 +245,7 @@ export type ServiceRecordWhereInput = {
   date?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   mileage?: Prisma.IntFilter<"ServiceRecord"> | number
   totalCost?: Prisma.IntFilter<"ServiceRecord"> | number
+  laborCost?: Prisma.IntFilter<"ServiceRecord"> | number
   createdAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   vehicle?: Prisma.XOR<Prisma.VehicleScalarRelationFilter, Prisma.VehicleWhereInput>
@@ -246,6 +258,7 @@ export type ServiceRecordOrderByWithRelationInput = {
   date?: Prisma.SortOrder
   mileage?: Prisma.SortOrder
   totalCost?: Prisma.SortOrder
+  laborCost?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   vehicle?: Prisma.VehicleOrderByWithRelationInput
@@ -261,6 +274,7 @@ export type ServiceRecordWhereUniqueInput = Prisma.AtLeast<{
   date?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   mileage?: Prisma.IntFilter<"ServiceRecord"> | number
   totalCost?: Prisma.IntFilter<"ServiceRecord"> | number
+  laborCost?: Prisma.IntFilter<"ServiceRecord"> | number
   createdAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   vehicle?: Prisma.XOR<Prisma.VehicleScalarRelationFilter, Prisma.VehicleWhereInput>
@@ -273,6 +287,7 @@ export type ServiceRecordOrderByWithAggregationInput = {
   date?: Prisma.SortOrder
   mileage?: Prisma.SortOrder
   totalCost?: Prisma.SortOrder
+  laborCost?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ServiceRecordCountOrderByAggregateInput
@@ -291,6 +306,7 @@ export type ServiceRecordScalarWhereWithAggregatesInput = {
   date?: Prisma.DateTimeWithAggregatesFilter<"ServiceRecord"> | Date | string
   mileage?: Prisma.IntWithAggregatesFilter<"ServiceRecord"> | number
   totalCost?: Prisma.IntWithAggregatesFilter<"ServiceRecord"> | number
+  laborCost?: Prisma.IntWithAggregatesFilter<"ServiceRecord"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ServiceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ServiceRecord"> | Date | string
 }
@@ -300,6 +316,7 @@ export type ServiceRecordCreateInput = {
   date?: Date | string
   mileage: number
   totalCost?: number
+  laborCost?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   vehicle: Prisma.VehicleCreateNestedOneWithoutServiceRecordsInput
@@ -312,6 +329,7 @@ export type ServiceRecordUncheckedCreateInput = {
   date?: Date | string
   mileage: number
   totalCost?: number
+  laborCost?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   details?: Prisma.ServiceDetailUncheckedCreateNestedManyWithoutServiceRecordInput
@@ -322,6 +340,7 @@ export type ServiceRecordUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mileage?: Prisma.IntFieldUpdateOperationsInput | number
   totalCost?: Prisma.IntFieldUpdateOperationsInput | number
+  laborCost?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vehicle?: Prisma.VehicleUpdateOneRequiredWithoutServiceRecordsNestedInput
@@ -334,6 +353,7 @@ export type ServiceRecordUncheckedUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mileage?: Prisma.IntFieldUpdateOperationsInput | number
   totalCost?: Prisma.IntFieldUpdateOperationsInput | number
+  laborCost?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   details?: Prisma.ServiceDetailUncheckedUpdateManyWithoutServiceRecordNestedInput
@@ -345,6 +365,7 @@ export type ServiceRecordCreateManyInput = {
   date?: Date | string
   mileage: number
   totalCost?: number
+  laborCost?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -354,6 +375,7 @@ export type ServiceRecordUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mileage?: Prisma.IntFieldUpdateOperationsInput | number
   totalCost?: Prisma.IntFieldUpdateOperationsInput | number
+  laborCost?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -364,6 +386,7 @@ export type ServiceRecordUncheckedUpdateManyInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mileage?: Prisma.IntFieldUpdateOperationsInput | number
   totalCost?: Prisma.IntFieldUpdateOperationsInput | number
+  laborCost?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -384,6 +407,7 @@ export type ServiceRecordCountOrderByAggregateInput = {
   date?: Prisma.SortOrder
   mileage?: Prisma.SortOrder
   totalCost?: Prisma.SortOrder
+  laborCost?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -391,6 +415,7 @@ export type ServiceRecordCountOrderByAggregateInput = {
 export type ServiceRecordAvgOrderByAggregateInput = {
   mileage?: Prisma.SortOrder
   totalCost?: Prisma.SortOrder
+  laborCost?: Prisma.SortOrder
 }
 
 export type ServiceRecordMaxOrderByAggregateInput = {
@@ -399,6 +424,7 @@ export type ServiceRecordMaxOrderByAggregateInput = {
   date?: Prisma.SortOrder
   mileage?: Prisma.SortOrder
   totalCost?: Prisma.SortOrder
+  laborCost?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -409,6 +435,7 @@ export type ServiceRecordMinOrderByAggregateInput = {
   date?: Prisma.SortOrder
   mileage?: Prisma.SortOrder
   totalCost?: Prisma.SortOrder
+  laborCost?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -416,6 +443,7 @@ export type ServiceRecordMinOrderByAggregateInput = {
 export type ServiceRecordSumOrderByAggregateInput = {
   mileage?: Prisma.SortOrder
   totalCost?: Prisma.SortOrder
+  laborCost?: Prisma.SortOrder
 }
 
 export type ServiceRecordScalarRelationFilter = {
@@ -484,6 +512,7 @@ export type ServiceRecordCreateWithoutVehicleInput = {
   date?: Date | string
   mileage: number
   totalCost?: number
+  laborCost?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   details?: Prisma.ServiceDetailCreateNestedManyWithoutServiceRecordInput
@@ -494,6 +523,7 @@ export type ServiceRecordUncheckedCreateWithoutVehicleInput = {
   date?: Date | string
   mileage: number
   totalCost?: number
+  laborCost?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   details?: Prisma.ServiceDetailUncheckedCreateNestedManyWithoutServiceRecordInput
@@ -533,6 +563,7 @@ export type ServiceRecordScalarWhereInput = {
   date?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   mileage?: Prisma.IntFilter<"ServiceRecord"> | number
   totalCost?: Prisma.IntFilter<"ServiceRecord"> | number
+  laborCost?: Prisma.IntFilter<"ServiceRecord"> | number
   createdAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
 }
@@ -542,6 +573,7 @@ export type ServiceRecordCreateWithoutDetailsInput = {
   date?: Date | string
   mileage: number
   totalCost?: number
+  laborCost?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   vehicle: Prisma.VehicleCreateNestedOneWithoutServiceRecordsInput
@@ -553,6 +585,7 @@ export type ServiceRecordUncheckedCreateWithoutDetailsInput = {
   date?: Date | string
   mileage: number
   totalCost?: number
+  laborCost?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -578,6 +611,7 @@ export type ServiceRecordUpdateWithoutDetailsInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mileage?: Prisma.IntFieldUpdateOperationsInput | number
   totalCost?: Prisma.IntFieldUpdateOperationsInput | number
+  laborCost?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vehicle?: Prisma.VehicleUpdateOneRequiredWithoutServiceRecordsNestedInput
@@ -589,6 +623,7 @@ export type ServiceRecordUncheckedUpdateWithoutDetailsInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mileage?: Prisma.IntFieldUpdateOperationsInput | number
   totalCost?: Prisma.IntFieldUpdateOperationsInput | number
+  laborCost?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -598,6 +633,7 @@ export type ServiceRecordCreateManyVehicleInput = {
   date?: Date | string
   mileage: number
   totalCost?: number
+  laborCost?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -607,6 +643,7 @@ export type ServiceRecordUpdateWithoutVehicleInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mileage?: Prisma.IntFieldUpdateOperationsInput | number
   totalCost?: Prisma.IntFieldUpdateOperationsInput | number
+  laborCost?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   details?: Prisma.ServiceDetailUpdateManyWithoutServiceRecordNestedInput
@@ -617,6 +654,7 @@ export type ServiceRecordUncheckedUpdateWithoutVehicleInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mileage?: Prisma.IntFieldUpdateOperationsInput | number
   totalCost?: Prisma.IntFieldUpdateOperationsInput | number
+  laborCost?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   details?: Prisma.ServiceDetailUncheckedUpdateManyWithoutServiceRecordNestedInput
@@ -627,6 +665,7 @@ export type ServiceRecordUncheckedUpdateManyWithoutVehicleInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mileage?: Prisma.IntFieldUpdateOperationsInput | number
   totalCost?: Prisma.IntFieldUpdateOperationsInput | number
+  laborCost?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -668,6 +707,7 @@ export type ServiceRecordSelect<ExtArgs extends runtime.Types.Extensions.Interna
   date?: boolean
   mileage?: boolean
   totalCost?: boolean
+  laborCost?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
@@ -681,6 +721,7 @@ export type ServiceRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   date?: boolean
   mileage?: boolean
   totalCost?: boolean
+  laborCost?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
@@ -692,6 +733,7 @@ export type ServiceRecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   date?: boolean
   mileage?: boolean
   totalCost?: boolean
+  laborCost?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
@@ -703,11 +745,12 @@ export type ServiceRecordSelectScalar = {
   date?: boolean
   mileage?: boolean
   totalCost?: boolean
+  laborCost?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ServiceRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vehicleId" | "date" | "mileage" | "totalCost" | "createdAt" | "updatedAt", ExtArgs["result"]["serviceRecord"]>
+export type ServiceRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vehicleId" | "date" | "mileage" | "totalCost" | "laborCost" | "createdAt" | "updatedAt", ExtArgs["result"]["serviceRecord"]>
 export type ServiceRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ServiceRecord$detailsArgs<ExtArgs>
@@ -732,6 +775,7 @@ export type $ServiceRecordPayload<ExtArgs extends runtime.Types.Extensions.Inter
     date: Date
     mileage: number
     totalCost: number
+    laborCost: number
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["serviceRecord"]>
@@ -1164,6 +1208,7 @@ export interface ServiceRecordFieldRefs {
   readonly date: Prisma.FieldRef<"ServiceRecord", 'DateTime'>
   readonly mileage: Prisma.FieldRef<"ServiceRecord", 'Int'>
   readonly totalCost: Prisma.FieldRef<"ServiceRecord", 'Int'>
+  readonly laborCost: Prisma.FieldRef<"ServiceRecord", 'Int'>
   readonly createdAt: Prisma.FieldRef<"ServiceRecord", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"ServiceRecord", 'DateTime'>
 }

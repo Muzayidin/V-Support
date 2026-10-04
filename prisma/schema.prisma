@@ -11,24 +11,91 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  name      String
-  email     String    @unique
-  vehicles  Vehicle[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  
+  accounts      Account[]
+  sessions      Session[]
+  vehicles      Vehicle[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
 
 model Vehicle {
-  id             String          @id @default(cuid())
-  userId         String
-  user           User            @relation(fields: [userId], references: [id])
-  name           String          // e.g. "Honda Vario 150"
-  licensePlate   String?
-  currentMileage Int             // Odometer
-  serviceRecords ServiceRecord[]
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+  id                 String          @id @default(cuid())
+  userId             String
+  user               User            @relation(fields: [userId], references: [id])
+  name               String          // e.g. "Honda Vario 150"
+  licensePlate       String?
+  vehicleType        String          @default("MOTORCYCLE") // "MOTORCYCLE" atau "CAR"
+  engineType         String          @default("ICE") // "ICE" atau "EV"
+  transmission       String          @default("AUTOMATIC") // "AUTOMATIC" atau "MANUAL"
+  ccOrKwh            Int?            // CC untuk ICE, kWh untuk EV
+  currentMileage     Int             // Angka odometer saat ini
+  lastOilChange      DateTime?       // Nullable untuk EV
+  lastService        DateTime?
+  tireConditionFront Int             @default(50)  // 0 - 100
+  tireConditionRear  Int             @default(50)  // 0 - 100
+  brakePadCondition  Int             @default(50)  // 0 - 100 (Kampas Rem Depan)
+  brakePadConditionRear Int          @default(50)  // 0 - 100 (Kampas Rem Belakang)
+  coolantCondition   Int             @default(50)  // 0 - 100 (Cairan Cooler / Radiator)
+  oilCondition       Int             @default(50)  // 0 - 100 (Oli Mesin)
+  
+  // Custom Interval Penggantian (KM) - User Setting atau Fallback ke Default Pabrikan
+  oilIntervalKm             Int?            // Default Pabrikan ICE: 3000 KM
+  transmissionOilIntervalKm Int?            // Default Pabrikan ICE: 8000 KM / EV: 10000 KM
+  coolantIntervalKm         Int?            // Default Pabrikan: 12000 KM
+  
+  // Pajak STNK
+  stnkTaxDueDate      DateTime?       // Tanggal jatuh tempo pajak tahunan STNK
+  stnkFiveYearDueDate DateTime?       // Tanggal jatuh tempo pajak 5 tahunan (ganti plat)
+  annualTaxAmount     Int?            // Nominal PKB tahunan
+  swdklljAmount       Int?            @default(35000) // Default SWDKLLJ motor Rp 35.000
+  
+  serviceRecords     ServiceRecord[]
+  taxRecords         TaxRecord[]
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
 }
 
 model ServiceRecord {
@@ -38,6 +105,7 @@ model ServiceRecord {
   date           DateTime        @default(now())
   mileage        Int             // Odometer saat servis dilakukan
   totalCost      Int             @default(0)
+  laborCost      Int             @default(0) // Biaya / Ongkos Jasa Mekanik
   details        ServiceDetail[]
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
@@ -52,3 +120,15 @@ model ServiceDetail {
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 }
+
+model TaxRecord {
+  id          String   @id @default(cuid())
+  vehicleId   String
+  vehicle     Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  taxType     String   @default("ANNUAL") // "ANNUAL" (1 Tahunan) atau "FIVE_YEAR" (5 Tahunan)
+  paymentDate DateTime @default(now())
+  amount      Int      @default(0)
+  note        String?
+  createdAt   DateTime @default(now())
+}
+

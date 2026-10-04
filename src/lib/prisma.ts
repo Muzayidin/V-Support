@@ -10,7 +10,8 @@ declare global {
   var prismaGlobal: undefined | ReturnType<typeof prismaClientSingleton>
 }
 
-const prisma = globalThis.prismaGlobal ?? prismaClientSingleton()
+// Selalu buat instance baru saat skema prisma di-update agar Next.js dev server tidak memakai cache instance lama
+const prisma = prismaClientSingleton()
 
 export default prisma
 

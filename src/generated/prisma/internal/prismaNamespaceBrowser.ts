@@ -52,9 +52,13 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  Account: 'Account',
+  Session: 'Session',
+  VerificationToken: 'VerificationToken',
   Vehicle: 'Vehicle',
   ServiceRecord: 'ServiceRecord',
-  ServiceDetail: 'ServiceDetail'
+  ServiceDetail: 'ServiceDetail',
+  TaxRecord: 'TaxRecord'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -74,6 +78,9 @@ export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
+  emailVerified: 'emailVerified',
+  image: 'image',
+  password: 'password',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -81,12 +88,68 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const AccountScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  provider: 'provider',
+  providerAccountId: 'providerAccountId',
+  refresh_token: 'refresh_token',
+  access_token: 'access_token',
+  expires_at: 'expires_at',
+  token_type: 'token_type',
+  scope: 'scope',
+  id_token: 'id_token',
+  session_state: 'session_state'
+} as const
+
+export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
+
+
+export const SessionScalarFieldEnum = {
+  id: 'id',
+  sessionToken: 'sessionToken',
+  userId: 'userId',
+  expires: 'expires'
+} as const
+
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+export const VerificationTokenScalarFieldEnum = {
+  identifier: 'identifier',
+  token: 'token',
+  expires: 'expires'
+} as const
+
+export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
+
+
 export const VehicleScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   name: 'name',
   licensePlate: 'licensePlate',
+  vehicleType: 'vehicleType',
+  engineType: 'engineType',
+  transmission: 'transmission',
+  ccOrKwh: 'ccOrKwh',
   currentMileage: 'currentMileage',
+  lastOilChange: 'lastOilChange',
+  lastService: 'lastService',
+  tireConditionFront: 'tireConditionFront',
+  tireConditionRear: 'tireConditionRear',
+  brakePadCondition: 'brakePadCondition',
+  brakePadConditionRear: 'brakePadConditionRear',
+  coolantCondition: 'coolantCondition',
+  oilCondition: 'oilCondition',
+  oilIntervalKm: 'oilIntervalKm',
+  transmissionOilIntervalKm: 'transmissionOilIntervalKm',
+  coolantIntervalKm: 'coolantIntervalKm',
+  stnkTaxDueDate: 'stnkTaxDueDate',
+  stnkFiveYearDueDate: 'stnkFiveYearDueDate',
+  annualTaxAmount: 'annualTaxAmount',
+  swdklljAmount: 'swdklljAmount',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -100,6 +163,7 @@ export const ServiceRecordScalarFieldEnum = {
   date: 'date',
   mileage: 'mileage',
   totalCost: 'totalCost',
+  laborCost: 'laborCost',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -117,6 +181,19 @@ export const ServiceDetailScalarFieldEnum = {
 } as const
 
 export type ServiceDetailScalarFieldEnum = (typeof ServiceDetailScalarFieldEnum)[keyof typeof ServiceDetailScalarFieldEnum]
+
+
+export const TaxRecordScalarFieldEnum = {
+  id: 'id',
+  vehicleId: 'vehicleId',
+  taxType: 'taxType',
+  paymentDate: 'paymentDate',
+  amount: 'amount',
+  note: 'note',
+  createdAt: 'createdAt'
+} as const
+
+export type TaxRecordScalarFieldEnum = (typeof TaxRecordScalarFieldEnum)[keyof typeof TaxRecordScalarFieldEnum]
 
 
 export const SortOrder = {

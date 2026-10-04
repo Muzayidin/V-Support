@@ -27,11 +27,35 @@ export type AggregateVehicle = {
 }
 
 export type VehicleAvgAggregateOutputType = {
+  ccOrKwh: number | null
   currentMileage: number | null
+  tireConditionFront: number | null
+  tireConditionRear: number | null
+  brakePadCondition: number | null
+  brakePadConditionRear: number | null
+  coolantCondition: number | null
+  oilCondition: number | null
+  oilIntervalKm: number | null
+  transmissionOilIntervalKm: number | null
+  coolantIntervalKm: number | null
+  annualTaxAmount: number | null
+  swdklljAmount: number | null
 }
 
 export type VehicleSumAggregateOutputType = {
+  ccOrKwh: number | null
   currentMileage: number | null
+  tireConditionFront: number | null
+  tireConditionRear: number | null
+  brakePadCondition: number | null
+  brakePadConditionRear: number | null
+  coolantCondition: number | null
+  oilCondition: number | null
+  oilIntervalKm: number | null
+  transmissionOilIntervalKm: number | null
+  coolantIntervalKm: number | null
+  annualTaxAmount: number | null
+  swdklljAmount: number | null
 }
 
 export type VehicleMinAggregateOutputType = {
@@ -39,7 +63,26 @@ export type VehicleMinAggregateOutputType = {
   userId: string | null
   name: string | null
   licensePlate: string | null
+  vehicleType: string | null
+  engineType: string | null
+  transmission: string | null
+  ccOrKwh: number | null
   currentMileage: number | null
+  lastOilChange: Date | null
+  lastService: Date | null
+  tireConditionFront: number | null
+  tireConditionRear: number | null
+  brakePadCondition: number | null
+  brakePadConditionRear: number | null
+  coolantCondition: number | null
+  oilCondition: number | null
+  oilIntervalKm: number | null
+  transmissionOilIntervalKm: number | null
+  coolantIntervalKm: number | null
+  stnkTaxDueDate: Date | null
+  stnkFiveYearDueDate: Date | null
+  annualTaxAmount: number | null
+  swdklljAmount: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -49,7 +92,26 @@ export type VehicleMaxAggregateOutputType = {
   userId: string | null
   name: string | null
   licensePlate: string | null
+  vehicleType: string | null
+  engineType: string | null
+  transmission: string | null
+  ccOrKwh: number | null
   currentMileage: number | null
+  lastOilChange: Date | null
+  lastService: Date | null
+  tireConditionFront: number | null
+  tireConditionRear: number | null
+  brakePadCondition: number | null
+  brakePadConditionRear: number | null
+  coolantCondition: number | null
+  oilCondition: number | null
+  oilIntervalKm: number | null
+  transmissionOilIntervalKm: number | null
+  coolantIntervalKm: number | null
+  stnkTaxDueDate: Date | null
+  stnkFiveYearDueDate: Date | null
+  annualTaxAmount: number | null
+  swdklljAmount: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -59,7 +121,26 @@ export type VehicleCountAggregateOutputType = {
   userId: number
   name: number
   licensePlate: number
+  vehicleType: number
+  engineType: number
+  transmission: number
+  ccOrKwh: number
   currentMileage: number
+  lastOilChange: number
+  lastService: number
+  tireConditionFront: number
+  tireConditionRear: number
+  brakePadCondition: number
+  brakePadConditionRear: number
+  coolantCondition: number
+  oilCondition: number
+  oilIntervalKm: number
+  transmissionOilIntervalKm: number
+  coolantIntervalKm: number
+  stnkTaxDueDate: number
+  stnkFiveYearDueDate: number
+  annualTaxAmount: number
+  swdklljAmount: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -67,11 +148,35 @@ export type VehicleCountAggregateOutputType = {
 
 
 export type VehicleAvgAggregateInputType = {
+  ccOrKwh?: true
   currentMileage?: true
+  tireConditionFront?: true
+  tireConditionRear?: true
+  brakePadCondition?: true
+  brakePadConditionRear?: true
+  coolantCondition?: true
+  oilCondition?: true
+  oilIntervalKm?: true
+  transmissionOilIntervalKm?: true
+  coolantIntervalKm?: true
+  annualTaxAmount?: true
+  swdklljAmount?: true
 }
 
 export type VehicleSumAggregateInputType = {
+  ccOrKwh?: true
   currentMileage?: true
+  tireConditionFront?: true
+  tireConditionRear?: true
+  brakePadCondition?: true
+  brakePadConditionRear?: true
+  coolantCondition?: true
+  oilCondition?: true
+  oilIntervalKm?: true
+  transmissionOilIntervalKm?: true
+  coolantIntervalKm?: true
+  annualTaxAmount?: true
+  swdklljAmount?: true
 }
 
 export type VehicleMinAggregateInputType = {
@@ -79,7 +184,26 @@ export type VehicleMinAggregateInputType = {
   userId?: true
   name?: true
   licensePlate?: true
+  vehicleType?: true
+  engineType?: true
+  transmission?: true
+  ccOrKwh?: true
   currentMileage?: true
+  lastOilChange?: true
+  lastService?: true
+  tireConditionFront?: true
+  tireConditionRear?: true
+  brakePadCondition?: true
+  brakePadConditionRear?: true
+  coolantCondition?: true
+  oilCondition?: true
+  oilIntervalKm?: true
+  transmissionOilIntervalKm?: true
+  coolantIntervalKm?: true
+  stnkTaxDueDate?: true
+  stnkFiveYearDueDate?: true
+  annualTaxAmount?: true
+  swdklljAmount?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -89,7 +213,26 @@ export type VehicleMaxAggregateInputType = {
   userId?: true
   name?: true
   licensePlate?: true
+  vehicleType?: true
+  engineType?: true
+  transmission?: true
+  ccOrKwh?: true
   currentMileage?: true
+  lastOilChange?: true
+  lastService?: true
+  tireConditionFront?: true
+  tireConditionRear?: true
+  brakePadCondition?: true
+  brakePadConditionRear?: true
+  coolantCondition?: true
+  oilCondition?: true
+  oilIntervalKm?: true
+  transmissionOilIntervalKm?: true
+  coolantIntervalKm?: true
+  stnkTaxDueDate?: true
+  stnkFiveYearDueDate?: true
+  annualTaxAmount?: true
+  swdklljAmount?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -99,7 +242,26 @@ export type VehicleCountAggregateInputType = {
   userId?: true
   name?: true
   licensePlate?: true
+  vehicleType?: true
+  engineType?: true
+  transmission?: true
+  ccOrKwh?: true
   currentMileage?: true
+  lastOilChange?: true
+  lastService?: true
+  tireConditionFront?: true
+  tireConditionRear?: true
+  brakePadCondition?: true
+  brakePadConditionRear?: true
+  coolantCondition?: true
+  oilCondition?: true
+  oilIntervalKm?: true
+  transmissionOilIntervalKm?: true
+  coolantIntervalKm?: true
+  stnkTaxDueDate?: true
+  stnkFiveYearDueDate?: true
+  annualTaxAmount?: true
+  swdklljAmount?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -196,7 +358,26 @@ export type VehicleGroupByOutputType = {
   userId: string
   name: string
   licensePlate: string | null
+  vehicleType: string
+  engineType: string
+  transmission: string
+  ccOrKwh: number | null
   currentMileage: number
+  lastOilChange: Date | null
+  lastService: Date | null
+  tireConditionFront: number
+  tireConditionRear: number
+  brakePadCondition: number
+  brakePadConditionRear: number
+  coolantCondition: number
+  oilCondition: number
+  oilIntervalKm: number | null
+  transmissionOilIntervalKm: number | null
+  coolantIntervalKm: number | null
+  stnkTaxDueDate: Date | null
+  stnkFiveYearDueDate: Date | null
+  annualTaxAmount: number | null
+  swdklljAmount: number | null
   createdAt: Date
   updatedAt: Date
   _count: VehicleCountAggregateOutputType | null
@@ -229,11 +410,31 @@ export type VehicleWhereInput = {
   userId?: Prisma.StringFilter<"Vehicle"> | string
   name?: Prisma.StringFilter<"Vehicle"> | string
   licensePlate?: Prisma.StringNullableFilter<"Vehicle"> | string | null
+  vehicleType?: Prisma.StringFilter<"Vehicle"> | string
+  engineType?: Prisma.StringFilter<"Vehicle"> | string
+  transmission?: Prisma.StringFilter<"Vehicle"> | string
+  ccOrKwh?: Prisma.IntNullableFilter<"Vehicle"> | number | null
   currentMileage?: Prisma.IntFilter<"Vehicle"> | number
+  lastOilChange?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  lastService?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  tireConditionFront?: Prisma.IntFilter<"Vehicle"> | number
+  tireConditionRear?: Prisma.IntFilter<"Vehicle"> | number
+  brakePadCondition?: Prisma.IntFilter<"Vehicle"> | number
+  brakePadConditionRear?: Prisma.IntFilter<"Vehicle"> | number
+  coolantCondition?: Prisma.IntFilter<"Vehicle"> | number
+  oilCondition?: Prisma.IntFilter<"Vehicle"> | number
+  oilIntervalKm?: Prisma.IntNullableFilter<"Vehicle"> | number | null
+  transmissionOilIntervalKm?: Prisma.IntNullableFilter<"Vehicle"> | number | null
+  coolantIntervalKm?: Prisma.IntNullableFilter<"Vehicle"> | number | null
+  stnkTaxDueDate?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  stnkFiveYearDueDate?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  annualTaxAmount?: Prisma.IntNullableFilter<"Vehicle"> | number | null
+  swdklljAmount?: Prisma.IntNullableFilter<"Vehicle"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Vehicle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Vehicle"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   serviceRecords?: Prisma.ServiceRecordListRelationFilter
+  taxRecords?: Prisma.TaxRecordListRelationFilter
 }
 
 export type VehicleOrderByWithRelationInput = {
@@ -241,11 +442,31 @@ export type VehicleOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   licensePlate?: Prisma.SortOrderInput | Prisma.SortOrder
+  vehicleType?: Prisma.SortOrder
+  engineType?: Prisma.SortOrder
+  transmission?: Prisma.SortOrder
+  ccOrKwh?: Prisma.SortOrderInput | Prisma.SortOrder
   currentMileage?: Prisma.SortOrder
+  lastOilChange?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastService?: Prisma.SortOrderInput | Prisma.SortOrder
+  tireConditionFront?: Prisma.SortOrder
+  tireConditionRear?: Prisma.SortOrder
+  brakePadCondition?: Prisma.SortOrder
+  brakePadConditionRear?: Prisma.SortOrder
+  coolantCondition?: Prisma.SortOrder
+  oilCondition?: Prisma.SortOrder
+  oilIntervalKm?: Prisma.SortOrderInput | Prisma.SortOrder
+  transmissionOilIntervalKm?: Prisma.SortOrderInput | Prisma.SortOrder
+  coolantIntervalKm?: Prisma.SortOrderInput | Prisma.SortOrder
+  stnkTaxDueDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  stnkFiveYearDueDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  annualTaxAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  swdklljAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   serviceRecords?: Prisma.ServiceRecordOrderByRelationAggregateInput
+  taxRecords?: Prisma.TaxRecordOrderByRelationAggregateInput
 }
 
 export type VehicleWhereUniqueInput = Prisma.AtLeast<{
@@ -256,11 +477,31 @@ export type VehicleWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"Vehicle"> | string
   name?: Prisma.StringFilter<"Vehicle"> | string
   licensePlate?: Prisma.StringNullableFilter<"Vehicle"> | string | null
+  vehicleType?: Prisma.StringFilter<"Vehicle"> | string
+  engineType?: Prisma.StringFilter<"Vehicle"> | string
+  transmission?: Prisma.StringFilter<"Vehicle"> | string
+  ccOrKwh?: Prisma.IntNullableFilter<"Vehicle"> | number | null
   currentMileage?: Prisma.IntFilter<"Vehicle"> | number
+  lastOilChange?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  lastService?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  tireConditionFront?: Prisma.IntFilter<"Vehicle"> | number
+  tireConditionRear?: Prisma.IntFilter<"Vehicle"> | number
+  brakePadCondition?: Prisma.IntFilter<"Vehicle"> | number
+  brakePadConditionRear?: Prisma.IntFilter<"Vehicle"> | number
+  coolantCondition?: Prisma.IntFilter<"Vehicle"> | number
+  oilCondition?: Prisma.IntFilter<"Vehicle"> | number
+  oilIntervalKm?: Prisma.IntNullableFilter<"Vehicle"> | number | null
+  transmissionOilIntervalKm?: Prisma.IntNullableFilter<"Vehicle"> | number | null
+  coolantIntervalKm?: Prisma.IntNullableFilter<"Vehicle"> | number | null
+  stnkTaxDueDate?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  stnkFiveYearDueDate?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  annualTaxAmount?: Prisma.IntNullableFilter<"Vehicle"> | number | null
+  swdklljAmount?: Prisma.IntNullableFilter<"Vehicle"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Vehicle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Vehicle"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   serviceRecords?: Prisma.ServiceRecordListRelationFilter
+  taxRecords?: Prisma.TaxRecordListRelationFilter
 }, "id">
 
 export type VehicleOrderByWithAggregationInput = {
@@ -268,7 +509,26 @@ export type VehicleOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   licensePlate?: Prisma.SortOrderInput | Prisma.SortOrder
+  vehicleType?: Prisma.SortOrder
+  engineType?: Prisma.SortOrder
+  transmission?: Prisma.SortOrder
+  ccOrKwh?: Prisma.SortOrderInput | Prisma.SortOrder
   currentMileage?: Prisma.SortOrder
+  lastOilChange?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastService?: Prisma.SortOrderInput | Prisma.SortOrder
+  tireConditionFront?: Prisma.SortOrder
+  tireConditionRear?: Prisma.SortOrder
+  brakePadCondition?: Prisma.SortOrder
+  brakePadConditionRear?: Prisma.SortOrder
+  coolantCondition?: Prisma.SortOrder
+  oilCondition?: Prisma.SortOrder
+  oilIntervalKm?: Prisma.SortOrderInput | Prisma.SortOrder
+  transmissionOilIntervalKm?: Prisma.SortOrderInput | Prisma.SortOrder
+  coolantIntervalKm?: Prisma.SortOrderInput | Prisma.SortOrder
+  stnkTaxDueDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  stnkFiveYearDueDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  annualTaxAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  swdklljAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.VehicleCountOrderByAggregateInput
@@ -286,7 +546,26 @@ export type VehicleScalarWhereWithAggregatesInput = {
   userId?: Prisma.StringWithAggregatesFilter<"Vehicle"> | string
   name?: Prisma.StringWithAggregatesFilter<"Vehicle"> | string
   licensePlate?: Prisma.StringNullableWithAggregatesFilter<"Vehicle"> | string | null
+  vehicleType?: Prisma.StringWithAggregatesFilter<"Vehicle"> | string
+  engineType?: Prisma.StringWithAggregatesFilter<"Vehicle"> | string
+  transmission?: Prisma.StringWithAggregatesFilter<"Vehicle"> | string
+  ccOrKwh?: Prisma.IntNullableWithAggregatesFilter<"Vehicle"> | number | null
   currentMileage?: Prisma.IntWithAggregatesFilter<"Vehicle"> | number
+  lastOilChange?: Prisma.DateTimeNullableWithAggregatesFilter<"Vehicle"> | Date | string | null
+  lastService?: Prisma.DateTimeNullableWithAggregatesFilter<"Vehicle"> | Date | string | null
+  tireConditionFront?: Prisma.IntWithAggregatesFilter<"Vehicle"> | number
+  tireConditionRear?: Prisma.IntWithAggregatesFilter<"Vehicle"> | number
+  brakePadCondition?: Prisma.IntWithAggregatesFilter<"Vehicle"> | number
+  brakePadConditionRear?: Prisma.IntWithAggregatesFilter<"Vehicle"> | number
+  coolantCondition?: Prisma.IntWithAggregatesFilter<"Vehicle"> | number
+  oilCondition?: Prisma.IntWithAggregatesFilter<"Vehicle"> | number
+  oilIntervalKm?: Prisma.IntNullableWithAggregatesFilter<"Vehicle"> | number | null
+  transmissionOilIntervalKm?: Prisma.IntNullableWithAggregatesFilter<"Vehicle"> | number | null
+  coolantIntervalKm?: Prisma.IntNullableWithAggregatesFilter<"Vehicle"> | number | null
+  stnkTaxDueDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Vehicle"> | Date | string | null
+  stnkFiveYearDueDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Vehicle"> | Date | string | null
+  annualTaxAmount?: Prisma.IntNullableWithAggregatesFilter<"Vehicle"> | number | null
+  swdklljAmount?: Prisma.IntNullableWithAggregatesFilter<"Vehicle"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Vehicle"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Vehicle"> | Date | string
 }
@@ -295,11 +574,31 @@ export type VehicleCreateInput = {
   id?: string
   name: string
   licensePlate?: string | null
+  vehicleType?: string
+  engineType?: string
+  transmission?: string
+  ccOrKwh?: number | null
   currentMileage: number
+  lastOilChange?: Date | string | null
+  lastService?: Date | string | null
+  tireConditionFront?: number
+  tireConditionRear?: number
+  brakePadCondition?: number
+  brakePadConditionRear?: number
+  coolantCondition?: number
+  oilCondition?: number
+  oilIntervalKm?: number | null
+  transmissionOilIntervalKm?: number | null
+  coolantIntervalKm?: number | null
+  stnkTaxDueDate?: Date | string | null
+  stnkFiveYearDueDate?: Date | string | null
+  annualTaxAmount?: number | null
+  swdklljAmount?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutVehiclesInput
   serviceRecords?: Prisma.ServiceRecordCreateNestedManyWithoutVehicleInput
+  taxRecords?: Prisma.TaxRecordCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleUncheckedCreateInput = {
@@ -307,21 +606,61 @@ export type VehicleUncheckedCreateInput = {
   userId: string
   name: string
   licensePlate?: string | null
+  vehicleType?: string
+  engineType?: string
+  transmission?: string
+  ccOrKwh?: number | null
   currentMileage: number
+  lastOilChange?: Date | string | null
+  lastService?: Date | string | null
+  tireConditionFront?: number
+  tireConditionRear?: number
+  brakePadCondition?: number
+  brakePadConditionRear?: number
+  coolantCondition?: number
+  oilCondition?: number
+  oilIntervalKm?: number | null
+  transmissionOilIntervalKm?: number | null
+  coolantIntervalKm?: number | null
+  stnkTaxDueDate?: Date | string | null
+  stnkFiveYearDueDate?: Date | string | null
+  annualTaxAmount?: number | null
+  swdklljAmount?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   serviceRecords?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutVehicleInput
+  taxRecords?: Prisma.TaxRecordUncheckedCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
+  engineType?: Prisma.StringFieldUpdateOperationsInput | string
+  transmission?: Prisma.StringFieldUpdateOperationsInput | string
+  ccOrKwh?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentMileage?: Prisma.IntFieldUpdateOperationsInput | number
+  lastOilChange?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastService?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tireConditionFront?: Prisma.IntFieldUpdateOperationsInput | number
+  tireConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  coolantCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  transmissionOilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coolantIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stnkTaxDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stnkFiveYearDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  annualTaxAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  swdklljAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutVehiclesNestedInput
   serviceRecords?: Prisma.ServiceRecordUpdateManyWithoutVehicleNestedInput
+  taxRecords?: Prisma.TaxRecordUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleUncheckedUpdateInput = {
@@ -329,10 +668,30 @@ export type VehicleUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
+  engineType?: Prisma.StringFieldUpdateOperationsInput | string
+  transmission?: Prisma.StringFieldUpdateOperationsInput | string
+  ccOrKwh?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentMileage?: Prisma.IntFieldUpdateOperationsInput | number
+  lastOilChange?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastService?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tireConditionFront?: Prisma.IntFieldUpdateOperationsInput | number
+  tireConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  coolantCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  transmissionOilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coolantIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stnkTaxDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stnkFiveYearDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  annualTaxAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  swdklljAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   serviceRecords?: Prisma.ServiceRecordUncheckedUpdateManyWithoutVehicleNestedInput
+  taxRecords?: Prisma.TaxRecordUncheckedUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleCreateManyInput = {
@@ -340,7 +699,26 @@ export type VehicleCreateManyInput = {
   userId: string
   name: string
   licensePlate?: string | null
+  vehicleType?: string
+  engineType?: string
+  transmission?: string
+  ccOrKwh?: number | null
   currentMileage: number
+  lastOilChange?: Date | string | null
+  lastService?: Date | string | null
+  tireConditionFront?: number
+  tireConditionRear?: number
+  brakePadCondition?: number
+  brakePadConditionRear?: number
+  coolantCondition?: number
+  oilCondition?: number
+  oilIntervalKm?: number | null
+  transmissionOilIntervalKm?: number | null
+  coolantIntervalKm?: number | null
+  stnkTaxDueDate?: Date | string | null
+  stnkFiveYearDueDate?: Date | string | null
+  annualTaxAmount?: number | null
+  swdklljAmount?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -349,7 +727,26 @@ export type VehicleUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
+  engineType?: Prisma.StringFieldUpdateOperationsInput | string
+  transmission?: Prisma.StringFieldUpdateOperationsInput | string
+  ccOrKwh?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentMileage?: Prisma.IntFieldUpdateOperationsInput | number
+  lastOilChange?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastService?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tireConditionFront?: Prisma.IntFieldUpdateOperationsInput | number
+  tireConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  coolantCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  transmissionOilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coolantIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stnkTaxDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stnkFiveYearDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  annualTaxAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  swdklljAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -359,7 +756,26 @@ export type VehicleUncheckedUpdateManyInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
+  engineType?: Prisma.StringFieldUpdateOperationsInput | string
+  transmission?: Prisma.StringFieldUpdateOperationsInput | string
+  ccOrKwh?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentMileage?: Prisma.IntFieldUpdateOperationsInput | number
+  lastOilChange?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastService?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tireConditionFront?: Prisma.IntFieldUpdateOperationsInput | number
+  tireConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  coolantCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  transmissionOilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coolantIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stnkTaxDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stnkFiveYearDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  annualTaxAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  swdklljAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -379,13 +795,44 @@ export type VehicleCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   licensePlate?: Prisma.SortOrder
+  vehicleType?: Prisma.SortOrder
+  engineType?: Prisma.SortOrder
+  transmission?: Prisma.SortOrder
+  ccOrKwh?: Prisma.SortOrder
   currentMileage?: Prisma.SortOrder
+  lastOilChange?: Prisma.SortOrder
+  lastService?: Prisma.SortOrder
+  tireConditionFront?: Prisma.SortOrder
+  tireConditionRear?: Prisma.SortOrder
+  brakePadCondition?: Prisma.SortOrder
+  brakePadConditionRear?: Prisma.SortOrder
+  coolantCondition?: Prisma.SortOrder
+  oilCondition?: Prisma.SortOrder
+  oilIntervalKm?: Prisma.SortOrder
+  transmissionOilIntervalKm?: Prisma.SortOrder
+  coolantIntervalKm?: Prisma.SortOrder
+  stnkTaxDueDate?: Prisma.SortOrder
+  stnkFiveYearDueDate?: Prisma.SortOrder
+  annualTaxAmount?: Prisma.SortOrder
+  swdklljAmount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type VehicleAvgOrderByAggregateInput = {
+  ccOrKwh?: Prisma.SortOrder
   currentMileage?: Prisma.SortOrder
+  tireConditionFront?: Prisma.SortOrder
+  tireConditionRear?: Prisma.SortOrder
+  brakePadCondition?: Prisma.SortOrder
+  brakePadConditionRear?: Prisma.SortOrder
+  coolantCondition?: Prisma.SortOrder
+  oilCondition?: Prisma.SortOrder
+  oilIntervalKm?: Prisma.SortOrder
+  transmissionOilIntervalKm?: Prisma.SortOrder
+  coolantIntervalKm?: Prisma.SortOrder
+  annualTaxAmount?: Prisma.SortOrder
+  swdklljAmount?: Prisma.SortOrder
 }
 
 export type VehicleMaxOrderByAggregateInput = {
@@ -393,7 +840,26 @@ export type VehicleMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   licensePlate?: Prisma.SortOrder
+  vehicleType?: Prisma.SortOrder
+  engineType?: Prisma.SortOrder
+  transmission?: Prisma.SortOrder
+  ccOrKwh?: Prisma.SortOrder
   currentMileage?: Prisma.SortOrder
+  lastOilChange?: Prisma.SortOrder
+  lastService?: Prisma.SortOrder
+  tireConditionFront?: Prisma.SortOrder
+  tireConditionRear?: Prisma.SortOrder
+  brakePadCondition?: Prisma.SortOrder
+  brakePadConditionRear?: Prisma.SortOrder
+  coolantCondition?: Prisma.SortOrder
+  oilCondition?: Prisma.SortOrder
+  oilIntervalKm?: Prisma.SortOrder
+  transmissionOilIntervalKm?: Prisma.SortOrder
+  coolantIntervalKm?: Prisma.SortOrder
+  stnkTaxDueDate?: Prisma.SortOrder
+  stnkFiveYearDueDate?: Prisma.SortOrder
+  annualTaxAmount?: Prisma.SortOrder
+  swdklljAmount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -403,13 +869,44 @@ export type VehicleMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   licensePlate?: Prisma.SortOrder
+  vehicleType?: Prisma.SortOrder
+  engineType?: Prisma.SortOrder
+  transmission?: Prisma.SortOrder
+  ccOrKwh?: Prisma.SortOrder
   currentMileage?: Prisma.SortOrder
+  lastOilChange?: Prisma.SortOrder
+  lastService?: Prisma.SortOrder
+  tireConditionFront?: Prisma.SortOrder
+  tireConditionRear?: Prisma.SortOrder
+  brakePadCondition?: Prisma.SortOrder
+  brakePadConditionRear?: Prisma.SortOrder
+  coolantCondition?: Prisma.SortOrder
+  oilCondition?: Prisma.SortOrder
+  oilIntervalKm?: Prisma.SortOrder
+  transmissionOilIntervalKm?: Prisma.SortOrder
+  coolantIntervalKm?: Prisma.SortOrder
+  stnkTaxDueDate?: Prisma.SortOrder
+  stnkFiveYearDueDate?: Prisma.SortOrder
+  annualTaxAmount?: Prisma.SortOrder
+  swdklljAmount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type VehicleSumOrderByAggregateInput = {
+  ccOrKwh?: Prisma.SortOrder
   currentMileage?: Prisma.SortOrder
+  tireConditionFront?: Prisma.SortOrder
+  tireConditionRear?: Prisma.SortOrder
+  brakePadCondition?: Prisma.SortOrder
+  brakePadConditionRear?: Prisma.SortOrder
+  coolantCondition?: Prisma.SortOrder
+  oilCondition?: Prisma.SortOrder
+  oilIntervalKm?: Prisma.SortOrder
+  transmissionOilIntervalKm?: Prisma.SortOrder
+  coolantIntervalKm?: Prisma.SortOrder
+  annualTaxAmount?: Prisma.SortOrder
+  swdklljAmount?: Prisma.SortOrder
 }
 
 export type VehicleScalarRelationFilter = {
@@ -459,10 +956,6 @@ export type VehicleUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.VehicleScalarWhereInput | Prisma.VehicleScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -485,24 +978,78 @@ export type VehicleUpdateOneRequiredWithoutServiceRecordsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VehicleUpdateToOneWithWhereWithoutServiceRecordsInput, Prisma.VehicleUpdateWithoutServiceRecordsInput>, Prisma.VehicleUncheckedUpdateWithoutServiceRecordsInput>
 }
 
+export type VehicleCreateNestedOneWithoutTaxRecordsInput = {
+  create?: Prisma.XOR<Prisma.VehicleCreateWithoutTaxRecordsInput, Prisma.VehicleUncheckedCreateWithoutTaxRecordsInput>
+  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutTaxRecordsInput
+  connect?: Prisma.VehicleWhereUniqueInput
+}
+
+export type VehicleUpdateOneRequiredWithoutTaxRecordsNestedInput = {
+  create?: Prisma.XOR<Prisma.VehicleCreateWithoutTaxRecordsInput, Prisma.VehicleUncheckedCreateWithoutTaxRecordsInput>
+  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutTaxRecordsInput
+  upsert?: Prisma.VehicleUpsertWithoutTaxRecordsInput
+  connect?: Prisma.VehicleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VehicleUpdateToOneWithWhereWithoutTaxRecordsInput, Prisma.VehicleUpdateWithoutTaxRecordsInput>, Prisma.VehicleUncheckedUpdateWithoutTaxRecordsInput>
+}
+
 export type VehicleCreateWithoutUserInput = {
   id?: string
   name: string
   licensePlate?: string | null
+  vehicleType?: string
+  engineType?: string
+  transmission?: string
+  ccOrKwh?: number | null
   currentMileage: number
+  lastOilChange?: Date | string | null
+  lastService?: Date | string | null
+  tireConditionFront?: number
+  tireConditionRear?: number
+  brakePadCondition?: number
+  brakePadConditionRear?: number
+  coolantCondition?: number
+  oilCondition?: number
+  oilIntervalKm?: number | null
+  transmissionOilIntervalKm?: number | null
+  coolantIntervalKm?: number | null
+  stnkTaxDueDate?: Date | string | null
+  stnkFiveYearDueDate?: Date | string | null
+  annualTaxAmount?: number | null
+  swdklljAmount?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   serviceRecords?: Prisma.ServiceRecordCreateNestedManyWithoutVehicleInput
+  taxRecords?: Prisma.TaxRecordCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleUncheckedCreateWithoutUserInput = {
   id?: string
   name: string
   licensePlate?: string | null
+  vehicleType?: string
+  engineType?: string
+  transmission?: string
+  ccOrKwh?: number | null
   currentMileage: number
+  lastOilChange?: Date | string | null
+  lastService?: Date | string | null
+  tireConditionFront?: number
+  tireConditionRear?: number
+  brakePadCondition?: number
+  brakePadConditionRear?: number
+  coolantCondition?: number
+  oilCondition?: number
+  oilIntervalKm?: number | null
+  transmissionOilIntervalKm?: number | null
+  coolantIntervalKm?: number | null
+  stnkTaxDueDate?: Date | string | null
+  stnkFiveYearDueDate?: Date | string | null
+  annualTaxAmount?: number | null
+  swdklljAmount?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   serviceRecords?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutVehicleInput
+  taxRecords?: Prisma.TaxRecordUncheckedCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleCreateOrConnectWithoutUserInput = {
@@ -538,7 +1085,26 @@ export type VehicleScalarWhereInput = {
   userId?: Prisma.StringFilter<"Vehicle"> | string
   name?: Prisma.StringFilter<"Vehicle"> | string
   licensePlate?: Prisma.StringNullableFilter<"Vehicle"> | string | null
+  vehicleType?: Prisma.StringFilter<"Vehicle"> | string
+  engineType?: Prisma.StringFilter<"Vehicle"> | string
+  transmission?: Prisma.StringFilter<"Vehicle"> | string
+  ccOrKwh?: Prisma.IntNullableFilter<"Vehicle"> | number | null
   currentMileage?: Prisma.IntFilter<"Vehicle"> | number
+  lastOilChange?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  lastService?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  tireConditionFront?: Prisma.IntFilter<"Vehicle"> | number
+  tireConditionRear?: Prisma.IntFilter<"Vehicle"> | number
+  brakePadCondition?: Prisma.IntFilter<"Vehicle"> | number
+  brakePadConditionRear?: Prisma.IntFilter<"Vehicle"> | number
+  coolantCondition?: Prisma.IntFilter<"Vehicle"> | number
+  oilCondition?: Prisma.IntFilter<"Vehicle"> | number
+  oilIntervalKm?: Prisma.IntNullableFilter<"Vehicle"> | number | null
+  transmissionOilIntervalKm?: Prisma.IntNullableFilter<"Vehicle"> | number | null
+  coolantIntervalKm?: Prisma.IntNullableFilter<"Vehicle"> | number | null
+  stnkTaxDueDate?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  stnkFiveYearDueDate?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  annualTaxAmount?: Prisma.IntNullableFilter<"Vehicle"> | number | null
+  swdklljAmount?: Prisma.IntNullableFilter<"Vehicle"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Vehicle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Vehicle"> | Date | string
 }
@@ -547,10 +1113,30 @@ export type VehicleCreateWithoutServiceRecordsInput = {
   id?: string
   name: string
   licensePlate?: string | null
+  vehicleType?: string
+  engineType?: string
+  transmission?: string
+  ccOrKwh?: number | null
   currentMileage: number
+  lastOilChange?: Date | string | null
+  lastService?: Date | string | null
+  tireConditionFront?: number
+  tireConditionRear?: number
+  brakePadCondition?: number
+  brakePadConditionRear?: number
+  coolantCondition?: number
+  oilCondition?: number
+  oilIntervalKm?: number | null
+  transmissionOilIntervalKm?: number | null
+  coolantIntervalKm?: number | null
+  stnkTaxDueDate?: Date | string | null
+  stnkFiveYearDueDate?: Date | string | null
+  annualTaxAmount?: number | null
+  swdklljAmount?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutVehiclesInput
+  taxRecords?: Prisma.TaxRecordCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleUncheckedCreateWithoutServiceRecordsInput = {
@@ -558,9 +1144,29 @@ export type VehicleUncheckedCreateWithoutServiceRecordsInput = {
   userId: string
   name: string
   licensePlate?: string | null
+  vehicleType?: string
+  engineType?: string
+  transmission?: string
+  ccOrKwh?: number | null
   currentMileage: number
+  lastOilChange?: Date | string | null
+  lastService?: Date | string | null
+  tireConditionFront?: number
+  tireConditionRear?: number
+  brakePadCondition?: number
+  brakePadConditionRear?: number
+  coolantCondition?: number
+  oilCondition?: number
+  oilIntervalKm?: number | null
+  transmissionOilIntervalKm?: number | null
+  coolantIntervalKm?: number | null
+  stnkTaxDueDate?: Date | string | null
+  stnkFiveYearDueDate?: Date | string | null
+  annualTaxAmount?: number | null
+  swdklljAmount?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  taxRecords?: Prisma.TaxRecordUncheckedCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleCreateOrConnectWithoutServiceRecordsInput = {
@@ -583,10 +1189,30 @@ export type VehicleUpdateWithoutServiceRecordsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
+  engineType?: Prisma.StringFieldUpdateOperationsInput | string
+  transmission?: Prisma.StringFieldUpdateOperationsInput | string
+  ccOrKwh?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentMileage?: Prisma.IntFieldUpdateOperationsInput | number
+  lastOilChange?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastService?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tireConditionFront?: Prisma.IntFieldUpdateOperationsInput | number
+  tireConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  coolantCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  transmissionOilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coolantIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stnkTaxDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stnkFiveYearDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  annualTaxAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  swdklljAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutVehiclesNestedInput
+  taxRecords?: Prisma.TaxRecordUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleUncheckedUpdateWithoutServiceRecordsInput = {
@@ -594,16 +1220,191 @@ export type VehicleUncheckedUpdateWithoutServiceRecordsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
+  engineType?: Prisma.StringFieldUpdateOperationsInput | string
+  transmission?: Prisma.StringFieldUpdateOperationsInput | string
+  ccOrKwh?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentMileage?: Prisma.IntFieldUpdateOperationsInput | number
+  lastOilChange?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastService?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tireConditionFront?: Prisma.IntFieldUpdateOperationsInput | number
+  tireConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  coolantCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  transmissionOilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coolantIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stnkTaxDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stnkFiveYearDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  annualTaxAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  swdklljAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  taxRecords?: Prisma.TaxRecordUncheckedUpdateManyWithoutVehicleNestedInput
+}
+
+export type VehicleCreateWithoutTaxRecordsInput = {
+  id?: string
+  name: string
+  licensePlate?: string | null
+  vehicleType?: string
+  engineType?: string
+  transmission?: string
+  ccOrKwh?: number | null
+  currentMileage: number
+  lastOilChange?: Date | string | null
+  lastService?: Date | string | null
+  tireConditionFront?: number
+  tireConditionRear?: number
+  brakePadCondition?: number
+  brakePadConditionRear?: number
+  coolantCondition?: number
+  oilCondition?: number
+  oilIntervalKm?: number | null
+  transmissionOilIntervalKm?: number | null
+  coolantIntervalKm?: number | null
+  stnkTaxDueDate?: Date | string | null
+  stnkFiveYearDueDate?: Date | string | null
+  annualTaxAmount?: number | null
+  swdklljAmount?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutVehiclesInput
+  serviceRecords?: Prisma.ServiceRecordCreateNestedManyWithoutVehicleInput
+}
+
+export type VehicleUncheckedCreateWithoutTaxRecordsInput = {
+  id?: string
+  userId: string
+  name: string
+  licensePlate?: string | null
+  vehicleType?: string
+  engineType?: string
+  transmission?: string
+  ccOrKwh?: number | null
+  currentMileage: number
+  lastOilChange?: Date | string | null
+  lastService?: Date | string | null
+  tireConditionFront?: number
+  tireConditionRear?: number
+  brakePadCondition?: number
+  brakePadConditionRear?: number
+  coolantCondition?: number
+  oilCondition?: number
+  oilIntervalKm?: number | null
+  transmissionOilIntervalKm?: number | null
+  coolantIntervalKm?: number | null
+  stnkTaxDueDate?: Date | string | null
+  stnkFiveYearDueDate?: Date | string | null
+  annualTaxAmount?: number | null
+  swdklljAmount?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  serviceRecords?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutVehicleInput
+}
+
+export type VehicleCreateOrConnectWithoutTaxRecordsInput = {
+  where: Prisma.VehicleWhereUniqueInput
+  create: Prisma.XOR<Prisma.VehicleCreateWithoutTaxRecordsInput, Prisma.VehicleUncheckedCreateWithoutTaxRecordsInput>
+}
+
+export type VehicleUpsertWithoutTaxRecordsInput = {
+  update: Prisma.XOR<Prisma.VehicleUpdateWithoutTaxRecordsInput, Prisma.VehicleUncheckedUpdateWithoutTaxRecordsInput>
+  create: Prisma.XOR<Prisma.VehicleCreateWithoutTaxRecordsInput, Prisma.VehicleUncheckedCreateWithoutTaxRecordsInput>
+  where?: Prisma.VehicleWhereInput
+}
+
+export type VehicleUpdateToOneWithWhereWithoutTaxRecordsInput = {
+  where?: Prisma.VehicleWhereInput
+  data: Prisma.XOR<Prisma.VehicleUpdateWithoutTaxRecordsInput, Prisma.VehicleUncheckedUpdateWithoutTaxRecordsInput>
+}
+
+export type VehicleUpdateWithoutTaxRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
+  engineType?: Prisma.StringFieldUpdateOperationsInput | string
+  transmission?: Prisma.StringFieldUpdateOperationsInput | string
+  ccOrKwh?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentMileage?: Prisma.IntFieldUpdateOperationsInput | number
+  lastOilChange?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastService?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tireConditionFront?: Prisma.IntFieldUpdateOperationsInput | number
+  tireConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  coolantCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  transmissionOilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coolantIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stnkTaxDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stnkFiveYearDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  annualTaxAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  swdklljAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutVehiclesNestedInput
+  serviceRecords?: Prisma.ServiceRecordUpdateManyWithoutVehicleNestedInput
+}
+
+export type VehicleUncheckedUpdateWithoutTaxRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
+  engineType?: Prisma.StringFieldUpdateOperationsInput | string
+  transmission?: Prisma.StringFieldUpdateOperationsInput | string
+  ccOrKwh?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentMileage?: Prisma.IntFieldUpdateOperationsInput | number
+  lastOilChange?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastService?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tireConditionFront?: Prisma.IntFieldUpdateOperationsInput | number
+  tireConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  coolantCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  transmissionOilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coolantIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stnkTaxDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stnkFiveYearDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  annualTaxAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  swdklljAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  serviceRecords?: Prisma.ServiceRecordUncheckedUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleCreateManyUserInput = {
   id?: string
   name: string
   licensePlate?: string | null
+  vehicleType?: string
+  engineType?: string
+  transmission?: string
+  ccOrKwh?: number | null
   currentMileage: number
+  lastOilChange?: Date | string | null
+  lastService?: Date | string | null
+  tireConditionFront?: number
+  tireConditionRear?: number
+  brakePadCondition?: number
+  brakePadConditionRear?: number
+  coolantCondition?: number
+  oilCondition?: number
+  oilIntervalKm?: number | null
+  transmissionOilIntervalKm?: number | null
+  coolantIntervalKm?: number | null
+  stnkTaxDueDate?: Date | string | null
+  stnkFiveYearDueDate?: Date | string | null
+  annualTaxAmount?: number | null
+  swdklljAmount?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -612,27 +1413,86 @@ export type VehicleUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
+  engineType?: Prisma.StringFieldUpdateOperationsInput | string
+  transmission?: Prisma.StringFieldUpdateOperationsInput | string
+  ccOrKwh?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentMileage?: Prisma.IntFieldUpdateOperationsInput | number
+  lastOilChange?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastService?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tireConditionFront?: Prisma.IntFieldUpdateOperationsInput | number
+  tireConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  coolantCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  transmissionOilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coolantIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stnkTaxDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stnkFiveYearDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  annualTaxAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  swdklljAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   serviceRecords?: Prisma.ServiceRecordUpdateManyWithoutVehicleNestedInput
+  taxRecords?: Prisma.TaxRecordUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
+  engineType?: Prisma.StringFieldUpdateOperationsInput | string
+  transmission?: Prisma.StringFieldUpdateOperationsInput | string
+  ccOrKwh?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentMileage?: Prisma.IntFieldUpdateOperationsInput | number
+  lastOilChange?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastService?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tireConditionFront?: Prisma.IntFieldUpdateOperationsInput | number
+  tireConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  coolantCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  transmissionOilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coolantIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stnkTaxDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stnkFiveYearDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  annualTaxAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  swdklljAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   serviceRecords?: Prisma.ServiceRecordUncheckedUpdateManyWithoutVehicleNestedInput
+  taxRecords?: Prisma.TaxRecordUncheckedUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
+  engineType?: Prisma.StringFieldUpdateOperationsInput | string
+  transmission?: Prisma.StringFieldUpdateOperationsInput | string
+  ccOrKwh?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentMileage?: Prisma.IntFieldUpdateOperationsInput | number
+  lastOilChange?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastService?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tireConditionFront?: Prisma.IntFieldUpdateOperationsInput | number
+  tireConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  coolantCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  transmissionOilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coolantIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stnkTaxDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stnkFiveYearDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  annualTaxAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  swdklljAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -644,10 +1504,12 @@ export type VehicleUncheckedUpdateManyWithoutUserInput = {
 
 export type VehicleCountOutputType = {
   serviceRecords: number
+  taxRecords: number
 }
 
 export type VehicleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   serviceRecords?: boolean | VehicleCountOutputTypeCountServiceRecordsArgs
+  taxRecords?: boolean | VehicleCountOutputTypeCountTaxRecordsArgs
 }
 
 /**
@@ -667,17 +1529,44 @@ export type VehicleCountOutputTypeCountServiceRecordsArgs<ExtArgs extends runtim
   where?: Prisma.ServiceRecordWhereInput
 }
 
+/**
+ * VehicleCountOutputType without action
+ */
+export type VehicleCountOutputTypeCountTaxRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaxRecordWhereInput
+}
+
 
 export type VehicleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
   name?: boolean
   licensePlate?: boolean
+  vehicleType?: boolean
+  engineType?: boolean
+  transmission?: boolean
+  ccOrKwh?: boolean
   currentMileage?: boolean
+  lastOilChange?: boolean
+  lastService?: boolean
+  tireConditionFront?: boolean
+  tireConditionRear?: boolean
+  brakePadCondition?: boolean
+  brakePadConditionRear?: boolean
+  coolantCondition?: boolean
+  oilCondition?: boolean
+  oilIntervalKm?: boolean
+  transmissionOilIntervalKm?: boolean
+  coolantIntervalKm?: boolean
+  stnkTaxDueDate?: boolean
+  stnkFiveYearDueDate?: boolean
+  annualTaxAmount?: boolean
+  swdklljAmount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   serviceRecords?: boolean | Prisma.Vehicle$serviceRecordsArgs<ExtArgs>
+  taxRecords?: boolean | Prisma.Vehicle$taxRecordsArgs<ExtArgs>
   _count?: boolean | Prisma.VehicleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vehicle"]>
 
@@ -686,7 +1575,26 @@ export type VehicleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   userId?: boolean
   name?: boolean
   licensePlate?: boolean
+  vehicleType?: boolean
+  engineType?: boolean
+  transmission?: boolean
+  ccOrKwh?: boolean
   currentMileage?: boolean
+  lastOilChange?: boolean
+  lastService?: boolean
+  tireConditionFront?: boolean
+  tireConditionRear?: boolean
+  brakePadCondition?: boolean
+  brakePadConditionRear?: boolean
+  coolantCondition?: boolean
+  oilCondition?: boolean
+  oilIntervalKm?: boolean
+  transmissionOilIntervalKm?: boolean
+  coolantIntervalKm?: boolean
+  stnkTaxDueDate?: boolean
+  stnkFiveYearDueDate?: boolean
+  annualTaxAmount?: boolean
+  swdklljAmount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -697,7 +1605,26 @@ export type VehicleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   userId?: boolean
   name?: boolean
   licensePlate?: boolean
+  vehicleType?: boolean
+  engineType?: boolean
+  transmission?: boolean
+  ccOrKwh?: boolean
   currentMileage?: boolean
+  lastOilChange?: boolean
+  lastService?: boolean
+  tireConditionFront?: boolean
+  tireConditionRear?: boolean
+  brakePadCondition?: boolean
+  brakePadConditionRear?: boolean
+  coolantCondition?: boolean
+  oilCondition?: boolean
+  oilIntervalKm?: boolean
+  transmissionOilIntervalKm?: boolean
+  coolantIntervalKm?: boolean
+  stnkTaxDueDate?: boolean
+  stnkFiveYearDueDate?: boolean
+  annualTaxAmount?: boolean
+  swdklljAmount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -708,15 +1635,35 @@ export type VehicleSelectScalar = {
   userId?: boolean
   name?: boolean
   licensePlate?: boolean
+  vehicleType?: boolean
+  engineType?: boolean
+  transmission?: boolean
+  ccOrKwh?: boolean
   currentMileage?: boolean
+  lastOilChange?: boolean
+  lastService?: boolean
+  tireConditionFront?: boolean
+  tireConditionRear?: boolean
+  brakePadCondition?: boolean
+  brakePadConditionRear?: boolean
+  coolantCondition?: boolean
+  oilCondition?: boolean
+  oilIntervalKm?: boolean
+  transmissionOilIntervalKm?: boolean
+  coolantIntervalKm?: boolean
+  stnkTaxDueDate?: boolean
+  stnkFiveYearDueDate?: boolean
+  annualTaxAmount?: boolean
+  swdklljAmount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type VehicleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "licensePlate" | "currentMileage" | "createdAt" | "updatedAt", ExtArgs["result"]["vehicle"]>
+export type VehicleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "licensePlate" | "vehicleType" | "engineType" | "transmission" | "ccOrKwh" | "currentMileage" | "lastOilChange" | "lastService" | "tireConditionFront" | "tireConditionRear" | "brakePadCondition" | "brakePadConditionRear" | "coolantCondition" | "oilCondition" | "oilIntervalKm" | "transmissionOilIntervalKm" | "coolantIntervalKm" | "stnkTaxDueDate" | "stnkFiveYearDueDate" | "annualTaxAmount" | "swdklljAmount" | "createdAt" | "updatedAt", ExtArgs["result"]["vehicle"]>
 export type VehicleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   serviceRecords?: boolean | Prisma.Vehicle$serviceRecordsArgs<ExtArgs>
+  taxRecords?: boolean | Prisma.Vehicle$taxRecordsArgs<ExtArgs>
   _count?: boolean | Prisma.VehicleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type VehicleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -731,13 +1678,33 @@ export type $VehiclePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     serviceRecords: Prisma.$ServiceRecordPayload<ExtArgs>[]
+    taxRecords: Prisma.$TaxRecordPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
     name: string
     licensePlate: string | null
+    vehicleType: string
+    engineType: string
+    transmission: string
+    ccOrKwh: number | null
     currentMileage: number
+    lastOilChange: Date | null
+    lastService: Date | null
+    tireConditionFront: number
+    tireConditionRear: number
+    brakePadCondition: number
+    brakePadConditionRear: number
+    coolantCondition: number
+    oilCondition: number
+    oilIntervalKm: number | null
+    transmissionOilIntervalKm: number | null
+    coolantIntervalKm: number | null
+    stnkTaxDueDate: Date | null
+    stnkFiveYearDueDate: Date | null
+    annualTaxAmount: number | null
+    swdklljAmount: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["vehicle"]>
@@ -1136,6 +2103,7 @@ export interface Prisma__VehicleClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   serviceRecords<T extends Prisma.Vehicle$serviceRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vehicle$serviceRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  taxRecords<T extends Prisma.Vehicle$taxRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vehicle$taxRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaxRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1169,7 +2137,26 @@ export interface VehicleFieldRefs {
   readonly userId: Prisma.FieldRef<"Vehicle", 'String'>
   readonly name: Prisma.FieldRef<"Vehicle", 'String'>
   readonly licensePlate: Prisma.FieldRef<"Vehicle", 'String'>
+  readonly vehicleType: Prisma.FieldRef<"Vehicle", 'String'>
+  readonly engineType: Prisma.FieldRef<"Vehicle", 'String'>
+  readonly transmission: Prisma.FieldRef<"Vehicle", 'String'>
+  readonly ccOrKwh: Prisma.FieldRef<"Vehicle", 'Int'>
   readonly currentMileage: Prisma.FieldRef<"Vehicle", 'Int'>
+  readonly lastOilChange: Prisma.FieldRef<"Vehicle", 'DateTime'>
+  readonly lastService: Prisma.FieldRef<"Vehicle", 'DateTime'>
+  readonly tireConditionFront: Prisma.FieldRef<"Vehicle", 'Int'>
+  readonly tireConditionRear: Prisma.FieldRef<"Vehicle", 'Int'>
+  readonly brakePadCondition: Prisma.FieldRef<"Vehicle", 'Int'>
+  readonly brakePadConditionRear: Prisma.FieldRef<"Vehicle", 'Int'>
+  readonly coolantCondition: Prisma.FieldRef<"Vehicle", 'Int'>
+  readonly oilCondition: Prisma.FieldRef<"Vehicle", 'Int'>
+  readonly oilIntervalKm: Prisma.FieldRef<"Vehicle", 'Int'>
+  readonly transmissionOilIntervalKm: Prisma.FieldRef<"Vehicle", 'Int'>
+  readonly coolantIntervalKm: Prisma.FieldRef<"Vehicle", 'Int'>
+  readonly stnkTaxDueDate: Prisma.FieldRef<"Vehicle", 'DateTime'>
+  readonly stnkFiveYearDueDate: Prisma.FieldRef<"Vehicle", 'DateTime'>
+  readonly annualTaxAmount: Prisma.FieldRef<"Vehicle", 'Int'>
+  readonly swdklljAmount: Prisma.FieldRef<"Vehicle", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Vehicle", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Vehicle", 'DateTime'>
 }
@@ -1592,6 +2579,30 @@ export type Vehicle$serviceRecordsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.ServiceRecordScalarFieldEnum | Prisma.ServiceRecordScalarFieldEnum[]
+}
+
+/**
+ * Vehicle.taxRecords
+ */
+export type Vehicle$taxRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TaxRecord
+   */
+  select?: Prisma.TaxRecordSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TaxRecord
+   */
+  omit?: Prisma.TaxRecordOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaxRecordInclude<ExtArgs> | null
+  where?: Prisma.TaxRecordWhereInput
+  orderBy?: Prisma.TaxRecordOrderByWithRelationInput | Prisma.TaxRecordOrderByWithRelationInput[]
+  cursor?: Prisma.TaxRecordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaxRecordScalarFieldEnum | Prisma.TaxRecordScalarFieldEnum[]
 }
 
 /**
