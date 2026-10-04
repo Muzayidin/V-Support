@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import BottomNav from './BottomNav'
 
@@ -11,6 +12,16 @@ export default function AppShell({
   isAuthenticated?: boolean
 }) {
   const pathname = usePathname()
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch((err) => {
+          console.warn('SW registration failed:', err)
+        })
+      })
+    }
+  }, [])
   const isLanding = pathname === '/' || pathname === '/landing' || pathname.startsWith('/landing')
   const isAuthOrOnboarding = pathname.startsWith('/login') || pathname.startsWith('/welcome')
 
