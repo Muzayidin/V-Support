@@ -18,6 +18,8 @@ import {
   ExternalLink
 } from 'lucide-react'
 
+import { isDeveloper } from '@/lib/admin'
+
 export default async function Profile() {
   const session = await auth()
   if (!session?.user?.id) {
@@ -34,6 +36,7 @@ export default async function Profile() {
   const userName = user?.name || session.user.name || 'Pengguna'
   const userEmail = user?.email || session.user.email || ''
   const vehicleCount = user?.vehicles?.length || 0
+  const isUserDev = isDeveloper(userEmail, user?.role)
 
   return (
     <>
@@ -80,6 +83,33 @@ export default async function Profile() {
             </div>
           </div>
         </section>
+
+        {/* Area Khusus Developer / Admin */}
+        {isUserDev && (
+          <section className="space-y-2">
+            <h3 className="text-xs font-black text-foreground uppercase tracking-wider px-1 flex items-center gap-1.5 text-amber-600 dark:text-amber-400">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              Developer & Admin Area
+            </h3>
+            <div className="bg-amber-400/10 rounded-[var(--radius-base)] border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] overflow-hidden">
+              <Link 
+                href="/admin" 
+                className="flex items-center justify-between p-3.5 hover:bg-amber-400/25 transition-colors group cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-[var(--radius-base)] bg-amber-400 border-2 border-border shadow-[1px_1px_0px_0px_var(--border)] flex items-center justify-center text-black font-black">
+                    <ShieldCheck className="w-5 h-5 stroke-[2.5]" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-black text-foreground block">Panel Admin & Statistik</span>
+                    <span className="text-[11px] font-bold text-foreground/70">Akses khusus developer sistem</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-foreground stroke-[3] group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
+          </section>
+        )}
 
         {/* Pengaturan Akun */}
         <section className="space-y-2">

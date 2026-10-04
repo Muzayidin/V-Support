@@ -24,8 +24,9 @@ export default function AppShell({
   }, [])
   const isLanding = pathname === '/' || pathname === '/landing' || pathname.startsWith('/landing')
   const isAuthOrOnboarding = pathname.startsWith('/login') || pathname.startsWith('/welcome')
+  const isAdmin = pathname.startsWith('/admin')
 
-  if (isLanding) {
+  if (isLanding || isAdmin) {
     return (
       <div suppressHydrationWarning className="min-h-screen w-full relative flex flex-col bg-background text-foreground">
         {children}

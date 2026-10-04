@@ -13,10 +13,16 @@ export default {
     newUser: "/welcome", // Redirect pengguna baru ke onboarding
   },
   callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = (user as any).role || "USER";
+      }
+      return token;
+    },
     async session({ session, user, token }) {
       if (session.user) {
-        // user is defined if using database session, token is defined if JWT
         session.user.id = user ? user.id : (token?.sub as string);
+        (session.user as any).role = (token?.role as string) || (user as any)?.role || "USER";
       }
       return session;
     },
