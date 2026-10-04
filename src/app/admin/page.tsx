@@ -181,7 +181,7 @@ export default async function AdminPage() {
                 Target Domain Production
               </div>
               <div className="text-base sm:text-lg font-black text-foreground flex items-center gap-2">
-                cruz.my.id
+                cruz.web.id
                 <span className="px-2 py-0.5 bg-emerald-400 text-black border border-border text-[10px] font-black rounded">
                   ONLINE TARGET
                 </span>
