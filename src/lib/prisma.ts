@@ -5,7 +5,7 @@ const prismaClientSingleton = () => {
 
   // Jika koneksi MySQL / Remote Database
   if (dbUrl.startsWith('mysql:') || dbUrl.startsWith('postgresql:')) {
-    return new PrismaClient()
+    return new PrismaClient({} as any)
   }
 
   // Fallback ke SQLite untuk lingkungan lokal
