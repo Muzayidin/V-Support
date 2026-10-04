@@ -1,11 +1,36 @@
 import { PrismaClient } from '@/generated/prisma/client'
 
+function parseMysqlUrl(urlStr: string) {
+  try {
+    const parsed = new URL(urlStr)
+    return {
+      host: parsed.hostname || '127.0.0.1',
+      port: parsed.port ? parseInt(parsed.port, 10) : 3306,
+      user: decodeURIComponent(parsed.username || 'root'),
+      password: decodeURIComponent(parsed.password || ''),
+      database: parsed.pathname.replace(/^\//, '') || '',
+      connectionLimit: 10
+    }
+  } catch (err) {
+    return {
+      host: '127.0.0.1',
+      port: 3306,
+      user: 'root',
+      password: '',
+      database: ''
+    }
+  }
+}
+
 const prismaClientSingleton = () => {
   const dbUrl = process.env.DATABASE_URL || 'file:./dev.db'
 
-  // Jika koneksi MySQL / Remote Database
-  if (dbUrl.startsWith('mysql:') || dbUrl.startsWith('postgresql:')) {
-    return new PrismaClient({} as any)
+  // Jika koneksi MySQL / MariaDB (Production aaPanel)
+  if (dbUrl.startsWith('mysql:') || dbUrl.startsWith('mariadb:')) {
+    const { PrismaMariaDb } = require('@prisma/adapter-mariadb')
+    const config = parseMysqlUrl(dbUrl)
+    const adapter = new PrismaMariaDb(config)
+    return new PrismaClient({ adapter })
   }
 
   // Fallback ke SQLite untuk lingkungan lokal
@@ -18,7 +43,7 @@ declare global {
   var prismaGlobal: undefined | ReturnType<typeof prismaClientSingleton>
 }
 
-// Selalu buat instance baru saat skema prisma di-update agar Next.js dev server tidak memakai cache instance lama
+// Singleton pattern untuk Prisma Client
 const prisma = prismaClientSingleton()
 
 export default prisma
