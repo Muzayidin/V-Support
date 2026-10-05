@@ -102,13 +102,15 @@ export default function OfflineSyncBar() {
     return null
   }
 
-  // Tentukan posisi vertikal di atas menu navigasi
-  const bottomPositionClass = isBottomNavVisible ? 'bottom-[62px]' : 'bottom-3'
+  // Tentukan posisi vertikal tepat di atas menu navigasi dengan memperhitungkan safe-area-bottom iPhone
+  const bottomPositionClass = isBottomNavVisible 
+    ? 'bottom-[calc(4.5rem+var(--safe-area-bottom,0px))]' 
+    : 'bottom-[calc(1rem+var(--safe-area-bottom,0px))]'
 
   return (
     <aside
       aria-label="Status Koneksi dan Sinkronisasi"
-      className={`fixed ${bottomPositionClass} left-0 w-full z-40 px-3 pointer-events-none md:max-w-md md:left-1/2 md:-translate-x-1/2 transition-all duration-300 animate-in slide-in-from-bottom-2`}
+      className={`fixed ${bottomPositionClass} left-0 w-full z-50 px-3 pointer-events-none md:max-w-md md:left-1/2 md:-translate-x-1/2 transition-all duration-300 animate-in slide-in-from-bottom-2`}
     >
       <div className="pointer-events-auto">
         {!isOnline ? (

@@ -47,7 +47,7 @@ export default async function Profile() {
   return (
     <>
       {/* Header */}
-      <header className="flex items-center justify-between px-4 h-16 w-full bg-background sticky top-0 z-40 border-b-2 border-border shadow-[0_2px_0px_0px_var(--border)] md:max-w-md md:mx-auto">
+      <header className="flex items-center justify-between px-4 min-h-16 py-2.5 w-full bg-background sticky top-0 z-40 border-b-2 border-border shadow-[0_2px_0px_0px_var(--border)] md:max-w-md md:mx-auto">
         <div className="flex items-center gap-2">
           <CruzLogo className="w-8 h-8 shrink-0" />
           <h1 className="text-lg font-black text-foreground tracking-tight">Profil Akun</h1>
