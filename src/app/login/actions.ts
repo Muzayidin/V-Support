@@ -50,10 +50,21 @@ export async function loginWithCredentials(formData: FormData, customRedirectTo?
       redirectTo: customRedirectTo || "/dashboard" // Gunakan custom jika ada
     })
   } catch (error: any) {
-    if (error.type === "CredentialsSignin") {
-      return { error: "Email atau password salah!" }
+    // Auth.js redirects by throwing a NEXT_REDIRECT error, so we must re-throw it if it's a redirect
+    if (error?.message?.includes("NEXT_REDIRECT") || error?.digest?.startsWith("NEXT_REDIRECT")) {
+      throw error
     }
-    // Auth.js redirects by throwing an error, so we must re-throw it if it's not a sign-in error
-    throw error
+
+    if (
+      error.type === "CredentialsSignin" ||
+      error.name === "CredentialsSignin" ||
+      error.code === "credentials" ||
+      error?.message?.includes("CredentialsSignin")
+    ) {
+      return { error: "Email atau kata sandi tidak cocok." }
+    }
+
+    console.error("[auth] Login credentials error:", error)
+    return { error: "Gagal masuk. Periksa kembali email dan kata sandi Anda." }
   }
 }

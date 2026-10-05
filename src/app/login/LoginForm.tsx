@@ -8,7 +8,14 @@ import { Mail, Lock, User, CheckCircle2, ArrowRight, Eye, EyeOff } from "lucide-
 export default function LoginForm() {
   const searchParams = useSearchParams()
   const [isRegister, setIsRegister] = useState(() => searchParams.get('mode') === 'register')
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(() => {
+    const err = searchParams.get('error')
+    if (!err) return null
+    if (err === 'CredentialsSignin') return 'Email atau kata sandi tidak cocok.'
+    if (err === 'OAuthAccountNotLinked') return 'Email ini telah terdaftar dengan metode masuk lain.'
+    if (err === 'Configuration') return 'Konfigurasi autentikasi server bermasalah.'
+    return 'Gagal masuk. Periksa kembali email dan kata sandi Anda.'
+  })
   const [isLoading, setIsLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   
