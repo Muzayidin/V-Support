@@ -7,6 +7,7 @@ export default {
     Google({
       clientId: process.env.AUTH_GOOGLE_ID,
       clientSecret: process.env.AUTH_GOOGLE_SECRET,
+      checks: ["state"],
       // Email Google sudah terverifikasi, jadi aman ditautkan ke akun email/password yang sama
       allowDangerousEmailAccountLinking: true,
     }),
