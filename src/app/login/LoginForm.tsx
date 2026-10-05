@@ -113,6 +113,13 @@ export default function LoginForm() {
         </button>
       </div>
 
+      {searchParams.get('deleted') === 'true' && (
+        <div className="p-3 bg-emerald-500/10 border-2 border-emerald-500 text-emerald-600 rounded-[var(--radius-base)] text-xs font-black shadow-[2px_2px_0px_0px_var(--border)] flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 stroke-[3] shrink-0" />
+          <span>Akun dan seluruh data Anda telah berhasil dihapus.</span>
+        </div>
+      )}
+
       {error && (
         <div className="p-3 bg-[#FF4D50] text-black text-xs font-black rounded-[var(--radius-base)] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-black shrink-0" />

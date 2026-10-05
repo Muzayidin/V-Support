@@ -7,6 +7,7 @@ import { ChevronDown, Check, Bike, Car } from 'lucide-react'
 type Vehicle = {
   id: string
   name: string
+  image?: string | null
   vehicleType?: string
 }
 
@@ -50,9 +51,15 @@ export default function VehicleDropdown({
       <button 
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1.5 sm:gap-2 bg-secondary-background hover:bg-main border-2 border-border px-2.5 sm:px-3.5 py-1.5 rounded-[var(--radius-base)] text-foreground text-xs font-bold transition-all shadow-[2px_2px_0px_0px_var(--border)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_var(--border)] cursor-pointer min-w-0"
+        className="flex items-center gap-1.5 sm:gap-2 bg-secondary-background hover:bg-main border-2 border-border px-2.5 sm:px-3 py-1.5 rounded-[var(--radius-base)] text-foreground text-xs font-bold transition-all shadow-[2px_2px_0px_0px_var(--border)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_var(--border)] cursor-pointer min-w-0"
       >
-        {activeVehicle?.vehicleType === 'CAR' ? (
+        {activeVehicle?.image ? (
+          <img 
+            src={activeVehicle.image} 
+            alt={activeVehicle.name} 
+            className="w-4 h-4 rounded-full object-cover shrink-0 border border-border" 
+          />
+        ) : activeVehicle?.vehicleType === 'CAR' ? (
           <Car className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-foreground shrink-0" />
         ) : (
           <Bike className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-foreground shrink-0" />
@@ -84,7 +91,13 @@ export default function VehicleDropdown({
                 }`}
               >
                 <div className="flex items-center gap-2 truncate mr-2">
-                  {isCar ? (
+                  {vehicle.image ? (
+                    <img 
+                      src={vehicle.image} 
+                      alt={vehicle.name} 
+                      className="w-5 h-5 rounded-md object-cover border border-border shrink-0" 
+                    />
+                  ) : isCar ? (
                     <Car className="w-3.5 h-3.5 shrink-0 opacity-80" />
                   ) : (
                     <Bike className="w-3.5 h-3.5 shrink-0 opacity-80" />

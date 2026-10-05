@@ -23,8 +23,10 @@ import {
   Search,
   X,
   Fuel,
-  Zap
+  Zap,
+  WifiOff
 } from 'lucide-react'
+import { enqueueOfflineAction, getCachedVehicles, updateCachedVehicleOdometer } from '@/lib/offlineSync'
 
 interface ComponentItem {
   id: string
@@ -176,21 +178,51 @@ function AddServiceForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
+  const [isOfflineSaved, setIsOfflineSaved] = useState(false)
 
-  // Load vehicles
+  // Load vehicles (with offline cache fallback)
   useEffect(() => {
-    getVehicles().then((vList) => {
-      if (vList && vList.length > 0) {
-        setVehiclesData(vList.map((v) => ({
+    let isMounted = true
+
+    const loadVehicles = async () => {
+      try {
+        const vList = await getVehicles()
+        if (isMounted && vList && vList.length > 0) {
+          const mapped = vList.map((v) => ({
+            id: v.id,
+            name: v.name,
+            engineType: v.engineType || 'ICE'
+          }))
+          setVehiclesData(mapped)
+          if (!selectedVehicleId) {
+            setSelectedVehicleId(mapped[0].id)
+          }
+          return
+        }
+      } catch (err) {
+        console.warn('Network error loading vehicles, checking cache:', err)
+      }
+
+      // Fallback ke cache lokal jika offline atau gagal koneksi
+      const cached = getCachedVehicles()
+      if (isMounted && cached && cached.length > 0) {
+        const mapped = cached.map((v) => ({
           id: v.id,
           name: v.name,
           engineType: v.engineType || 'ICE'
-        })))
+        }))
+        setVehiclesData(mapped)
         if (!selectedVehicleId) {
-          setSelectedVehicleId(vList[0].id)
+          setSelectedVehicleId(mapped[0].id)
         }
       }
-    })
+    }
+
+    loadVehicles()
+
+    return () => {
+      isMounted = false
+    }
   }, [selectedVehicleId])
 
   const activeVehicle = vehiclesData.find((v) => v.id === selectedVehicleId)
@@ -279,21 +311,72 @@ function AddServiceForm() {
       cost: parseThousands(prices[comp])
     }))
 
-    const result = await createServiceRecord({
-      vehicleId: selectedVehicleId,
-      date: date ? new Date(date) : undefined,
-      mileage: parsedOdometer,
-      totalCost: totalEstimasi,
-      laborCost: parsedLaborCost,
-      details
-    })
+    // Cek apakah perangkat sedang offline
+    if (typeof window !== 'undefined' && !navigator.onLine) {
+      try {
+        enqueueOfflineAction(
+          'ADD_SERVICE_RECORD',
+          {
+            vehicleId: selectedVehicleId,
+            date: date ? new Date(date).toISOString() : new Date().toISOString(),
+            mileage: parsedOdometer,
+            totalCost: totalEstimasi,
+            laborCost: parsedLaborCost,
+            details
+          },
+          `Tambah Servis ${selectedVehicleName} (${formatThousands(parsedOdometer)} KM)`
+        )
+        updateCachedVehicleOdometer(selectedVehicleId, parsedOdometer)
+        setIsOfflineSaved(true)
+        setShowModal(true)
+        return
+      } catch (err) {
+        setErrorMessage('Gagal menyimpan ke antrean offline.')
+        return
+      } finally {
+        setIsSubmitting(false)
+      }
+    }
 
-    setIsSubmitting(false)
+    try {
+      const result = await createServiceRecord({
+        vehicleId: selectedVehicleId,
+        date: date ? new Date(date) : undefined,
+        mileage: parsedOdometer,
+        totalCost: totalEstimasi,
+        laborCost: parsedLaborCost,
+        details
+      })
 
-    if (result.success) {
-      setShowModal(true)
-    } else {
-      setErrorMessage('Terjadi kesalahan saat menyimpan data servis.')
+      if (result.success) {
+        setIsOfflineSaved(false)
+        setShowModal(true)
+      } else {
+        setErrorMessage('Terjadi kesalahan saat menyimpan data servis.')
+      }
+    } catch {
+      // Jika fetch gagal (koneksi terputus saat submit), simpan ke antrean offline
+      try {
+        enqueueOfflineAction(
+          'ADD_SERVICE_RECORD',
+          {
+            vehicleId: selectedVehicleId,
+            date: date ? new Date(date).toISOString() : new Date().toISOString(),
+            mileage: parsedOdometer,
+            totalCost: totalEstimasi,
+            laborCost: parsedLaborCost,
+            details
+          },
+          `Tambah Servis ${selectedVehicleName} (${formatThousands(parsedOdometer)} KM)`
+        )
+        updateCachedVehicleOdometer(selectedVehicleId, parsedOdometer)
+        setIsOfflineSaved(true)
+        setShowModal(true)
+      } catch {
+        setErrorMessage('Terjadi kesalahan saat menyimpan data.')
+      }
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -882,7 +965,12 @@ function AddServiceForm() {
       {/* Smart Suggestion Modal on success */}
       <SmartSuggestionModal 
         isOpen={showModal} 
-        onClose={() => router.push('/dashboard')} 
+        onClose={() => router.push('/dashboard')}
+        suggestionText={
+          isOfflineSaved
+            ? `Data servis untuk ${selectedVehicleName} berhasil disimpan di antrean offline perangkat Anda! Data akan disinkronkan otomatis ke server ketika Anda terhubung kembali ke internet.`
+            : undefined
+        }
       />
     </div>
   )

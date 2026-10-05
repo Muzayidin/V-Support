@@ -15,7 +15,11 @@ export function isDeveloper(email?: string | null, role?: string | null): boolea
     .map((e) => e.trim().toLowerCase())
     .filter(Boolean)
 
-  if (email && adminEmails.includes(email.toLowerCase())) {
+  // Email developer utama terdaftar
+  const defaultDeveloperEmails = ['fajrimuzayin@gmail.com']
+  const allAuthorized = new Set([...adminEmails, ...defaultDeveloperEmails])
+
+  if (email && allAuthorized.has(email.toLowerCase().trim())) {
     return true
   }
 
@@ -48,9 +52,20 @@ export async function getVerifiedDeveloper() {
     },
   })
 
-  if (!user) return null
+  if (!user) {
+    if (session.user.email && isDeveloper(session.user.email, null)) {
+      return {
+        id: session.user.id || 'dev',
+        name: session.user.name || 'Developer',
+        email: session.user.email,
+        role: 'ADMIN',
+        image: session.user.image || null,
+      }
+    }
+    return null
+  }
 
-  const isDev = isDeveloper(user.email, user.role)
+  const isDev = isDeveloper(user.email, user.role) || isDeveloper(session.user.email, null)
   if (!isDev) return null
 
   return user

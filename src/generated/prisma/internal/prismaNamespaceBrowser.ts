@@ -58,7 +58,8 @@ export const ModelName = {
   Vehicle: 'Vehicle',
   ServiceRecord: 'ServiceRecord',
   ServiceDetail: 'ServiceDetail',
-  TaxRecord: 'TaxRecord'
+  TaxRecord: 'TaxRecord',
+  Feedback: 'Feedback'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -136,6 +137,7 @@ export const VehicleScalarFieldEnum = {
   userId: 'userId',
   name: 'name',
   licensePlate: 'licensePlate',
+  image: 'image',
   vehicleType: 'vehicleType',
   engineType: 'engineType',
   transmission: 'transmission',
@@ -200,6 +202,20 @@ export const TaxRecordScalarFieldEnum = {
 } as const
 
 export type TaxRecordScalarFieldEnum = (typeof TaxRecordScalarFieldEnum)[keyof typeof TaxRecordScalarFieldEnum]
+
+
+export const FeedbackScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  category: 'category',
+  message: 'message',
+  imageUrl: 'imageUrl',
+  rating: 'rating',
+  createdAt: 'createdAt'
+} as const
+
+export type FeedbackScalarFieldEnum = (typeof FeedbackScalarFieldEnum)[keyof typeof FeedbackScalarFieldEnum]
 
 
 export const SortOrder = {

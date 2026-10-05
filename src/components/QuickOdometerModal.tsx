@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { updateVehicle } from '@/actions/vehicle'
 import { formatThousands, parseThousands } from '@/lib/formatters'
-import { Gauge, X, Save, AlertCircle, Loader2 } from 'lucide-react'
+import { Gauge, X, Save, AlertCircle, Loader2, WifiOff } from 'lucide-react'
+import { enqueueOfflineAction, updateCachedVehicleOdometer } from '@/lib/offlineSync'
 
 interface QuickOdometerModalProps {
   vehicleId: string
@@ -24,10 +25,12 @@ export default function QuickOdometerModal({
   const [mileage, setMileage] = useState(formatThousands(currentMileage))
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [offlineNotice, setOfflineNotice] = useState<string | null>(null)
 
   const handleOpen = () => {
     setMileage(formatThousands(currentMileage))
     setError(null)
+    setOfflineNotice(null)
     setIsOpen(true)
   }
 
@@ -35,6 +38,7 @@ export default function QuickOdometerModal({
     if (!loading) {
       setIsOpen(false)
       setError(null)
+      setOfflineNotice(null)
     }
   }
 
@@ -54,6 +58,30 @@ export default function QuickOdometerModal({
 
     setLoading(true)
     setError(null)
+    setOfflineNotice(null)
+
+    // Cek apakah perangkat sedang offline
+    if (typeof window !== 'undefined' && !navigator.onLine) {
+      try {
+        enqueueOfflineAction(
+          'UPDATE_ODOMETER',
+          { vehicleId, currentMileage: newMileage },
+          `Update Odometer ${vehicleName}: ${newMileage} KM`
+        )
+        updateCachedVehicleOdometer(vehicleId, newMileage)
+        setOfflineNotice('Tersimpan di mode offline! Akan disinkron otomatis saat terhubung internet.')
+        setTimeout(() => {
+          setIsOpen(false)
+          router.refresh()
+        }, 1200)
+        return
+      } catch (err) {
+        setError('Gagal menyimpan di antrean offline.')
+        return
+      } finally {
+        setLoading(false)
+      }
+    }
 
     try {
       const result = await updateVehicle(vehicleId, { currentMileage: newMileage })
@@ -64,7 +92,22 @@ export default function QuickOdometerModal({
         setError(result.error || 'Gagal memperbarui odometer.')
       }
     } catch {
-      setError('Terjadi kesalahan saat menyimpan data.')
+      // Jika fetch gagal karena koneksi terputus tiba-tiba
+      try {
+        enqueueOfflineAction(
+          'UPDATE_ODOMETER',
+          { vehicleId, currentMileage: newMileage },
+          `Update Odometer ${vehicleName}: ${newMileage} KM`
+        )
+        updateCachedVehicleOdometer(vehicleId, newMileage)
+        setOfflineNotice('Koneksi terputus. Data disimpan secara offline dan disinkron saat online.')
+        setTimeout(() => {
+          setIsOpen(false)
+          router.refresh()
+        }, 1500)
+      } catch {
+        setError('Terjadi kesalahan saat menyimpan data.')
+      }
     } finally {
       setLoading(false)
     }
@@ -129,6 +172,13 @@ export default function QuickOdometerModal({
                   Angka sebelumnya: {formatThousands(currentMileage)} KM
                 </span>
               </div>
+
+              {offlineNotice && (
+                <div className="p-3 rounded-[var(--radius-base)] bg-amber-300 text-black border-2 border-border text-xs font-black flex items-center gap-2 shadow-[2px_2px_0px_0px_var(--border)]">
+                  <WifiOff className="w-4 h-4 shrink-0" />
+                  <span>{offlineNotice}</span>
+                </div>
+              )}
 
               {error && (
                 <div className="p-3 rounded-[var(--radius-base)] bg-[#FF4D50] text-black border-2 border-border text-xs font-bold flex items-center gap-2 shadow-[2px_2px_0px_0px_var(--border)]">

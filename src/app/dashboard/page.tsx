@@ -10,6 +10,7 @@ import VehicleDropdown from '@/components/VehicleDropdown'
 import QuickOdometerModal from '@/components/QuickOdometerModal'
 import NotificationModal from '@/components/NotificationModal'
 import NotificationScheduler from '@/components/NotificationScheduler'
+import SyncVehicleCache from '@/components/SyncVehicleCache'
 import { getUserNotifications } from '@/lib/notifications'
 import { formatThousands } from '@/lib/formatters'
 import { Suspense } from 'react'
@@ -169,6 +170,15 @@ export default async function DashboardPage({
         enabled={userNotificationsData.settings.odometerReminderEnabled}
         notifications={userNotificationsData.notifications}
       />
+      <SyncVehicleCache
+        vehicles={allVehicles.map((v) => ({
+          id: v.id,
+          name: v.name,
+          licensePlate: v.licensePlate,
+          currentMileage: v.currentMileage,
+          engineType: v.engineType,
+        }))}
+      />
       {/* Header */}
       <header className="w-full top-0 sticky bg-background border-b-2 border-border shadow-[0_2px_0px_0px_var(--border)] flex justify-between items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 z-40 md:max-w-md md:mx-auto">
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
@@ -189,17 +199,24 @@ export default async function DashboardPage({
       
       <main className="px-3 sm:px-4 py-3.5 sm:py-5 space-y-4 sm:space-y-5 pb-24 sm:pb-28 md:max-w-md md:mx-auto max-w-full overflow-hidden">
         {/* Greeting Banner & Active Vehicle Tag */}
-        <div className="flex items-center justify-between gap-2 pt-0.5">
-          <div className="min-w-0 flex-1">
-            <h2 className="text-base sm:text-xl font-black text-foreground tracking-tight truncate">Halo, {userName}! 👋</h2>
-            <p className="text-[11px] sm:text-xs text-foreground/80 mt-0.5 font-bold flex items-center gap-1.5 truncate">
-              <span className="truncate">{vehicle.name}</span>
-              {vehicle.licensePlate && (
-                <span className="px-1.5 py-0.2 bg-background border border-border rounded-[var(--radius-base)] text-[9px] uppercase font-black shrink-0">
-                  {vehicle.licensePlate}
-                </span>
-              )}
-            </p>
+        <div className="flex items-center justify-between gap-3 pt-0.5">
+          <div className="flex items-center gap-2.5 min-w-0 flex-1">
+            {vehicle.image && (
+              <div className="w-11 h-11 rounded-[var(--radius-base)] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] overflow-hidden shrink-0 bg-background">
+                <img src={vehicle.image} alt={vehicle.name} className="w-full h-full object-cover" />
+              </div>
+            )}
+            <div className="min-w-0 flex-1">
+              <h2 className="text-base sm:text-xl font-black text-foreground tracking-tight truncate">Halo, {userName}! 👋</h2>
+              <p className="text-[11px] sm:text-xs text-foreground/80 mt-0.5 font-bold flex items-center gap-1.5 truncate">
+                <span className="truncate">{vehicle.name}</span>
+                {vehicle.licensePlate && (
+                  <span className="px-1.5 py-0.2 bg-background border border-border rounded-[var(--radius-base)] text-[9px] uppercase font-black shrink-0">
+                    {vehicle.licensePlate}
+                  </span>
+                )}
+              </p>
+            </div>
           </div>
           {isEV ? (
             <span className="inline-flex items-center gap-1 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-[var(--radius-base)] text-[11px] sm:text-xs font-black bg-main text-black border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] shrink-0">

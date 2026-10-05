@@ -81,3 +81,8 @@ export type ServiceDetail = Prisma.ServiceDetailModel
  * 
  */
 export type TaxRecord = Prisma.TaxRecordModel
+/**
+ * Model Feedback
+ * 
+ */
+export type Feedback = Prisma.FeedbackModel

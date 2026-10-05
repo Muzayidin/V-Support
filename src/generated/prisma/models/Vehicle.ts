@@ -63,6 +63,7 @@ export type VehicleMinAggregateOutputType = {
   userId: string | null
   name: string | null
   licensePlate: string | null
+  image: string | null
   vehicleType: string | null
   engineType: string | null
   transmission: string | null
@@ -92,6 +93,7 @@ export type VehicleMaxAggregateOutputType = {
   userId: string | null
   name: string | null
   licensePlate: string | null
+  image: string | null
   vehicleType: string | null
   engineType: string | null
   transmission: string | null
@@ -121,6 +123,7 @@ export type VehicleCountAggregateOutputType = {
   userId: number
   name: number
   licensePlate: number
+  image: number
   vehicleType: number
   engineType: number
   transmission: number
@@ -184,6 +187,7 @@ export type VehicleMinAggregateInputType = {
   userId?: true
   name?: true
   licensePlate?: true
+  image?: true
   vehicleType?: true
   engineType?: true
   transmission?: true
@@ -213,6 +217,7 @@ export type VehicleMaxAggregateInputType = {
   userId?: true
   name?: true
   licensePlate?: true
+  image?: true
   vehicleType?: true
   engineType?: true
   transmission?: true
@@ -242,6 +247,7 @@ export type VehicleCountAggregateInputType = {
   userId?: true
   name?: true
   licensePlate?: true
+  image?: true
   vehicleType?: true
   engineType?: true
   transmission?: true
@@ -358,6 +364,7 @@ export type VehicleGroupByOutputType = {
   userId: string
   name: string
   licensePlate: string | null
+  image: string | null
   vehicleType: string
   engineType: string
   transmission: string
@@ -410,6 +417,7 @@ export type VehicleWhereInput = {
   userId?: Prisma.StringFilter<"Vehicle"> | string
   name?: Prisma.StringFilter<"Vehicle"> | string
   licensePlate?: Prisma.StringNullableFilter<"Vehicle"> | string | null
+  image?: Prisma.StringNullableFilter<"Vehicle"> | string | null
   vehicleType?: Prisma.StringFilter<"Vehicle"> | string
   engineType?: Prisma.StringFilter<"Vehicle"> | string
   transmission?: Prisma.StringFilter<"Vehicle"> | string
@@ -442,6 +450,7 @@ export type VehicleOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   licensePlate?: Prisma.SortOrderInput | Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   vehicleType?: Prisma.SortOrder
   engineType?: Prisma.SortOrder
   transmission?: Prisma.SortOrder
@@ -477,6 +486,7 @@ export type VehicleWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"Vehicle"> | string
   name?: Prisma.StringFilter<"Vehicle"> | string
   licensePlate?: Prisma.StringNullableFilter<"Vehicle"> | string | null
+  image?: Prisma.StringNullableFilter<"Vehicle"> | string | null
   vehicleType?: Prisma.StringFilter<"Vehicle"> | string
   engineType?: Prisma.StringFilter<"Vehicle"> | string
   transmission?: Prisma.StringFilter<"Vehicle"> | string
@@ -509,6 +519,7 @@ export type VehicleOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   licensePlate?: Prisma.SortOrderInput | Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   vehicleType?: Prisma.SortOrder
   engineType?: Prisma.SortOrder
   transmission?: Prisma.SortOrder
@@ -546,6 +557,7 @@ export type VehicleScalarWhereWithAggregatesInput = {
   userId?: Prisma.StringWithAggregatesFilter<"Vehicle"> | string
   name?: Prisma.StringWithAggregatesFilter<"Vehicle"> | string
   licensePlate?: Prisma.StringNullableWithAggregatesFilter<"Vehicle"> | string | null
+  image?: Prisma.StringNullableWithAggregatesFilter<"Vehicle"> | string | null
   vehicleType?: Prisma.StringWithAggregatesFilter<"Vehicle"> | string
   engineType?: Prisma.StringWithAggregatesFilter<"Vehicle"> | string
   transmission?: Prisma.StringWithAggregatesFilter<"Vehicle"> | string
@@ -574,6 +586,7 @@ export type VehicleCreateInput = {
   id?: string
   name: string
   licensePlate?: string | null
+  image?: string | null
   vehicleType?: string
   engineType?: string
   transmission?: string
@@ -606,6 +619,7 @@ export type VehicleUncheckedCreateInput = {
   userId: string
   name: string
   licensePlate?: string | null
+  image?: string | null
   vehicleType?: string
   engineType?: string
   transmission?: string
@@ -636,6 +650,7 @@ export type VehicleUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
   engineType?: Prisma.StringFieldUpdateOperationsInput | string
   transmission?: Prisma.StringFieldUpdateOperationsInput | string
@@ -668,6 +683,7 @@ export type VehicleUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
   engineType?: Prisma.StringFieldUpdateOperationsInput | string
   transmission?: Prisma.StringFieldUpdateOperationsInput | string
@@ -699,6 +715,7 @@ export type VehicleCreateManyInput = {
   userId: string
   name: string
   licensePlate?: string | null
+  image?: string | null
   vehicleType?: string
   engineType?: string
   transmission?: string
@@ -727,6 +744,7 @@ export type VehicleUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
   engineType?: Prisma.StringFieldUpdateOperationsInput | string
   transmission?: Prisma.StringFieldUpdateOperationsInput | string
@@ -756,6 +774,7 @@ export type VehicleUncheckedUpdateManyInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
   engineType?: Prisma.StringFieldUpdateOperationsInput | string
   transmission?: Prisma.StringFieldUpdateOperationsInput | string
@@ -795,6 +814,7 @@ export type VehicleCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   licensePlate?: Prisma.SortOrder
+  image?: Prisma.SortOrder
   vehicleType?: Prisma.SortOrder
   engineType?: Prisma.SortOrder
   transmission?: Prisma.SortOrder
@@ -840,6 +860,7 @@ export type VehicleMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   licensePlate?: Prisma.SortOrder
+  image?: Prisma.SortOrder
   vehicleType?: Prisma.SortOrder
   engineType?: Prisma.SortOrder
   transmission?: Prisma.SortOrder
@@ -869,6 +890,7 @@ export type VehicleMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   licensePlate?: Prisma.SortOrder
+  image?: Prisma.SortOrder
   vehicleType?: Prisma.SortOrder
   engineType?: Prisma.SortOrder
   transmission?: Prisma.SortOrder
@@ -988,6 +1010,7 @@ export type VehicleCreateWithoutUserInput = {
   id?: string
   name: string
   licensePlate?: string | null
+  image?: string | null
   vehicleType?: string
   engineType?: string
   transmission?: string
@@ -1018,6 +1041,7 @@ export type VehicleUncheckedCreateWithoutUserInput = {
   id?: string
   name: string
   licensePlate?: string | null
+  image?: string | null
   vehicleType?: string
   engineType?: string
   transmission?: string
@@ -1077,6 +1101,7 @@ export type VehicleScalarWhereInput = {
   userId?: Prisma.StringFilter<"Vehicle"> | string
   name?: Prisma.StringFilter<"Vehicle"> | string
   licensePlate?: Prisma.StringNullableFilter<"Vehicle"> | string | null
+  image?: Prisma.StringNullableFilter<"Vehicle"> | string | null
   vehicleType?: Prisma.StringFilter<"Vehicle"> | string
   engineType?: Prisma.StringFilter<"Vehicle"> | string
   transmission?: Prisma.StringFilter<"Vehicle"> | string
@@ -1105,6 +1130,7 @@ export type VehicleCreateWithoutServiceRecordsInput = {
   id?: string
   name: string
   licensePlate?: string | null
+  image?: string | null
   vehicleType?: string
   engineType?: string
   transmission?: string
@@ -1136,6 +1162,7 @@ export type VehicleUncheckedCreateWithoutServiceRecordsInput = {
   userId: string
   name: string
   licensePlate?: string | null
+  image?: string | null
   vehicleType?: string
   engineType?: string
   transmission?: string
@@ -1181,6 +1208,7 @@ export type VehicleUpdateWithoutServiceRecordsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
   engineType?: Prisma.StringFieldUpdateOperationsInput | string
   transmission?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1212,6 +1240,7 @@ export type VehicleUncheckedUpdateWithoutServiceRecordsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
   engineType?: Prisma.StringFieldUpdateOperationsInput | string
   transmission?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1241,6 +1270,7 @@ export type VehicleCreateWithoutTaxRecordsInput = {
   id?: string
   name: string
   licensePlate?: string | null
+  image?: string | null
   vehicleType?: string
   engineType?: string
   transmission?: string
@@ -1272,6 +1302,7 @@ export type VehicleUncheckedCreateWithoutTaxRecordsInput = {
   userId: string
   name: string
   licensePlate?: string | null
+  image?: string | null
   vehicleType?: string
   engineType?: string
   transmission?: string
@@ -1317,6 +1348,7 @@ export type VehicleUpdateWithoutTaxRecordsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
   engineType?: Prisma.StringFieldUpdateOperationsInput | string
   transmission?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1348,6 +1380,7 @@ export type VehicleUncheckedUpdateWithoutTaxRecordsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
   engineType?: Prisma.StringFieldUpdateOperationsInput | string
   transmission?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1377,6 +1410,7 @@ export type VehicleCreateManyUserInput = {
   id?: string
   name: string
   licensePlate?: string | null
+  image?: string | null
   vehicleType?: string
   engineType?: string
   transmission?: string
@@ -1405,6 +1439,7 @@ export type VehicleUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
   engineType?: Prisma.StringFieldUpdateOperationsInput | string
   transmission?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1435,6 +1470,7 @@ export type VehicleUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
   engineType?: Prisma.StringFieldUpdateOperationsInput | string
   transmission?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1465,6 +1501,7 @@ export type VehicleUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
   engineType?: Prisma.StringFieldUpdateOperationsInput | string
   transmission?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1534,6 +1571,7 @@ export type VehicleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   userId?: boolean
   name?: boolean
   licensePlate?: boolean
+  image?: boolean
   vehicleType?: boolean
   engineType?: boolean
   transmission?: boolean
@@ -1567,6 +1605,7 @@ export type VehicleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   userId?: boolean
   name?: boolean
   licensePlate?: boolean
+  image?: boolean
   vehicleType?: boolean
   engineType?: boolean
   transmission?: boolean
@@ -1597,6 +1636,7 @@ export type VehicleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   userId?: boolean
   name?: boolean
   licensePlate?: boolean
+  image?: boolean
   vehicleType?: boolean
   engineType?: boolean
   transmission?: boolean
@@ -1627,6 +1667,7 @@ export type VehicleSelectScalar = {
   userId?: boolean
   name?: boolean
   licensePlate?: boolean
+  image?: boolean
   vehicleType?: boolean
   engineType?: boolean
   transmission?: boolean
@@ -1651,7 +1692,7 @@ export type VehicleSelectScalar = {
   updatedAt?: boolean
 }
 
-export type VehicleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "licensePlate" | "vehicleType" | "engineType" | "transmission" | "ccOrKwh" | "currentMileage" | "lastOilChange" | "lastService" | "tireConditionFront" | "tireConditionRear" | "brakePadCondition" | "brakePadConditionRear" | "coolantCondition" | "oilCondition" | "oilIntervalKm" | "transmissionOilIntervalKm" | "coolantIntervalKm" | "stnkTaxDueDate" | "stnkFiveYearDueDate" | "annualTaxAmount" | "swdklljAmount" | "createdAt" | "updatedAt", ExtArgs["result"]["vehicle"]>
+export type VehicleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "licensePlate" | "image" | "vehicleType" | "engineType" | "transmission" | "ccOrKwh" | "currentMileage" | "lastOilChange" | "lastService" | "tireConditionFront" | "tireConditionRear" | "brakePadCondition" | "brakePadConditionRear" | "coolantCondition" | "oilCondition" | "oilIntervalKm" | "transmissionOilIntervalKm" | "coolantIntervalKm" | "stnkTaxDueDate" | "stnkFiveYearDueDate" | "annualTaxAmount" | "swdklljAmount" | "createdAt" | "updatedAt", ExtArgs["result"]["vehicle"]>
 export type VehicleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   serviceRecords?: boolean | Prisma.Vehicle$serviceRecordsArgs<ExtArgs>
@@ -1677,6 +1718,7 @@ export type $VehiclePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     userId: string
     name: string
     licensePlate: string | null
+    image: string | null
     vehicleType: string
     engineType: string
     transmission: string
@@ -2129,6 +2171,7 @@ export interface VehicleFieldRefs {
   readonly userId: Prisma.FieldRef<"Vehicle", 'String'>
   readonly name: Prisma.FieldRef<"Vehicle", 'String'>
   readonly licensePlate: Prisma.FieldRef<"Vehicle", 'String'>
+  readonly image: Prisma.FieldRef<"Vehicle", 'String'>
   readonly vehicleType: Prisma.FieldRef<"Vehicle", 'String'>
   readonly engineType: Prisma.FieldRef<"Vehicle", 'String'>
   readonly transmission: Prisma.FieldRef<"Vehicle", 'String'>

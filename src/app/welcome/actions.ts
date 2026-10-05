@@ -9,6 +9,7 @@ export interface OnboardingData {
   vehicleType: "MOTORCYCLE" | "CAR"
   engineType: "ICE" | "EV"
   name: string
+  image?: string | null
   licensePlate: string
   transmission: "AUTOMATIC" | "MANUAL"
   ccOrKwh: number | null
@@ -74,6 +75,7 @@ export async function submitVehicleOnboarding(data: OnboardingData) {
         data: {
           userId,
           name: data.name.trim(),
+          image: data.image?.trim() || null,
           licensePlate: data.licensePlate?.trim() || null,
           vehicleType,
           engineType,
