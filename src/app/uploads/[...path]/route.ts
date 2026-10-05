@@ -15,6 +15,7 @@ const MIME_TYPES: Record<string, string> = {
   ico: 'image/x-icon',
   mp4: 'video/mp4',
   pdf: 'application/pdf',
+  apk: 'application/vnd.android.package-archive',
 }
 
 export async function GET(

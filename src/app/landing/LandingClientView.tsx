@@ -67,11 +67,8 @@ export default function LandingClientView() {
   const triggerApkDownload = () => {
     setDownloadStarted(true)
     const element = document.createElement('a')
-    const file = new Blob([
-      'Cruz Android Application Installer Package (PWA Standalone Package)\nKunjungi aplikasi kami pada browser smartphone Anda dan pilih "Tambahkan ke Layar Utama" (Add to Home Screen) untuk pengalaman aplikasi native terbaik.'
-    ], { type: 'text/plain' })
-    element.href = URL.createObjectURL(file)
-    element.download = 'Cruz-v1.2.0.txt'
+    element.href = '/cruz.apk'
+    element.download = 'Cruz.apk'
     document.body.appendChild(element)
     element.click()
     document.body.removeChild(element)
