@@ -97,9 +97,10 @@
 }
 
 /* Semua <header> mendapat padding-top sesuai notch iPhone X.
-   box-sizing: border-box dan max-width: 100% mencegah horizontal scroll. */
+   min-height memastikan konten di dalam header tidak terjepit ke area status bar/notch. */
 header {
   padding-top: var(--safe-area-top);
+  min-height: calc(4rem + var(--safe-area-top));
   box-sizing: border-box;
   max-width: 100%;
 }
