@@ -2,7 +2,7 @@
   "name": "Cruz — Asisten Perawatan Motor",
   "short_name": "Cruz",
   "description": "Aplikasi pendamping cerdas untuk Motor Bensin (ICE) dan Motor Listrik (EV). Pantau kondisi komponen, riwayat servis, dan estimasi biaya perawatan kendaraan Anda.",
-  "start_url": "/dashboard",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
