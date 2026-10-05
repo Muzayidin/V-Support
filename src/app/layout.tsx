@@ -40,7 +40,8 @@ export const metadata: Metadata = {
       { url: "/favicon.ico", sizes: "any" },
     ],
     apple: [
-      { url: "/icon-192.png" },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
     ],
   },
   openGraph: {
@@ -64,6 +65,13 @@ export default async function RootLayout({
       className={`${inter.variable} h-full antialiased`}
     >
       <head suppressHydrationWarning>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Cruz" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content="Cruz" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/apple-touch-icon-precomposed.png" />
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       <body suppressHydrationWarning className="bg-[#f8fafc] text-slate-900 antialiased min-h-screen">
