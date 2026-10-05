@@ -166,8 +166,15 @@ export default function UserTable({
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-[var(--radius-base)] border-2 border-border bg-main font-black text-xs flex items-center justify-center shrink-0 overflow-hidden shadow-[1px_1px_0px_0px_var(--border)]">
-                            {user.image ? (
-                              <img src={user.image} alt="" className="w-full h-full object-cover" />
+                            {user.image && (user.image.startsWith('http') || user.image.startsWith('/') || user.image.startsWith('data:')) ? (
+                              <img 
+                                src={user.image} 
+                                alt="" 
+                                className="w-full h-full object-cover" 
+                                referrerPolicy="no-referrer"
+                              />
+                            ) : user.image ? (
+                              <span className="text-base select-none leading-none">{user.image}</span>
                             ) : (
                               (user.name || user.email || 'U')[0].toUpperCase()
                             )}

@@ -159,7 +159,7 @@ export default function EditProfileForm({
           <div className="relative">
             <div className="w-24 h-24 rounded-[var(--radius-base)] border-2 border-border bg-main shadow-[4px_4px_0px_0px_var(--border)] flex items-center justify-center overflow-hidden">
               {isPhoto ? (
-                <img src={selectedImage} alt="Avatar" className="w-full h-full object-cover" />
+                <img src={selectedImage} alt="Avatar" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               ) : selectedImage ? (
                 <span className="text-4xl">{selectedImage}</span>
               ) : (

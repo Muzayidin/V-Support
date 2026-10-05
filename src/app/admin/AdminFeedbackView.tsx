@@ -295,6 +295,8 @@ export default function AdminFeedbackView({ feedbacks }: AdminFeedbackViewProps)
                       alt="Lampiran Feedback"
                       onClick={() => setPreviewImage(item.imageUrl!)}
                       className="max-h-40 max-w-xs object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                      referrerPolicy="no-referrer"
+                      loading="lazy"
                     />
                     <button
                       type="button"
@@ -338,6 +340,7 @@ export default function AdminFeedbackView({ feedbacks }: AdminFeedbackViewProps)
                 src={previewImage}
                 alt="Detail Lampiran"
                 className="max-h-[70vh] max-w-full object-contain"
+                referrerPolicy="no-referrer"
               />
             </div>
           </div>
