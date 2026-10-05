@@ -7,6 +7,7 @@ import { auth } from "@/auth";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const viewport: Viewport = {
@@ -72,7 +73,21 @@ export default async function RootLayout({
         <meta name="application-name" content="Cruz" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/apple-touch-icon-precomposed.png" />
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+                if (document.readyState === 'complete') {
+                  navigator.serviceWorker.register('/sw.js', { scope: '/' });
+                } else {
+                  window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/sw.js', { scope: '/' });
+                  });
+                }
+              }
+            `,
+          }}
+        />
       </head>
       <body suppressHydrationWarning className="bg-[#f8fafc] text-slate-900 antialiased min-h-screen">
         <AppShell isAuthenticated={!!session?.user?.id}>{children}</AppShell>

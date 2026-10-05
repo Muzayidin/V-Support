@@ -18,11 +18,16 @@ export default function AppShell({
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch((err) => {
+      const registerSW = () => {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch((err) => {
           console.warn('SW registration failed:', err)
         })
-      })
+      }
+      if (document.readyState === 'complete') {
+        registerSW()
+      } else {
+        window.addEventListener('load', registerSW)
+      }
     }
   }, [])
   const isLanding = pathname === '/' || pathname === '/landing' || pathname.startsWith('/landing')
