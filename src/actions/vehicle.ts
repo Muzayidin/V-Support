@@ -218,14 +218,30 @@ export async function deleteVehicle(id: string) {
     if (!existing) {
       return { success: false, error: 'Kendaraan tidak ditemukan' }
     }
-    await prisma.vehicle.delete({
-      where: { id }
-    })
+
+    // Hapus rincian servis, catatan servis, dan catatan pajak terkait secara transaksional
+    await prisma.$transaction([
+      prisma.serviceDetail.deleteMany({
+        where: { serviceRecord: { vehicleId: id } }
+      }),
+      prisma.serviceRecord.deleteMany({
+        where: { vehicleId: id }
+      }),
+      prisma.taxRecord.deleteMany({
+        where: { vehicleId: id }
+      }),
+      prisma.vehicle.delete({
+        where: { id }
+      })
+    ])
+
     revalidatePath('/')
+    revalidatePath('/dashboard')
     revalidatePath('/vehicles')
+    revalidatePath('/history')
     return { success: true }
   } catch (error) {
     console.error('Failed to delete vehicle:', error)
-    return { success: false, error: 'Failed to delete vehicle' }
+    return { success: false, error: 'Gagal menghapus data kendaraan' }
   }
 }

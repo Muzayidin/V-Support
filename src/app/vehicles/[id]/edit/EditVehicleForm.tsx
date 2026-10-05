@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { updateVehicle } from '@/actions/vehicle'
+import { updateVehicle, deleteVehicle } from '@/actions/vehicle'
 import { NeoCombobox } from '@/components/ui/NeoCombobox'
-import { Bike, Car, Gauge, FileText, Zap, Fuel, Save, Loader2, AlertCircle, Camera, X } from 'lucide-react'
+import { Bike, Car, Gauge, FileText, Zap, Fuel, Save, Loader2, AlertCircle, Camera, X, Trash2 } from 'lucide-react'
 import { formatThousands, parseThousands } from '@/lib/formatters'
 
 type Vehicle = {
@@ -29,8 +29,29 @@ export default function EditVehicleForm({ vehicle }: { vehicle: Vehicle }) {
   const [ccOrKwh, setCcOrKwh] = useState(vehicle.ccOrKwh ? vehicle.ccOrKwh.toString() : '')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [deleteError, setDeleteError] = useState<string | null>(null)
 
   const isEV = vehicle.engineType === 'EV'
+
+  const handleDeleteVehicle = async () => {
+    setIsDeleting(true)
+    setDeleteError(null)
+    try {
+      const res = await deleteVehicle(vehicle.id)
+      if (res.success) {
+        router.push('/vehicles')
+        router.refresh()
+      } else {
+        setDeleteError(res.error || 'Gagal menghapus kendaraan.')
+      }
+    } catch {
+      setDeleteError('Terjadi kesalahan saat menghapus kendaraan.')
+    } finally {
+      setIsDeleting(false)
+    }
+  }
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -248,7 +269,85 @@ export default function EditVehicleForm({ vehicle }: { vehicle: Vehicle }) {
             />
           </div>
         </div>
+
+        {/* Zona Bahaya / Danger Zone */}
+        <div className="bg-secondary-background rounded-[var(--radius-base)] p-4 sm:p-5 border-2 border-red-500 shadow-[4px_4px_0px_0px_#ef4444] space-y-3">
+          <div className="flex items-center gap-2 text-red-600">
+            <Trash2 className="w-4 h-4 stroke-[2.5]" />
+            <h3 className="text-xs font-black uppercase tracking-wider">Hapus Kendaraan</h3>
+          </div>
+          <p className="text-xs text-foreground/75 font-bold leading-relaxed">
+            Menghapus kendaraan ini akan menghapus semua riwayat servis, estimasi keausan, dan catatan pajak terkait secara permanen.
+          </p>
+          <button
+            type="button"
+            onClick={() => setShowDeleteModal(true)}
+            className="w-full py-2.5 px-4 bg-red-50 hover:bg-red-100 text-red-600 border-2 border-red-500 rounded-[var(--radius-base)] font-black text-xs uppercase tracking-wider shadow-[2px_2px_0px_0px_#ef4444] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+            <span>Hapus Kendaraan Ini</span>
+          </button>
+        </div>
       </div>
+
+      {/* Modal Konfirmasi Hapus Kendaraan */}
+      {showDeleteModal && (
+        <div 
+          onClick={() => setShowDeleteModal(false)}
+          className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in"
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-sm bg-secondary-background border-3 border-border rounded-[var(--radius-base)] p-5 shadow-[6px_6px_0px_0px_var(--border)] space-y-4"
+          >
+            <div className="flex items-center gap-3 text-red-600">
+              <div className="w-10 h-10 rounded-[var(--radius-base)] bg-red-100 border-2 border-red-500 flex items-center justify-center shrink-0">
+                <Trash2 className="w-5 h-5 stroke-[2.5]" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-sm font-black text-foreground">Hapus Kendaraan?</h3>
+                <p className="text-[11px] text-foreground/70 font-bold truncate">{vehicle.name}</p>
+              </div>
+            </div>
+
+            <p className="text-xs text-foreground/85 font-bold leading-relaxed bg-background p-3 rounded-[var(--radius-base)] border border-border">
+              Apakah Anda yakin ingin menghapus <strong>{vehicle.name}</strong>? Seluruh data riwayat servis dan catatan pajaknya akan dihapus secara permanen.
+            </p>
+
+            {deleteError && (
+              <p className="text-xs font-bold text-red-600 bg-red-50 p-2 rounded border border-red-300">
+                {deleteError}
+              </p>
+            )}
+
+            <div className="grid grid-cols-2 gap-2 pt-1">
+              <button
+                type="button"
+                disabled={isDeleting}
+                onClick={() => setShowDeleteModal(false)}
+                className="py-2.5 px-3 bg-secondary-background hover:bg-background text-foreground border-2 border-border rounded-[var(--radius-base)] font-black text-xs uppercase shadow-[2px_2px_0px_0px_var(--border)] cursor-pointer disabled:opacity-50"
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                disabled={isDeleting}
+                onClick={handleDeleteVehicle}
+                className="py-2.5 px-3 bg-red-600 hover:bg-red-700 text-white border-2 border-border rounded-[var(--radius-base)] font-black text-xs uppercase shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
+              >
+                {isDeleting ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>Menghapus...</span>
+                  </>
+                ) : (
+                  <span>Ya, Hapus</span>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Fixed Bottom Action */}
       <div className="fixed bottom-0 left-0 w-full bg-background p-4 border-t-2 border-border shadow-[0_-2px_0px_0px_var(--border)] z-50 md:max-w-md md:left-1/2 md:-translate-x-1/2">
