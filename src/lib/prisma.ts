@@ -3,8 +3,9 @@ import { PrismaClient } from '@/generated/prisma/client'
 function parseMysqlUrl(urlStr: string) {
   try {
     const parsed = new URL(urlStr)
+    const hostname = parsed.hostname || '127.0.0.1'
     return {
-      host: parsed.hostname || '127.0.0.1',
+      host: hostname === 'localhost' ? '127.0.0.1' : hostname,
       port: parsed.port ? parseInt(parsed.port, 10) : 3306,
       user: decodeURIComponent(parsed.username || 'root'),
       password: decodeURIComponent(parsed.password || ''),
