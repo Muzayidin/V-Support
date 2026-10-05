@@ -69,6 +69,9 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  */
 
 export const TransactionIsolationLevel = runtime.makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 } as const)
 
@@ -232,4 +235,104 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const UserOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  image: 'image',
+  password: 'password',
+  role: 'role',
+  odometerReminderTime: 'odometerReminderTime'
+} as const
+
+export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+
+export const AccountOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  provider: 'provider',
+  providerAccountId: 'providerAccountId',
+  refresh_token: 'refresh_token',
+  access_token: 'access_token',
+  token_type: 'token_type',
+  scope: 'scope',
+  id_token: 'id_token',
+  session_state: 'session_state'
+} as const
+
+export type AccountOrderByRelevanceFieldEnum = (typeof AccountOrderByRelevanceFieldEnum)[keyof typeof AccountOrderByRelevanceFieldEnum]
+
+
+export const SessionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  sessionToken: 'sessionToken',
+  userId: 'userId'
+} as const
+
+export type SessionOrderByRelevanceFieldEnum = (typeof SessionOrderByRelevanceFieldEnum)[keyof typeof SessionOrderByRelevanceFieldEnum]
+
+
+export const VerificationTokenOrderByRelevanceFieldEnum = {
+  identifier: 'identifier',
+  token: 'token'
+} as const
+
+export type VerificationTokenOrderByRelevanceFieldEnum = (typeof VerificationTokenOrderByRelevanceFieldEnum)[keyof typeof VerificationTokenOrderByRelevanceFieldEnum]
+
+
+export const VehicleOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  licensePlate: 'licensePlate',
+  image: 'image',
+  vehicleType: 'vehicleType',
+  engineType: 'engineType',
+  transmission: 'transmission'
+} as const
+
+export type VehicleOrderByRelevanceFieldEnum = (typeof VehicleOrderByRelevanceFieldEnum)[keyof typeof VehicleOrderByRelevanceFieldEnum]
+
+
+export const ServiceRecordOrderByRelevanceFieldEnum = {
+  id: 'id',
+  vehicleId: 'vehicleId'
+} as const
+
+export type ServiceRecordOrderByRelevanceFieldEnum = (typeof ServiceRecordOrderByRelevanceFieldEnum)[keyof typeof ServiceRecordOrderByRelevanceFieldEnum]
+
+
+export const ServiceDetailOrderByRelevanceFieldEnum = {
+  id: 'id',
+  serviceRecordId: 'serviceRecordId',
+  componentName: 'componentName'
+} as const
+
+export type ServiceDetailOrderByRelevanceFieldEnum = (typeof ServiceDetailOrderByRelevanceFieldEnum)[keyof typeof ServiceDetailOrderByRelevanceFieldEnum]
+
+
+export const TaxRecordOrderByRelevanceFieldEnum = {
+  id: 'id',
+  vehicleId: 'vehicleId',
+  taxType: 'taxType',
+  note: 'note'
+} as const
+
+export type TaxRecordOrderByRelevanceFieldEnum = (typeof TaxRecordOrderByRelevanceFieldEnum)[keyof typeof TaxRecordOrderByRelevanceFieldEnum]
+
+
+export const FeedbackOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  category: 'category',
+  message: 'message',
+  imageUrl: 'imageUrl'
+} as const
+
+export type FeedbackOrderByRelevanceFieldEnum = (typeof FeedbackOrderByRelevanceFieldEnum)[keyof typeof FeedbackOrderByRelevanceFieldEnum]
 

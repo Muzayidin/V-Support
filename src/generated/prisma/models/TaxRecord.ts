@@ -244,6 +244,7 @@ export type TaxRecordOrderByWithRelationInput = {
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   vehicle?: Prisma.VehicleOrderByWithRelationInput
+  _relevance?: Prisma.TaxRecordOrderByRelevanceInput
 }
 
 export type TaxRecordWhereUniqueInput = Prisma.AtLeast<{
@@ -367,6 +368,12 @@ export type TaxRecordOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type TaxRecordOrderByRelevanceInput = {
+  fields: Prisma.TaxRecordOrderByRelevanceFieldEnum | Prisma.TaxRecordOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
+}
+
 export type TaxRecordCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vehicleId?: Prisma.SortOrder
@@ -472,6 +479,7 @@ export type TaxRecordCreateOrConnectWithoutVehicleInput = {
 
 export type TaxRecordCreateManyVehicleInputEnvelope = {
   data: Prisma.TaxRecordCreateManyVehicleInput | Prisma.TaxRecordCreateManyVehicleInput[]
+  skipDuplicates?: boolean
 }
 
 export type TaxRecordUpsertWithWhereUniqueWithoutVehicleInput = {
@@ -552,27 +560,7 @@ export type TaxRecordSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["taxRecord"]>
 
-export type TaxRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  vehicleId?: boolean
-  taxType?: boolean
-  paymentDate?: boolean
-  amount?: boolean
-  note?: boolean
-  createdAt?: boolean
-  vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["taxRecord"]>
 
-export type TaxRecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  vehicleId?: boolean
-  taxType?: boolean
-  paymentDate?: boolean
-  amount?: boolean
-  note?: boolean
-  createdAt?: boolean
-  vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["taxRecord"]>
 
 export type TaxRecordSelectScalar = {
   id?: boolean
@@ -586,12 +574,6 @@ export type TaxRecordSelectScalar = {
 
 export type TaxRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vehicleId" | "taxType" | "paymentDate" | "amount" | "note" | "createdAt", ExtArgs["result"]["taxRecord"]>
 export type TaxRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
-}
-export type TaxRecordIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
-}
-export type TaxRecordIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
 }
 
@@ -726,30 +708,6 @@ export interface TaxRecordDelegate<ExtArgs extends runtime.Types.Extensions.Inte
   createMany<T extends TaxRecordCreateManyArgs>(args?: Prisma.SelectSubset<T, TaxRecordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many TaxRecords and returns the data saved in the database.
-   * @param {TaxRecordCreateManyAndReturnArgs} args - Arguments to create many TaxRecords.
-   * @example
-   * // Create many TaxRecords
-   * const taxRecord = await prisma.taxRecord.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many TaxRecords and only return the `id`
-   * const taxRecordWithIdOnly = await prisma.taxRecord.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends TaxRecordCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, TaxRecordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaxRecordPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a TaxRecord.
    * @param {TaxRecordDeleteArgs} args - Arguments to delete one TaxRecord.
    * @example
@@ -812,36 +770,6 @@ export interface TaxRecordDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * 
    */
   updateMany<T extends TaxRecordUpdateManyArgs>(args: Prisma.SelectSubset<T, TaxRecordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
-
-  /**
-   * Update zero or more TaxRecords and returns the data updated in the database.
-   * @param {TaxRecordUpdateManyAndReturnArgs} args - Arguments to update many TaxRecords.
-   * @example
-   * // Update many TaxRecords
-   * const taxRecord = await prisma.taxRecord.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more TaxRecords and only return the `id`
-   * const taxRecordWithIdOnly = await prisma.taxRecord.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends TaxRecordUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, TaxRecordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaxRecordPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one TaxRecord.
@@ -1273,28 +1201,7 @@ export type TaxRecordCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * The data used to create many TaxRecords.
    */
   data: Prisma.TaxRecordCreateManyInput | Prisma.TaxRecordCreateManyInput[]
-}
-
-/**
- * TaxRecord createManyAndReturn
- */
-export type TaxRecordCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the TaxRecord
-   */
-  select?: Prisma.TaxRecordSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the TaxRecord
-   */
-  omit?: Prisma.TaxRecordOmit<ExtArgs> | null
-  /**
-   * The data used to create many TaxRecords.
-   */
-  data: Prisma.TaxRecordCreateManyInput | Prisma.TaxRecordCreateManyInput[]
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TaxRecordIncludeCreateManyAndReturn<ExtArgs> | null
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1339,36 +1246,6 @@ export type TaxRecordUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Limit how many TaxRecords to update.
    */
   limit?: number
-}
-
-/**
- * TaxRecord updateManyAndReturn
- */
-export type TaxRecordUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the TaxRecord
-   */
-  select?: Prisma.TaxRecordSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the TaxRecord
-   */
-  omit?: Prisma.TaxRecordOmit<ExtArgs> | null
-  /**
-   * The data used to update TaxRecords.
-   */
-  data: Prisma.XOR<Prisma.TaxRecordUpdateManyMutationInput, Prisma.TaxRecordUncheckedUpdateManyInput>
-  /**
-   * Filter which TaxRecords to update
-   */
-  where?: Prisma.TaxRecordWhereInput
-  /**
-   * Limit how many TaxRecords to update.
-   */
-  limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TaxRecordIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

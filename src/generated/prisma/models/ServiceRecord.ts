@@ -263,6 +263,7 @@ export type ServiceRecordOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   vehicle?: Prisma.VehicleOrderByWithRelationInput
   details?: Prisma.ServiceDetailOrderByRelationAggregateInput
+  _relevance?: Prisma.ServiceRecordOrderByRelevanceInput
 }
 
 export type ServiceRecordWhereUniqueInput = Prisma.AtLeast<{
@@ -401,6 +402,12 @@ export type ServiceRecordOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type ServiceRecordOrderByRelevanceInput = {
+  fields: Prisma.ServiceRecordOrderByRelevanceFieldEnum | Prisma.ServiceRecordOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
+}
+
 export type ServiceRecordCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vehicleId?: Prisma.SortOrder
@@ -536,6 +543,7 @@ export type ServiceRecordCreateOrConnectWithoutVehicleInput = {
 
 export type ServiceRecordCreateManyVehicleInputEnvelope = {
   data: Prisma.ServiceRecordCreateManyVehicleInput | Prisma.ServiceRecordCreateManyVehicleInput[]
+  skipDuplicates?: boolean
 }
 
 export type ServiceRecordUpsertWithWhereUniqueWithoutVehicleInput = {
@@ -715,29 +723,7 @@ export type ServiceRecordSelect<ExtArgs extends runtime.Types.Extensions.Interna
   _count?: boolean | Prisma.ServiceRecordCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["serviceRecord"]>
 
-export type ServiceRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  vehicleId?: boolean
-  date?: boolean
-  mileage?: boolean
-  totalCost?: boolean
-  laborCost?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
-  vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["serviceRecord"]>
 
-export type ServiceRecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  vehicleId?: boolean
-  date?: boolean
-  mileage?: boolean
-  totalCost?: boolean
-  laborCost?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
-  vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["serviceRecord"]>
 
 export type ServiceRecordSelectScalar = {
   id?: boolean
@@ -755,12 +741,6 @@ export type ServiceRecordInclude<ExtArgs extends runtime.Types.Extensions.Intern
   vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ServiceRecord$detailsArgs<ExtArgs>
   _count?: boolean | Prisma.ServiceRecordCountOutputTypeDefaultArgs<ExtArgs>
-}
-export type ServiceRecordIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
-}
-export type ServiceRecordIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
 }
 
 export type $ServiceRecordPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -896,30 +876,6 @@ export interface ServiceRecordDelegate<ExtArgs extends runtime.Types.Extensions.
   createMany<T extends ServiceRecordCreateManyArgs>(args?: Prisma.SelectSubset<T, ServiceRecordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many ServiceRecords and returns the data saved in the database.
-   * @param {ServiceRecordCreateManyAndReturnArgs} args - Arguments to create many ServiceRecords.
-   * @example
-   * // Create many ServiceRecords
-   * const serviceRecord = await prisma.serviceRecord.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many ServiceRecords and only return the `id`
-   * const serviceRecordWithIdOnly = await prisma.serviceRecord.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends ServiceRecordCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, ServiceRecordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceRecordPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a ServiceRecord.
    * @param {ServiceRecordDeleteArgs} args - Arguments to delete one ServiceRecord.
    * @example
@@ -982,36 +938,6 @@ export interface ServiceRecordDelegate<ExtArgs extends runtime.Types.Extensions.
    * 
    */
   updateMany<T extends ServiceRecordUpdateManyArgs>(args: Prisma.SelectSubset<T, ServiceRecordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
-
-  /**
-   * Update zero or more ServiceRecords and returns the data updated in the database.
-   * @param {ServiceRecordUpdateManyAndReturnArgs} args - Arguments to update many ServiceRecords.
-   * @example
-   * // Update many ServiceRecords
-   * const serviceRecord = await prisma.serviceRecord.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more ServiceRecords and only return the `id`
-   * const serviceRecordWithIdOnly = await prisma.serviceRecord.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends ServiceRecordUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, ServiceRecordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceRecordPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one ServiceRecord.
@@ -1445,28 +1371,7 @@ export type ServiceRecordCreateManyArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many ServiceRecords.
    */
   data: Prisma.ServiceRecordCreateManyInput | Prisma.ServiceRecordCreateManyInput[]
-}
-
-/**
- * ServiceRecord createManyAndReturn
- */
-export type ServiceRecordCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ServiceRecord
-   */
-  select?: Prisma.ServiceRecordSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the ServiceRecord
-   */
-  omit?: Prisma.ServiceRecordOmit<ExtArgs> | null
-  /**
-   * The data used to create many ServiceRecords.
-   */
-  data: Prisma.ServiceRecordCreateManyInput | Prisma.ServiceRecordCreateManyInput[]
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ServiceRecordIncludeCreateManyAndReturn<ExtArgs> | null
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1511,36 +1416,6 @@ export type ServiceRecordUpdateManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many ServiceRecords to update.
    */
   limit?: number
-}
-
-/**
- * ServiceRecord updateManyAndReturn
- */
-export type ServiceRecordUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ServiceRecord
-   */
-  select?: Prisma.ServiceRecordSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the ServiceRecord
-   */
-  omit?: Prisma.ServiceRecordOmit<ExtArgs> | null
-  /**
-   * The data used to update ServiceRecords.
-   */
-  data: Prisma.XOR<Prisma.ServiceRecordUpdateManyMutationInput, Prisma.ServiceRecordUncheckedUpdateManyInput>
-  /**
-   * Filter which ServiceRecords to update
-   */
-  where?: Prisma.ServiceRecordWhereInput
-  /**
-   * Limit how many ServiceRecords to update.
-   */
-  limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ServiceRecordIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

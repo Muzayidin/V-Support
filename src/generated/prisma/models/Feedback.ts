@@ -251,6 +251,7 @@ export type FeedbackOrderByWithRelationInput = {
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   rating?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  _relevance?: Prisma.FeedbackOrderByRelevanceInput
 }
 
 export type FeedbackWhereUniqueInput = Prisma.AtLeast<{
@@ -374,6 +375,12 @@ export type FeedbackUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type FeedbackOrderByRelevanceInput = {
+  fields: Prisma.FeedbackOrderByRelevanceFieldEnum | Prisma.FeedbackOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
+}
+
 export type FeedbackCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -428,27 +435,7 @@ export type FeedbackSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   createdAt?: boolean
 }, ExtArgs["result"]["feedback"]>
 
-export type FeedbackSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  name?: boolean
-  email?: boolean
-  category?: boolean
-  message?: boolean
-  imageUrl?: boolean
-  rating?: boolean
-  createdAt?: boolean
-}, ExtArgs["result"]["feedback"]>
 
-export type FeedbackSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  name?: boolean
-  email?: boolean
-  category?: boolean
-  message?: boolean
-  imageUrl?: boolean
-  rating?: boolean
-  createdAt?: boolean
-}, ExtArgs["result"]["feedback"]>
 
 export type FeedbackSelectScalar = {
   id?: boolean
@@ -593,30 +580,6 @@ export interface FeedbackDelegate<ExtArgs extends runtime.Types.Extensions.Inter
   createMany<T extends FeedbackCreateManyArgs>(args?: Prisma.SelectSubset<T, FeedbackCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many Feedbacks and returns the data saved in the database.
-   * @param {FeedbackCreateManyAndReturnArgs} args - Arguments to create many Feedbacks.
-   * @example
-   * // Create many Feedbacks
-   * const feedback = await prisma.feedback.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many Feedbacks and only return the `id`
-   * const feedbackWithIdOnly = await prisma.feedback.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends FeedbackCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, FeedbackCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedbackPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a Feedback.
    * @param {FeedbackDeleteArgs} args - Arguments to delete one Feedback.
    * @example
@@ -679,36 +642,6 @@ export interface FeedbackDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    * 
    */
   updateMany<T extends FeedbackUpdateManyArgs>(args: Prisma.SelectSubset<T, FeedbackUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
-
-  /**
-   * Update zero or more Feedbacks and returns the data updated in the database.
-   * @param {FeedbackUpdateManyAndReturnArgs} args - Arguments to update many Feedbacks.
-   * @example
-   * // Update many Feedbacks
-   * const feedback = await prisma.feedback.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more Feedbacks and only return the `id`
-   * const feedbackWithIdOnly = await prisma.feedback.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends FeedbackUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, FeedbackUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedbackPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one Feedback.
@@ -1116,24 +1049,7 @@ export type FeedbackCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * The data used to create many Feedbacks.
    */
   data: Prisma.FeedbackCreateManyInput | Prisma.FeedbackCreateManyInput[]
-}
-
-/**
- * Feedback createManyAndReturn
- */
-export type FeedbackCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Feedback
-   */
-  select?: Prisma.FeedbackSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Feedback
-   */
-  omit?: Prisma.FeedbackOmit<ExtArgs> | null
-  /**
-   * The data used to create many Feedbacks.
-   */
-  data: Prisma.FeedbackCreateManyInput | Prisma.FeedbackCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1162,32 +1078,6 @@ export type FeedbackUpdateArgs<ExtArgs extends runtime.Types.Extensions.Internal
  * Feedback updateMany
  */
 export type FeedbackUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * The data used to update Feedbacks.
-   */
-  data: Prisma.XOR<Prisma.FeedbackUpdateManyMutationInput, Prisma.FeedbackUncheckedUpdateManyInput>
-  /**
-   * Filter which Feedbacks to update
-   */
-  where?: Prisma.FeedbackWhereInput
-  /**
-   * Limit how many Feedbacks to update.
-   */
-  limit?: number
-}
-
-/**
- * Feedback updateManyAndReturn
- */
-export type FeedbackUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Feedback
-   */
-  select?: Prisma.FeedbackSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Feedback
-   */
-  omit?: Prisma.FeedbackOmit<ExtArgs> | null
   /**
    * The data used to update Feedbacks.
    */

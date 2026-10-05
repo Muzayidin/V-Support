@@ -235,6 +235,7 @@ export type ServiceDetailOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   serviceRecord?: Prisma.ServiceRecordOrderByWithRelationInput
+  _relevance?: Prisma.ServiceDetailOrderByRelevanceInput
 }
 
 export type ServiceDetailWhereUniqueInput = Prisma.AtLeast<{
@@ -348,6 +349,12 @@ export type ServiceDetailOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type ServiceDetailOrderByRelevanceInput = {
+  fields: Prisma.ServiceDetailOrderByRelevanceFieldEnum | Prisma.ServiceDetailOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
+}
+
 export type ServiceDetailCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   serviceRecordId?: Prisma.SortOrder
@@ -448,6 +455,7 @@ export type ServiceDetailCreateOrConnectWithoutServiceRecordInput = {
 
 export type ServiceDetailCreateManyServiceRecordInputEnvelope = {
   data: Prisma.ServiceDetailCreateManyServiceRecordInput | Prisma.ServiceDetailCreateManyServiceRecordInput[]
+  skipDuplicates?: boolean
 }
 
 export type ServiceDetailUpsertWithWhereUniqueWithoutServiceRecordInput = {
@@ -522,25 +530,7 @@ export type ServiceDetailSelect<ExtArgs extends runtime.Types.Extensions.Interna
   serviceRecord?: boolean | Prisma.ServiceRecordDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["serviceDetail"]>
 
-export type ServiceDetailSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  serviceRecordId?: boolean
-  componentName?: boolean
-  cost?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
-  serviceRecord?: boolean | Prisma.ServiceRecordDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["serviceDetail"]>
 
-export type ServiceDetailSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  serviceRecordId?: boolean
-  componentName?: boolean
-  cost?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
-  serviceRecord?: boolean | Prisma.ServiceRecordDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["serviceDetail"]>
 
 export type ServiceDetailSelectScalar = {
   id?: boolean
@@ -553,12 +543,6 @@ export type ServiceDetailSelectScalar = {
 
 export type ServiceDetailOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "serviceRecordId" | "componentName" | "cost" | "createdAt" | "updatedAt", ExtArgs["result"]["serviceDetail"]>
 export type ServiceDetailInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  serviceRecord?: boolean | Prisma.ServiceRecordDefaultArgs<ExtArgs>
-}
-export type ServiceDetailIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  serviceRecord?: boolean | Prisma.ServiceRecordDefaultArgs<ExtArgs>
-}
-export type ServiceDetailIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   serviceRecord?: boolean | Prisma.ServiceRecordDefaultArgs<ExtArgs>
 }
 
@@ -692,30 +676,6 @@ export interface ServiceDetailDelegate<ExtArgs extends runtime.Types.Extensions.
   createMany<T extends ServiceDetailCreateManyArgs>(args?: Prisma.SelectSubset<T, ServiceDetailCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many ServiceDetails and returns the data saved in the database.
-   * @param {ServiceDetailCreateManyAndReturnArgs} args - Arguments to create many ServiceDetails.
-   * @example
-   * // Create many ServiceDetails
-   * const serviceDetail = await prisma.serviceDetail.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many ServiceDetails and only return the `id`
-   * const serviceDetailWithIdOnly = await prisma.serviceDetail.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends ServiceDetailCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, ServiceDetailCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceDetailPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a ServiceDetail.
    * @param {ServiceDetailDeleteArgs} args - Arguments to delete one ServiceDetail.
    * @example
@@ -778,36 +738,6 @@ export interface ServiceDetailDelegate<ExtArgs extends runtime.Types.Extensions.
    * 
    */
   updateMany<T extends ServiceDetailUpdateManyArgs>(args: Prisma.SelectSubset<T, ServiceDetailUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
-
-  /**
-   * Update zero or more ServiceDetails and returns the data updated in the database.
-   * @param {ServiceDetailUpdateManyAndReturnArgs} args - Arguments to update many ServiceDetails.
-   * @example
-   * // Update many ServiceDetails
-   * const serviceDetail = await prisma.serviceDetail.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more ServiceDetails and only return the `id`
-   * const serviceDetailWithIdOnly = await prisma.serviceDetail.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends ServiceDetailUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, ServiceDetailUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceDetailPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one ServiceDetail.
@@ -1238,28 +1168,7 @@ export type ServiceDetailCreateManyArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many ServiceDetails.
    */
   data: Prisma.ServiceDetailCreateManyInput | Prisma.ServiceDetailCreateManyInput[]
-}
-
-/**
- * ServiceDetail createManyAndReturn
- */
-export type ServiceDetailCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ServiceDetail
-   */
-  select?: Prisma.ServiceDetailSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the ServiceDetail
-   */
-  omit?: Prisma.ServiceDetailOmit<ExtArgs> | null
-  /**
-   * The data used to create many ServiceDetails.
-   */
-  data: Prisma.ServiceDetailCreateManyInput | Prisma.ServiceDetailCreateManyInput[]
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ServiceDetailIncludeCreateManyAndReturn<ExtArgs> | null
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1304,36 +1213,6 @@ export type ServiceDetailUpdateManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many ServiceDetails to update.
    */
   limit?: number
-}
-
-/**
- * ServiceDetail updateManyAndReturn
- */
-export type ServiceDetailUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ServiceDetail
-   */
-  select?: Prisma.ServiceDetailSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the ServiceDetail
-   */
-  omit?: Prisma.ServiceDetailOmit<ExtArgs> | null
-  /**
-   * The data used to update ServiceDetails.
-   */
-  data: Prisma.XOR<Prisma.ServiceDetailUpdateManyMutationInput, Prisma.ServiceDetailUncheckedUpdateManyInput>
-  /**
-   * Filter which ServiceDetails to update
-   */
-  where?: Prisma.ServiceDetailWhereInput
-  /**
-   * Limit how many ServiceDetails to update.
-   */
-  limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ServiceDetailIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
