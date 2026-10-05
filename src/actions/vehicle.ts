@@ -43,6 +43,7 @@ export async function getVehicleById(id: string) {
 export async function createVehicle(data: {
   userId: string
   name: string
+  image?: string | null
   licensePlate?: string
   vehicleType?: 'MOTORCYCLE' | 'CAR'
   currentMileage: number
@@ -51,6 +52,7 @@ export async function createVehicle(data: {
     const vehicle = await prisma.vehicle.create({
       data: {
         ...data,
+        image: data.image || null,
         vehicleType: data.vehicleType || 'MOTORCYCLE',
         swdklljAmount: data.vehicleType === 'CAR' ? 143000 : 35000
       }
@@ -66,6 +68,7 @@ export async function createVehicle(data: {
 
 export async function addVehicleAction(data: {
   name: string
+  image?: string | null
   licensePlate?: string
   vehicleType?: 'MOTORCYCLE' | 'CAR'
   engineType: 'ICE' | 'EV'
@@ -83,6 +86,7 @@ export async function addVehicleAction(data: {
       data: {
         userId: session.user.id,
         name: data.name,
+        image: data.image || null,
         licensePlate: data.licensePlate?.trim() || null,
         vehicleType,
         engineType: data.engineType,
@@ -109,6 +113,7 @@ export async function addVehicleAction(data: {
 
 export async function updateVehicle(id: string, data: {
   name?: string
+  image?: string | null
   licensePlate?: string
   vehicleType?: string
   currentMileage?: number

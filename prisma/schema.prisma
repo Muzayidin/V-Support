@@ -75,6 +75,7 @@ model Vehicle {
   user               User            @relation(fields: [userId], references: [id])
   name               String          // e.g. "Honda Vario 150"
   licensePlate       String?
+  image              String?         // URL / path foto kendaraan
   vehicleType        String          @default("MOTORCYCLE") // "MOTORCYCLE" atau "CAR"
   engineType         String          @default("ICE") // "ICE" atau "EV"
   transmission       String          @default("AUTOMATIC") // "AUTOMATIC" atau "MANUAL"
@@ -139,4 +140,16 @@ model TaxRecord {
   note        String?
   createdAt   DateTime @default(now())
 }
+
+model Feedback {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String?
+  category  String   @default("SUGGESTION") // "SUGGESTION", "BUG", "CRITICISM", "OTHER"
+  message   String
+  imageUrl  String?  // URL / path screenshot atau foto keluhan
+  rating    Int?     @default(5)
+  createdAt DateTime @default(now())
+}
+
 

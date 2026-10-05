@@ -33,7 +33,9 @@ import {
   X,
   RotateCcw,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  Camera,
+  Loader2
 } from "lucide-react"
 
 const COMMON_SERVICE_ITEMS_MOTORCYCLE_ICE = [
@@ -210,9 +212,51 @@ export default function WelcomeForm({ onSuccess, submitButtonLabel }: WelcomeFor
   const [selectedModel, setSelectedModel] = useState("")
   const [customName, setCustomName] = useState("")
   const [licensePlate, setLicensePlate] = useState("")
+  const [image, setImage] = useState<string | null>(null)
+  const [isUploadingImage, setIsUploadingImage] = useState(false)
   const [transmission, setTransmission] = useState<"AUTOMATIC" | "MANUAL">("AUTOMATIC")
   const [ccOrKwh, setCcOrKwh] = useState<string>("")
   const [currentMileage, setCurrentMileage] = useState<string>("")
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    if (!file.type.startsWith('image/')) {
+      setErrorMessage('Harap pilih berkas foto (JPG, PNG, WebP).')
+      return
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      setErrorMessage('Ukuran foto maksimal 10MB.')
+      return
+    }
+
+    setIsUploadingImage(true)
+    setErrorMessage(null)
+
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      formData.append('folder', 'vehicles')
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      })
+
+      const data = await res.json()
+      if (data.success && data.url) {
+        setImage(data.url)
+      } else {
+        setErrorMessage(data.error || 'Gagal mengunggah foto kendaraan.')
+      }
+    } catch {
+      setErrorMessage('Terjadi gangguan saat mengunggah foto kendaraan.')
+    } finally {
+      setIsUploadingImage(false)
+    }
+  }
 
   // Ganti kategori kendaraan (Motor vs Mobil)
   const handleVehicleTypeChange = (type: VehicleType) => {
@@ -385,6 +429,7 @@ export default function WelcomeForm({ onSuccess, submitButtonLabel }: WelcomeFor
       transmission: engineType === "EV" ? "AUTOMATIC" : transmission,
       ccOrKwh: ccOrKwh ? Math.round(Number(ccOrKwh)) : null,
       currentMileage: parseThousands(currentMileage),
+      image: image || null,
       
       hasServiceHistory,
       lastServiceDate: hasServiceHistory && lastServiceDate ? lastServiceDate : null,
@@ -835,6 +880,66 @@ export default function WelcomeForm({ onSuccess, submitButtonLabel }: WelcomeFor
               <span className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-xs font-black text-foreground pointer-events-none">
                 KM
               </span>
+            </div>
+          </div>
+
+          {/* Foto Kendaraan (Opsional) */}
+          <div className="space-y-1.5 pt-2 border-t-2 border-border/40">
+            <div className="flex items-center justify-between">
+              <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-foreground block">
+                Foto Kendaraan
+              </label>
+              <span className="text-[10px] font-bold text-foreground/60 bg-background border border-border px-1.5 py-0.5 rounded-[var(--radius-base)]">
+                Opsional
+              </span>
+            </div>
+            
+            <div className="flex items-center gap-3">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-[var(--radius-base)] border-2 border-border bg-background shadow-[2px_2px_0px_0px_var(--border)] overflow-hidden flex items-center justify-center shrink-0 relative">
+                {image ? (
+                  <img src={image} alt="Foto Kendaraan" className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full bg-main/30 flex flex-col items-center justify-center text-foreground/70 p-1 text-center">
+                    {vehicleType === "CAR" ? <Car className="w-6 h-6 stroke-[2]" /> : <Bike className="w-6 h-6 stroke-[2]" />}
+                  </div>
+                )}
+              </div>
+
+              <div className="flex-1 space-y-1.5">
+                <label className="inline-flex items-center gap-1.5 px-3 py-2 bg-main hover:bg-[#8AE500] text-black border-2 border-border rounded-[var(--radius-base)] text-xs font-black shadow-[2px_2px_0px_0px_var(--border)] cursor-pointer transition-all active:translate-x-0.5 active:translate-y-0.5">
+                  {isUploadingImage ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin stroke-[2.5]" />
+                      <span>Mengunggah...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Camera className="w-3.5 h-3.5 stroke-[2.5]" />
+                      <span>{image ? 'Ganti Foto' : 'Unggah Foto'}</span>
+                    </>
+                  )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    disabled={isUploadingImage}
+                    onChange={handleImageUpload}
+                    className="hidden"
+                  />
+                </label>
+
+                {image && (
+                  <button
+                    type="button"
+                    onClick={() => setImage(null)}
+                    className="block text-[10px] font-black text-red-600 hover:underline cursor-pointer"
+                  >
+                    Hapus Foto
+                  </button>
+                )}
+                <p className="text-[10px] font-bold text-foreground/60 leading-tight">
+                  Format JPG, PNG, atau WebP (Maks. 10MB).
+                </p>
+              </div>
             </div>
           </div>
 

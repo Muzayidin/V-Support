@@ -15,10 +15,13 @@ import {
   LogOut,
   Sparkles,
   Bike,
-  ExternalLink
+  ExternalLink,
+  Trash2
 } from 'lucide-react'
 
 import { isDeveloper } from '@/lib/admin'
+import DeleteAccountModal from './DeleteAccountModal'
+import CookieSettingsTrigger from '@/components/CookieSettingsTrigger'
 
 export default async function Profile() {
   const session = await auth()
@@ -37,6 +40,9 @@ export default async function Profile() {
   const userEmail = user?.email || session.user.email || ''
   const vehicleCount = user?.vehicles?.length || 0
   const isUserDev = isDeveloper(userEmail, user?.role)
+
+  const userImage = user?.image || session.user.image
+  const isPhoto = userImage && (userImage.startsWith('http') || userImage.startsWith('/') || userImage.startsWith('data:'))
 
   return (
     <>
@@ -57,12 +63,14 @@ export default async function Profile() {
         <section className="bg-secondary-background rounded-[var(--radius-base)] p-5 border-2 border-border shadow-[5px_5px_0px_0px_var(--border)] flex items-center gap-4 relative">
           <div className="w-16 h-16 rounded-[var(--radius-base)] overflow-hidden shrink-0 border-2 border-border bg-main shadow-[2px_2px_0px_0px_var(--border)]">
             <div className="w-full h-full bg-secondary-background flex items-center justify-center overflow-hidden">
-              {session.user.image ? (
+              {isPhoto ? (
                 <img 
                   alt="Profile Picture" 
                   className="w-full h-full object-cover" 
-                  src={session.user.image}
+                  src={userImage!}
                 />
+              ) : userImage ? (
+                <span className="text-3xl select-none">{userImage}</span>
               ) : (
                 <User className="w-8 h-8 text-black stroke-[2.5]" />
               )}
@@ -213,6 +221,19 @@ export default async function Profile() {
               </div>
               <ChevronRight className="w-4 h-4 text-foreground stroke-[3] group-hover:translate-x-0.5 transition-transform" />
             </Link>
+
+            <CookieSettingsTrigger />
+          </div>
+        </section>
+
+        {/* Zona Hapus Akun */}
+        <section className="space-y-2">
+          <h3 className="text-xs font-black text-red-600 uppercase tracking-wider px-1 flex items-center gap-1.5">
+            <Trash2 className="w-3.5 h-3.5" />
+            Kelola Akun & Zona Bahaya
+          </h3>
+          <div className="bg-secondary-background rounded-[var(--radius-base)] border-2 border-red-500/50 shadow-[4px_4px_0px_0px_var(--border)] overflow-hidden">
+            <DeleteAccountModal userEmail={userEmail} />
           </div>
         </section>
 

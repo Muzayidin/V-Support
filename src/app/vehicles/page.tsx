@@ -208,13 +208,19 @@ export default async function Vehicles({
               </p>
             </div>
             
-            <div className="w-12 h-12 rounded-[var(--radius-base)] bg-main border-2 border-border shadow-[3px_3px_0px_0px_var(--border)] flex items-center justify-center text-black">
-              {vehicle.vehicleType === 'CAR' ? (
-                <Car className="w-6 h-6 stroke-[2.5]" />
-              ) : (
-                <Bike className="w-6 h-6 stroke-[2.5]" />
-              )}
-            </div>
+            {vehicle.image ? (
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-[var(--radius-base)] border-2 border-border shadow-[3px_3px_0px_0px_var(--border)] overflow-hidden shrink-0 bg-background">
+                <img src={vehicle.image} alt={vehicle.name} className="w-full h-full object-cover" />
+              </div>
+            ) : (
+              <div className="w-12 h-12 rounded-[var(--radius-base)] bg-main border-2 border-border shadow-[3px_3px_0px_0px_var(--border)] flex items-center justify-center text-black">
+                {vehicle.vehicleType === 'CAR' ? (
+                  <Car className="w-6 h-6 stroke-[2.5]" />
+                ) : (
+                  <Bike className="w-6 h-6 stroke-[2.5]" />
+                )}
+              </div>
+            )}
           </div>
 
           <div className="mt-5 pt-4 border-t-2 border-border grid grid-cols-2 gap-4">

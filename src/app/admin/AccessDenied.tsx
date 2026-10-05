@@ -34,17 +34,10 @@ export default function AccessDenied({ userEmail }: { userEmail?: string | null 
           </p>
         </div>
 
-        <div className="p-4 bg-amber-500/10 border-2 border-border rounded-[var(--radius-base)] space-y-2">
-          <div className="flex items-center gap-2 text-amber-900 dark:text-amber-300 font-black text-xs">
-            <Terminal className="w-4 h-4 shrink-0" />
-            <span>Cara Mendapatkan Akses:</span>
-          </div>
-          <p className="text-[11px] text-foreground/80 leading-relaxed">
-            Tambahkan email akun Anda ke environment variable <code className="bg-background px-1.5 py-0.5 border border-border rounded font-mono text-[10px] font-bold">ADMIN_EMAILS</code> di file <code className="bg-background px-1.5 py-0.5 border border-border rounded font-mono text-[10px] font-bold">.env</code>:
+        <div className="p-4 bg-muted/50 border-2 border-border rounded-[var(--radius-base)] space-y-1.5 shadow-[2px_2px_0px_0px_var(--border)]">
+          <p className="text-xs font-bold text-foreground/80 leading-relaxed">
+            Akses ke halaman ini dibatasi secara ketat untuk tim pengembang internal. Jika Anda memiliki hak akses developer, silakan masuk menggunakan akun developer resmi Anda.
           </p>
-          <pre className="p-2 bg-background border border-border rounded text-[11px] font-mono text-foreground overflow-x-auto">
-            ADMIN_EMAILS=&quot;{userEmail || 'email-anda@domain.com'}&quot;
-          </pre>
         </div>
 
         <div className="pt-2 flex flex-col sm:flex-row gap-3">

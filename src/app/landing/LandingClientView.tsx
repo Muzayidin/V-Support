@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import CruzLogo from '@/components/CruzLogo'
+import FeedbackForm from '@/components/FeedbackForm'
 import { 
   Bike, 
   Zap, 
@@ -34,7 +35,11 @@ import {
   Menu,
   Sliders,
   RotateCcw,
-  Plus
+  Plus,
+  WifiOff,
+  RefreshCw,
+  Bell,
+  MessageSquareHeart
 } from 'lucide-react'
 
 export default function LandingClientView() {
@@ -176,7 +181,7 @@ export default function LandingClientView() {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-8 text-xs font-black uppercase tracking-wider text-foreground/80">
+          <nav className="hidden lg:flex items-center gap-7 text-xs font-black uppercase tracking-wider text-foreground/80">
             <a href="#fitur" className="hover:text-foreground transition-colors hover:underline underline-offset-4 decoration-2">Fitur</a>
             <a href="#simulator" className="hover:text-foreground transition-colors hover:underline underline-offset-4 decoration-2 flex items-center gap-1">
               <span>Simulator</span>
@@ -185,6 +190,7 @@ export default function LandingClientView() {
             <a href="#keunggulan" className="hover:text-foreground transition-colors hover:underline underline-offset-4 decoration-2">Keunggulan</a>
             <a href="#unduh" className="hover:text-foreground transition-colors hover:underline underline-offset-4 decoration-2">Unduh App</a>
             <a href="#faq" className="hover:text-foreground transition-colors hover:underline underline-offset-4 decoration-2">FAQ</a>
+            <a href="#feedback" className="hover:text-foreground transition-colors hover:underline underline-offset-4 decoration-2 text-main-foreground font-black">Kritik & Saran</a>
           </nav>
 
           {/* Right Action Buttons */}
@@ -255,6 +261,13 @@ export default function LandingClientView() {
                 className="p-2.5 bg-background border-2 border-border rounded-[var(--radius-base)] shadow-[1px_1px_0px_0px_var(--border)]"
               >
                 Tanya Jawab (FAQ)
+              </a>
+              <a 
+                href="#feedback" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 bg-main text-black border-2 border-border rounded-[var(--radius-base)] shadow-[2px_2px_0px_0px_var(--border)]"
+              >
+                Kritik & Saran Pengguna
               </a>
             </div>
 
@@ -668,90 +681,134 @@ export default function LandingClientView() {
             </p>
           </div>
 
-          {/* Grid 6 Fitur Utama */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Grid 8 Fitur Utama */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            {/* Fitur 1 */}
-            <div className="bg-secondary-background rounded-[var(--radius-base)] p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--border)] transition-all">
-              <div className="w-10 h-10 rounded-[var(--radius-base)] bg-[#8AE500] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-black">
-                <Gauge className="w-5 h-5 stroke-[2.5]" />
+            {/* Fitur 1: Offline Mode & Auto Sync */}
+            <div className="bg-secondary-background rounded-[var(--radius-base)] p-5 sm:p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--border)] transition-all flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-[var(--radius-base)] bg-[#FFE500] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-black">
+                  <WifiOff className="w-5 h-5 stroke-[2.5]" />
+                </div>
+                <h3 className="text-base font-black text-foreground">Mode Offline & Sinkronisasi Otomatis</h3>
+                <p className="text-xs font-bold text-foreground/70 leading-relaxed">
+                  Tetap bisa input servis dan update kilometer saat di basemen bengkel tanpa sinyal. Data tersimpan lokal di HP dan otomatis sinkron ke server begitu online.
+                </p>
               </div>
-              <h3 className="text-base font-black text-foreground">Kalkulasi Degradasi Fisik Komponen</h3>
-              <p className="text-xs font-bold text-foreground/70 leading-relaxed">
-                Menghitung sisa ketebalan kampas rem, kualitas oli, kelenturan V-belt, hingga filter udara berdasarkan pertambahan kilometer aktual harian Anda.
-              </p>
-              <div className="pt-2 text-[10px] font-black text-foreground flex items-center gap-1 border-t-2 border-border/30">
+              <div className="pt-3 text-[10px] font-black text-foreground flex items-center gap-1 border-t-2 border-border/30">
+                <span>Offline-First</span> • <span className="text-[#00A86B]">Auto Cloud Sync</span>
+              </div>
+            </div>
+
+            {/* Fitur 2: Splash Screen & PWA Native */}
+            <div className="bg-secondary-background rounded-[var(--radius-base)] p-5 sm:p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--border)] transition-all flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-[var(--radius-base)] bg-[#8AE500] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-black">
+                  <Smartphone className="w-5 h-5 stroke-[2.5]" />
+                </div>
+                <h3 className="text-base font-black text-foreground">Splash Screen & Tampilan Mobile Native</h3>
+                <p className="text-xs font-bold text-foreground/70 leading-relaxed">
+                  Buka aplikasi di smartphone dengan splash screen logo Cruz yang halus. Pengalaman layar penuh (standalone PWA) layaknya mengunduh dari app store resmi.
+                </p>
+              </div>
+              <div className="pt-3 text-[10px] font-black text-foreground flex items-center gap-1 border-t-2 border-border/30">
+                <span>PWA & APK Siap Pakai</span> • <span className="text-[#00A86B]">Super Cepat</span>
+              </div>
+            </div>
+
+            {/* Fitur 3: Notifikasi & Odometer */}
+            <div className="bg-secondary-background rounded-[var(--radius-base)] p-5 sm:p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--border)] transition-all flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-[var(--radius-base)] bg-[#FF8000] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-white">
+                  <Bell className="w-5 h-5 stroke-[2.5]" />
+                </div>
+                <h3 className="text-base font-black text-foreground">Pengingat Odometer & Servis Berkala</h3>
+                <p className="text-xs font-bold text-foreground/70 leading-relaxed">
+                  Pusat notifikasi interaktif yang mengingatkan Anda untuk mengupdate kilometer motor dan memperingatkan jika ada komponen yang mendekati batas aus.
+                </p>
+              </div>
+              <div className="pt-3 text-[10px] font-black text-foreground flex items-center gap-1 border-t-2 border-border/30">
+                <span>Pusat Notifikasi Cerdas</span> • <span className="text-[#FF4D50]">Tepat Waktu</span>
+              </div>
+            </div>
+
+            {/* Fitur 4: Degradasi Fisik (ICE & EV) */}
+            <div className="bg-secondary-background rounded-[var(--radius-base)] p-5 sm:p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--border)] transition-all flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-[var(--radius-base)] bg-[#00D696] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-black">
+                  <Gauge className="w-5 h-5 stroke-[2.5]" />
+                </div>
+                <h3 className="text-base font-black text-foreground">Kalkulasi Degradasi Fisik Komponen</h3>
+                <p className="text-xs font-bold text-foreground/70 leading-relaxed">
+                  Menghitung sisa ketebalan kampas rem, kualitas oli, kelenturan V-belt, hingga status baterai EV (SOH) berdasarkan pertambahan kilometer aktual harian Anda.
+                </p>
+              </div>
+              <div className="pt-3 text-[10px] font-black text-foreground flex items-center gap-1 border-t-2 border-border/30">
                 <span>Algoritma Pabrikan Resmi</span> • <span className="text-[#00A86B]">Akurat</span>
               </div>
             </div>
 
-            {/* Fitur 2 */}
-            <div className="bg-secondary-background rounded-[var(--radius-base)] p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--border)] transition-all">
-              <div className="w-10 h-10 rounded-[var(--radius-base)] bg-[#FACC00] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-black">
-                <Coins className="w-5 h-5 stroke-[2.5]" />
+            {/* Fitur 5: Paspor Servis & PDF */}
+            <div className="bg-secondary-background rounded-[var(--radius-base)] p-5 sm:p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--border)] transition-all flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-[var(--radius-base)] bg-main border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-black">
+                  <FileText className="w-5 h-5 stroke-[2.5]" />
+                </div>
+                <h3 className="text-base font-black text-foreground">Buku Servis Digital & Ekspor PDF</h3>
+                <p className="text-xs font-bold text-foreground/70 leading-relaxed">
+                  Miliki paspor digital kendaraan Anda. Unduh atau cetak seluruh rekam jejak servis ke format PDF resmi untuk bukti perawatan yang melipatgandakan nilai jual motor.
+                </p>
               </div>
-              <h3 className="text-base font-black text-foreground">Estimasi Biaya & Jadwal Servis</h3>
-              <p className="text-xs font-bold text-foreground/70 leading-relaxed">
-                Ketahui kapan servis berikutnya harus dilakukan dan berapa estimasi rupiah yang harus disiapkan, sehingga anggaran bengkel bulanan selalu terkelola rapi.
-              </p>
-              <div className="pt-2 text-[10px] font-black text-foreground flex items-center gap-1 border-t-2 border-border/30">
-                <span>Biaya Suku Cadang + Rekomendasi Jasa</span>
-              </div>
-            </div>
-
-            {/* Fitur 3 */}
-            <div className="bg-secondary-background rounded-[var(--radius-base)] p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--border)] transition-all">
-              <div className="w-10 h-10 rounded-[var(--radius-base)] bg-main border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-black">
-                <Receipt className="w-5 h-5 stroke-[2.5]" />
-              </div>
-              <h3 className="text-base font-black text-foreground">Catat Servis + Ongkos Jasa Mekanik</h3>
-              <p className="text-xs font-bold text-foreground/70 leading-relaxed">
-                Mencatat penggantian suku cadang dengan input ongkos pasang dan jasa bengkel terpisah. Lengkap dengan pemisah ribuan otomatis untuk kemudahan input.
-              </p>
-              <div className="pt-2 text-[10px] font-black text-foreground flex items-center gap-1 border-t-2 border-border/30">
-                <span>Rincian Kwitansi Digital Lengkap</span>
-              </div>
-            </div>
-
-            {/* Fitur 4 */}
-            <div className="bg-secondary-background rounded-[var(--radius-base)] p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--border)] transition-all">
-              <div className="w-10 h-10 rounded-[var(--radius-base)] bg-[#00D696] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-black">
-                <FileText className="w-5 h-5 stroke-[2.5]" />
-              </div>
-              <h3 className="text-base font-black text-foreground">Buku Servis Digital & Ekspor PDF</h3>
-              <p className="text-xs font-bold text-foreground/70 leading-relaxed">
-                Miliki paspor digital kendaraan Anda. Cetak seluruh rekam jejak servis ke format PDF untuk bukti perawatan berkala yang melipatgandakan harga jual motor Anda.
-              </p>
-              <div className="pt-2 text-[10px] font-black text-foreground flex items-center gap-1 border-t-2 border-border/30">
+              <div className="pt-3 text-[10px] font-black text-foreground flex items-center gap-1 border-t-2 border-border/30">
                 <span>Dokumen Cetak Format Resmi</span>
               </div>
             </div>
 
-            {/* Fitur 5 */}
-            <div className="bg-secondary-background rounded-[var(--radius-base)] p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--border)] transition-all">
-              <div className="w-10 h-10 rounded-[var(--radius-base)] bg-[#FF4D50] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-white">
-                <Calendar className="w-5 h-5 stroke-[2.5]" />
+            {/* Fitur 6: Pajak STNK & Plat 5 Tahun */}
+            <div className="bg-secondary-background rounded-[var(--radius-base)] p-5 sm:p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--border)] transition-all flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-[var(--radius-base)] bg-[#FF4D50] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-white">
+                  <Calendar className="w-5 h-5 stroke-[2.5]" />
+                </div>
+                <h3 className="text-base font-black text-foreground">Pengingat Pajak STNK & Plat 5 Tahunan</h3>
+                <p className="text-xs font-bold text-foreground/70 leading-relaxed">
+                  Peringatan dini otomatis sebelum jatuh tempo perpanjangan STNK tahunan dan ganti plat nomor 5 tahunan, lengkap dengan estimasi nominal PKB & SWDKLLJ.
+                </p>
               </div>
-              <h3 className="text-base font-black text-foreground">Pengingat Pajak STNK & Plat 5 Tahunan</h3>
-              <p className="text-xs font-bold text-foreground/70 leading-relaxed">
-                Peringatan dini otomatis 30 hari sebelum jatuh tempo pajak tahunan STNK dan ganti plat nomor, lengkap dengan estimasi nominal PKB & SWDKLLJ.
-              </p>
-              <div className="pt-2 text-[10px] font-black text-foreground flex items-center gap-1 border-t-2 border-border/30">
+              <div className="pt-3 text-[10px] font-black text-foreground flex items-center gap-1 border-t-2 border-border/30">
                 <span>Bebas Denda Keterlambatan Samsat</span>
               </div>
             </div>
 
-            {/* Fitur 6 */}
-            <div className="bg-secondary-background rounded-[var(--radius-base)] p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--border)] transition-all">
-              <div className="w-10 h-10 rounded-[var(--radius-base)] bg-[#8AE500] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-black">
-                <Wrench className="w-5 h-5 stroke-[2.5]" />
+            {/* Fitur 7: Catat Servis & Ongkos Jasa */}
+            <div className="bg-secondary-background rounded-[var(--radius-base)] p-5 sm:p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--border)] transition-all flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-[var(--radius-base)] bg-[#FACC00] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-black">
+                  <Receipt className="w-5 h-5 stroke-[2.5]" />
+                </div>
+                <h3 className="text-base font-black text-foreground">Catat Servis + Ongkos Jasa Mekanik</h3>
+                <p className="text-xs font-bold text-foreground/70 leading-relaxed">
+                  Mencatat penggantian suku cadang dengan input ongkos pasang dan jasa bengkel terpisah. Dilengkapi format rupiah otomatis agar anggaran bengkel terkelola rapi.
+                </p>
               </div>
-              <h3 className="text-base font-black text-foreground">Atur Interval Kustom Fleksibel</h3>
-              <p className="text-xs font-bold text-foreground/70 leading-relaxed">
-                Sesuaikan interval penggantian oli mesin, oli gardan, dan radiator coolant sesuai merk pelumas favorit Anda, namun tetap didampingi angka rekomendasi pabrikan.
-              </p>
-              <div className="pt-2 text-[10px] font-black text-foreground flex items-center gap-1 border-t-2 border-border/30">
-                <span>Kustomisasi Bebas Sesuai Kebutuhan</span>
+              <div className="pt-3 text-[10px] font-black text-foreground flex items-center gap-1 border-t-2 border-border/30">
+                <span>Rincian Kwitansi Lengkap</span>
+              </div>
+            </div>
+
+            {/* Fitur 8: Kritik & Saran Pengguna */}
+            <div className="bg-secondary-background rounded-[var(--radius-base)] p-5 sm:p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--border)] transition-all flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-[var(--radius-base)] bg-[#C084FC] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-black">
+                  <MessageSquareHeart className="w-5 h-5 stroke-[2.5]" />
+                </div>
+                <h3 className="text-base font-black text-foreground">Form Kritik & Saran Interaktif</h3>
+                <p className="text-xs font-bold text-foreground/70 leading-relaxed">
+                  Suara Anda didengar langsung oleh developer! Kirimkan saran fitur, laporan kendala teknis, atau evaluasi pengalaman aplikasi via form kritik dan saran langsung.
+                </p>
+              </div>
+              <div className="pt-3 text-[10px] font-black text-foreground flex items-center gap-1 border-t-2 border-border/30">
+                <span>Respon Langsung Developer</span> • <span className="text-[#00A86B]">Rating 5★</span>
               </div>
             </div>
 
@@ -791,11 +848,11 @@ export default function LandingClientView() {
             {/* Keunggulan 2 */}
             <div className="bg-background rounded-[var(--radius-base)] p-6 border-2 border-border shadow-[4px_4px_0px_0px_var(--border)] space-y-3">
               <div className="w-12 h-12 rounded-[var(--radius-base)] bg-[#8AE500] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-black">
-                <Sparkles className="w-6 h-6 stroke-[2.5]" />
+                <WifiOff className="w-6 h-6 stroke-[2.5]" />
               </div>
-              <h3 className="text-base font-black text-foreground">Desain Modern Cepat & Ringan</h3>
+              <h3 className="text-base font-black text-foreground">Offline-First & Splash Screen Native</h3>
               <p className="text-xs font-bold text-foreground/70 leading-relaxed">
-                Didesain dengan kontras tinggi yang jelas terbaca di bawah terik matahari saat di bengkel. Tanpa animasi berat, beban memori sangat hemat dan loading instan.
+                Bebas cemas di basemen parkir atau bengkel tanpa sinyal internet. Input data tetap tersimpan offline dan otomatis sync ke server saat online. Dilengkapi splash screen instan di HP.
               </p>
             </div>
 
@@ -804,7 +861,7 @@ export default function LandingClientView() {
               <div className="w-12 h-12 rounded-[var(--radius-base)] bg-[#00D696] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] flex items-center justify-center text-black">
                 <ShieldCheck className="w-6 h-6 stroke-[2.5]" />
               </div>
-              <h3 className="text-base font-black text-foreground">Tanpa Iklan & Privasi Terjamin</h3>
+              <h3 className="text-base font-black text-foreground">100% Bebas Iklan & Privasi Terjamin</h3>
               <p className="text-xs font-bold text-foreground/70 leading-relaxed">
                 Tidak ada iklan banner yang mengganggu. Seluruh data kendaraan dan log keuangan tersimpan secara aman di cloud dengan proteksi kata sandi terenkripsi.
               </p>
@@ -945,6 +1002,9 @@ export default function LandingClientView() {
         </div>
       </section>
 
+      {/* Kritik dan Saran Pengguna */}
+      <FeedbackForm />
+
       {/* Final High-Contrast CTA Banner */}
       <section className="py-16 md:py-20 bg-main border-b-2 border-border text-foreground">
         <div className="max-w-4xl mx-auto px-4 text-center space-y-6">
@@ -985,6 +1045,7 @@ export default function LandingClientView() {
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-bold text-foreground/75">
             <Link href="/login" className="hover:text-foreground">Masuk</Link>
             <Link href="/login?mode=register" className="hover:text-foreground">Daftar Akun</Link>
+            <a href="#feedback" className="hover:text-foreground font-black text-foreground">Kritik & Saran</a>
             <Link href="/help" className="hover:text-foreground">Pusat Bantuan</Link>
             <Link href="/privacy" className="hover:text-foreground">Kebijakan Privasi</Link>
           </div>

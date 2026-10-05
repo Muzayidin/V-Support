@@ -109,15 +109,15 @@ export default function NotificationSettingsForm({
   return (
     <form onSubmit={handleSave} className="space-y-5">
       {saveSuccess && (
-        <div className="p-3 bg-emerald-500/10 border-2 border-emerald-500 text-emerald-600 rounded-[var(--radius-base)] text-xs font-black flex items-center gap-2 shadow-[2px_2px_0px_0px_var(--border)]">
+        <div className="p-3 bg-[#8AE500] border-2 border-border text-black rounded-[var(--radius-base)] text-xs font-black flex items-center gap-2 shadow-[2px_2px_0px_0px_var(--border)]">
           <Check className="w-4 h-4 stroke-[3]" />
           <span>Pengaturan dan jam notifikasi berhasil disimpan!</span>
         </div>
       )}
 
       {errorMessage && (
-        <div className="p-3 bg-red-500/10 border-2 border-red-500 text-red-600 rounded-[var(--radius-base)] text-xs font-black flex items-center gap-2">
-          <AlertCircle className="w-4 h-4" />
+        <div className="p-3 bg-[#FF4D50] border-2 border-border text-white rounded-[var(--radius-base)] text-xs font-black flex items-center gap-2 shadow-[2px_2px_0px_0px_var(--border)]">
+          <AlertCircle className="w-4 h-4 stroke-[2.5]" />
           <span>{errorMessage}</span>
         </div>
       )}

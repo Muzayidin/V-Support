@@ -3,6 +3,9 @@
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import BottomNav from './BottomNav'
+import CookieConsent from './CookieConsent'
+import SplashScreen from './SplashScreen'
+import OfflineSyncBar from './OfflineSyncBar'
 
 export default function AppShell({ 
   children,
@@ -29,7 +32,10 @@ export default function AppShell({
   if (isLanding || isAdmin) {
     return (
       <div suppressHydrationWarning className="min-h-screen w-full relative flex flex-col bg-background text-foreground">
+        <SplashScreen />
         {children}
+        <OfflineSyncBar />
+        <CookieConsent />
       </div>
     )
   }
@@ -37,15 +43,21 @@ export default function AppShell({
   if (isAuthOrOnboarding) {
     return (
       <div suppressHydrationWarning className="min-h-screen w-full relative flex flex-col">
+        <SplashScreen />
         {children}
+        <OfflineSyncBar />
+        <CookieConsent />
       </div>
     )
   }
 
   return (
     <div suppressHydrationWarning className="min-h-[100dvh] w-full max-w-full overflow-x-hidden pb-safe md:max-w-md md:mx-auto md:shadow-2xl relative bg-background text-foreground">
+      <SplashScreen />
       {children}
+      <OfflineSyncBar />
       <BottomNav />
+      <CookieConsent />
     </div>
   )
 }

@@ -76,3 +76,18 @@ export async function deleteUser(userId: string) {
   revalidatePath('/admin')
   return { success: true }
 }
+
+export async function deleteFeedback(feedbackId: string) {
+  const currentDev = await getVerifiedDeveloper()
+  if (!currentDev) {
+    throw new Error('Akses ditolak: Hanya developer yang dapat menghapus data feedback.')
+  }
+
+  await prisma.feedback.delete({
+    where: { id: feedbackId }
+  })
+
+  revalidatePath('/admin')
+  return { success: true }
+}
+
