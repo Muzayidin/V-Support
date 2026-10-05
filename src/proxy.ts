@@ -7,10 +7,11 @@ const { auth } = NextAuth(authConfig)
 export default auth((req) => {
   const { pathname } = req.nextUrl
 
-  // 0. Abaikan seluruh berkas statis, uploads, dan aset publik
+  // 0. Abaikan seluruh berkas statis, uploads, aset publik, dan rute autentikasi
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/uploads') ||
+    pathname.startsWith('/api/auth') ||
     pathname.includes('.')
   ) {
     return
@@ -91,7 +92,8 @@ export default auth((req) => {
     pathname === '/landing' ||
     pathname.startsWith('/landing') ||
     pathname.startsWith('/help') ||
-    pathname.startsWith('/privacy')
+    pathname.startsWith('/privacy') ||
+    pathname.startsWith('/api/auth')
 
   const isOnAuthPage = pathname.startsWith('/login')
 
