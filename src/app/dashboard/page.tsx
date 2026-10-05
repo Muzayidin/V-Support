@@ -152,9 +152,9 @@ export default async function DashboardPage({
   const isAnyOverdue = (taxDaysLeft !== null && taxDaysLeft < 0) || (fiveYearDaysLeft !== null && fiveYearDaysLeft < 0)
 
   const getConditionColor = (val: number) => {
-    if (val >= 70) return 'text-[#8AE500]'
-    if (val >= 40) return 'text-[#FACC00]'
-    return 'text-[#FF4D50]'
+    if (val >= 70) return 'text-[#166534]' // Hijau gelap (kontras tinggi)
+    if (val >= 40) return 'text-[#92400e]' // Amber / cokelat gelap (kontras tinggi)
+    return 'text-[#991b1b]' // Merah gelap (kontras tinggi)
   }
 
   const getConditionBadgeBg = (val: number) => {
@@ -207,7 +207,7 @@ export default async function DashboardPage({
               </div>
             )}
             <div className="min-w-0 flex-1">
-              <h2 className="text-base sm:text-xl font-black text-foreground tracking-tight truncate">Halo, {userName}! 👋</h2>
+              <h2 className="text-base sm:text-xl font-black text-foreground tracking-tight truncate">Halo, {userName}!</h2>
               <p className="text-[11px] sm:text-xs text-foreground/80 mt-0.5 font-bold flex items-center gap-1.5 truncate">
                 <span className="truncate">{vehicle.name}</span>
                 {vehicle.licensePlate && (
