@@ -58,14 +58,22 @@ export async function POST(req: NextRequest) {
     const randomSuffix = crypto.randomUUID().slice(0, 10)
     const fileName = `${Date.now()}-${randomSuffix}.${ext}`
 
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', folder)
-    await fs.mkdir(uploadDir, { recursive: true })
+    // Simpan ke public/uploads dan root uploads agar dapat diakses baik oleh Next.js maupun Nginx standalone
+    const publicUploadDir = path.join(process.cwd(), 'public', 'uploads', folder)
+    const rootUploadDir = path.join(process.cwd(), 'uploads', folder)
 
-    const filePath = path.join(uploadDir, fileName)
+    await Promise.all([
+      fs.mkdir(publicUploadDir, { recursive: true }),
+      fs.mkdir(rootUploadDir, { recursive: true })
+    ])
+
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
 
-    await fs.writeFile(filePath, buffer)
+    await Promise.all([
+      fs.writeFile(path.join(publicUploadDir, fileName), buffer),
+      fs.writeFile(path.join(rootUploadDir, fileName), buffer)
+    ])
 
     const publicUrl = `/uploads/${folder}/${fileName}`
 

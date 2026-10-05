@@ -203,7 +203,7 @@ export default async function DashboardPage({
           <div className="flex items-center gap-2.5 min-w-0 flex-1">
             {vehicle.image && (
               <div className="w-11 h-11 rounded-[var(--radius-base)] border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] overflow-hidden shrink-0 bg-background">
-                <img src={vehicle.image} alt={vehicle.name} className="w-full h-full object-cover" />
+                <img src={vehicle.image} alt={vehicle.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               </div>
             )}
             <div className="min-w-0 flex-1">

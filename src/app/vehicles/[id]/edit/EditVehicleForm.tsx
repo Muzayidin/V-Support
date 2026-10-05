@@ -126,7 +126,7 @@ export default function EditVehicleForm({ vehicle }: { vehicle: Vehicle }) {
           <div className="flex items-center gap-4">
             <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-[var(--radius-base)] border-2 border-border bg-background shadow-[3px_3px_0px_0px_var(--border)] overflow-hidden flex items-center justify-center shrink-0 relative">
               {image ? (
-                <img src={image} alt="Foto Kendaraan" className="w-full h-full object-cover" />
+                <img src={image} alt="Foto Kendaraan" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               ) : (
                 <div className="w-full h-full bg-main/30 flex flex-col items-center justify-center text-foreground/70 p-2 text-center">
                   <Bike className="w-7 h-7 stroke-[2]" />

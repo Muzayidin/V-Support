@@ -897,7 +897,7 @@ export default function WelcomeForm({ onSuccess, submitButtonLabel }: WelcomeFor
             <div className="flex items-center gap-3">
               <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-[var(--radius-base)] border-2 border-border bg-background shadow-[2px_2px_0px_0px_var(--border)] overflow-hidden flex items-center justify-center shrink-0 relative">
                 {image ? (
-                  <img src={image} alt="Foto Kendaraan" className="w-full h-full object-cover" />
+                  <img src={image} alt="Foto Kendaraan" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 ) : (
                   <div className="w-full h-full bg-main/30 flex flex-col items-center justify-center text-foreground/70 p-1 text-center">
                     {vehicleType === "CAR" ? <Car className="w-6 h-6 stroke-[2]" /> : <Bike className="w-6 h-6 stroke-[2]" />}

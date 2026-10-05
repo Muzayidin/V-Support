@@ -58,6 +58,7 @@ export default function VehicleDropdown({
             src={activeVehicle.image} 
             alt={activeVehicle.name} 
             className="w-4 h-4 rounded-full object-cover shrink-0 border border-border" 
+            referrerPolicy="no-referrer"
           />
         ) : activeVehicle?.vehicleType === 'CAR' ? (
           <Car className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-foreground shrink-0" />
@@ -96,6 +97,7 @@ export default function VehicleDropdown({
                       src={vehicle.image} 
                       alt={vehicle.name} 
                       className="w-5 h-5 rounded-md object-cover border border-border shrink-0" 
+                      referrerPolicy="no-referrer"
                     />
                   ) : isCar ? (
                     <Car className="w-3.5 h-3.5 shrink-0 opacity-80" />

@@ -68,6 +68,7 @@ export default async function Profile() {
                   alt="Profile Picture" 
                   className="w-full h-full object-cover" 
                   src={userImage!}
+                  referrerPolicy="no-referrer"
                 />
               ) : userImage ? (
                 <span className="text-3xl select-none">{userImage}</span>
