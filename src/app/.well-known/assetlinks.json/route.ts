@@ -1,0 +1,24 @@
+import { NextResponse } from 'next/server'
+
+export async function GET() {
+  const assetlinks = [
+    {
+      relation: ['delegate_permission/common.handle_all_urls'],
+      target: {
+        namespace: 'android_app',
+        package_name: 'id.web.cruz.twa',
+        sha256_cert_fingerprints: [
+          '6F:A7:EE:72:FF:40:F4:F4:37:F3:96:1A:AD:56:A6:F7:1B:45:CD:01:9F:7C:FF:DE:A8:7A:B7:C9:5D:94:5F:13',
+        ],
+      },
+    },
+  ]
+
+  return NextResponse.json(assetlinks, {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+    },
+  })
+}
