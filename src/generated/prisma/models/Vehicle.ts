@@ -443,6 +443,7 @@ export type VehicleWhereInput = {
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   serviceRecords?: Prisma.ServiceRecordListRelationFilter
   taxRecords?: Prisma.TaxRecordListRelationFilter
+  componentInspections?: Prisma.ComponentInspectionListRelationFilter
 }
 
 export type VehicleOrderByWithRelationInput = {
@@ -476,6 +477,7 @@ export type VehicleOrderByWithRelationInput = {
   user?: Prisma.UserOrderByWithRelationInput
   serviceRecords?: Prisma.ServiceRecordOrderByRelationAggregateInput
   taxRecords?: Prisma.TaxRecordOrderByRelationAggregateInput
+  componentInspections?: Prisma.ComponentInspectionOrderByRelationAggregateInput
 }
 
 export type VehicleWhereUniqueInput = Prisma.AtLeast<{
@@ -512,6 +514,7 @@ export type VehicleWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   serviceRecords?: Prisma.ServiceRecordListRelationFilter
   taxRecords?: Prisma.TaxRecordListRelationFilter
+  componentInspections?: Prisma.ComponentInspectionListRelationFilter
 }, "id">
 
 export type VehicleOrderByWithAggregationInput = {
@@ -612,6 +615,7 @@ export type VehicleCreateInput = {
   user: Prisma.UserCreateNestedOneWithoutVehiclesInput
   serviceRecords?: Prisma.ServiceRecordCreateNestedManyWithoutVehicleInput
   taxRecords?: Prisma.TaxRecordCreateNestedManyWithoutVehicleInput
+  componentInspections?: Prisma.ComponentInspectionCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleUncheckedCreateInput = {
@@ -644,6 +648,7 @@ export type VehicleUncheckedCreateInput = {
   updatedAt?: Date | string
   serviceRecords?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutVehicleInput
   taxRecords?: Prisma.TaxRecordUncheckedCreateNestedManyWithoutVehicleInput
+  componentInspections?: Prisma.ComponentInspectionUncheckedCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleUpdateInput = {
@@ -676,6 +681,7 @@ export type VehicleUpdateInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutVehiclesNestedInput
   serviceRecords?: Prisma.ServiceRecordUpdateManyWithoutVehicleNestedInput
   taxRecords?: Prisma.TaxRecordUpdateManyWithoutVehicleNestedInput
+  componentInspections?: Prisma.ComponentInspectionUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleUncheckedUpdateInput = {
@@ -708,6 +714,7 @@ export type VehicleUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   serviceRecords?: Prisma.ServiceRecordUncheckedUpdateManyWithoutVehicleNestedInput
   taxRecords?: Prisma.TaxRecordUncheckedUpdateManyWithoutVehicleNestedInput
+  componentInspections?: Prisma.ComponentInspectionUncheckedUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleCreateManyInput = {
@@ -1006,6 +1013,20 @@ export type VehicleUpdateOneRequiredWithoutTaxRecordsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VehicleUpdateToOneWithWhereWithoutTaxRecordsInput, Prisma.VehicleUpdateWithoutTaxRecordsInput>, Prisma.VehicleUncheckedUpdateWithoutTaxRecordsInput>
 }
 
+export type VehicleCreateNestedOneWithoutComponentInspectionsInput = {
+  create?: Prisma.XOR<Prisma.VehicleCreateWithoutComponentInspectionsInput, Prisma.VehicleUncheckedCreateWithoutComponentInspectionsInput>
+  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutComponentInspectionsInput
+  connect?: Prisma.VehicleWhereUniqueInput
+}
+
+export type VehicleUpdateOneRequiredWithoutComponentInspectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.VehicleCreateWithoutComponentInspectionsInput, Prisma.VehicleUncheckedCreateWithoutComponentInspectionsInput>
+  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutComponentInspectionsInput
+  upsert?: Prisma.VehicleUpsertWithoutComponentInspectionsInput
+  connect?: Prisma.VehicleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VehicleUpdateToOneWithWhereWithoutComponentInspectionsInput, Prisma.VehicleUpdateWithoutComponentInspectionsInput>, Prisma.VehicleUncheckedUpdateWithoutComponentInspectionsInput>
+}
+
 export type VehicleCreateWithoutUserInput = {
   id?: string
   name: string
@@ -1035,6 +1056,7 @@ export type VehicleCreateWithoutUserInput = {
   updatedAt?: Date | string
   serviceRecords?: Prisma.ServiceRecordCreateNestedManyWithoutVehicleInput
   taxRecords?: Prisma.TaxRecordCreateNestedManyWithoutVehicleInput
+  componentInspections?: Prisma.ComponentInspectionCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleUncheckedCreateWithoutUserInput = {
@@ -1066,6 +1088,7 @@ export type VehicleUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   serviceRecords?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutVehicleInput
   taxRecords?: Prisma.TaxRecordUncheckedCreateNestedManyWithoutVehicleInput
+  componentInspections?: Prisma.ComponentInspectionUncheckedCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleCreateOrConnectWithoutUserInput = {
@@ -1155,6 +1178,7 @@ export type VehicleCreateWithoutServiceRecordsInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutVehiclesInput
   taxRecords?: Prisma.TaxRecordCreateNestedManyWithoutVehicleInput
+  componentInspections?: Prisma.ComponentInspectionCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleUncheckedCreateWithoutServiceRecordsInput = {
@@ -1186,6 +1210,7 @@ export type VehicleUncheckedCreateWithoutServiceRecordsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   taxRecords?: Prisma.TaxRecordUncheckedCreateNestedManyWithoutVehicleInput
+  componentInspections?: Prisma.ComponentInspectionUncheckedCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleCreateOrConnectWithoutServiceRecordsInput = {
@@ -1233,6 +1258,7 @@ export type VehicleUpdateWithoutServiceRecordsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutVehiclesNestedInput
   taxRecords?: Prisma.TaxRecordUpdateManyWithoutVehicleNestedInput
+  componentInspections?: Prisma.ComponentInspectionUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleUncheckedUpdateWithoutServiceRecordsInput = {
@@ -1264,6 +1290,7 @@ export type VehicleUncheckedUpdateWithoutServiceRecordsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   taxRecords?: Prisma.TaxRecordUncheckedUpdateManyWithoutVehicleNestedInput
+  componentInspections?: Prisma.ComponentInspectionUncheckedUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleCreateWithoutTaxRecordsInput = {
@@ -1295,6 +1322,7 @@ export type VehicleCreateWithoutTaxRecordsInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutVehiclesInput
   serviceRecords?: Prisma.ServiceRecordCreateNestedManyWithoutVehicleInput
+  componentInspections?: Prisma.ComponentInspectionCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleUncheckedCreateWithoutTaxRecordsInput = {
@@ -1326,6 +1354,7 @@ export type VehicleUncheckedCreateWithoutTaxRecordsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   serviceRecords?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutVehicleInput
+  componentInspections?: Prisma.ComponentInspectionUncheckedCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleCreateOrConnectWithoutTaxRecordsInput = {
@@ -1373,6 +1402,7 @@ export type VehicleUpdateWithoutTaxRecordsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutVehiclesNestedInput
   serviceRecords?: Prisma.ServiceRecordUpdateManyWithoutVehicleNestedInput
+  componentInspections?: Prisma.ComponentInspectionUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleUncheckedUpdateWithoutTaxRecordsInput = {
@@ -1404,6 +1434,151 @@ export type VehicleUncheckedUpdateWithoutTaxRecordsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   serviceRecords?: Prisma.ServiceRecordUncheckedUpdateManyWithoutVehicleNestedInput
+  componentInspections?: Prisma.ComponentInspectionUncheckedUpdateManyWithoutVehicleNestedInput
+}
+
+export type VehicleCreateWithoutComponentInspectionsInput = {
+  id?: string
+  name: string
+  licensePlate?: string | null
+  image?: string | null
+  vehicleType?: string
+  engineType?: string
+  transmission?: string
+  ccOrKwh?: number | null
+  currentMileage: number
+  lastOilChange?: Date | string | null
+  lastService?: Date | string | null
+  tireConditionFront?: number
+  tireConditionRear?: number
+  brakePadCondition?: number
+  brakePadConditionRear?: number
+  coolantCondition?: number
+  oilCondition?: number
+  oilIntervalKm?: number | null
+  transmissionOilIntervalKm?: number | null
+  coolantIntervalKm?: number | null
+  stnkTaxDueDate?: Date | string | null
+  stnkFiveYearDueDate?: Date | string | null
+  annualTaxAmount?: number | null
+  swdklljAmount?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutVehiclesInput
+  serviceRecords?: Prisma.ServiceRecordCreateNestedManyWithoutVehicleInput
+  taxRecords?: Prisma.TaxRecordCreateNestedManyWithoutVehicleInput
+}
+
+export type VehicleUncheckedCreateWithoutComponentInspectionsInput = {
+  id?: string
+  userId: string
+  name: string
+  licensePlate?: string | null
+  image?: string | null
+  vehicleType?: string
+  engineType?: string
+  transmission?: string
+  ccOrKwh?: number | null
+  currentMileage: number
+  lastOilChange?: Date | string | null
+  lastService?: Date | string | null
+  tireConditionFront?: number
+  tireConditionRear?: number
+  brakePadCondition?: number
+  brakePadConditionRear?: number
+  coolantCondition?: number
+  oilCondition?: number
+  oilIntervalKm?: number | null
+  transmissionOilIntervalKm?: number | null
+  coolantIntervalKm?: number | null
+  stnkTaxDueDate?: Date | string | null
+  stnkFiveYearDueDate?: Date | string | null
+  annualTaxAmount?: number | null
+  swdklljAmount?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  serviceRecords?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutVehicleInput
+  taxRecords?: Prisma.TaxRecordUncheckedCreateNestedManyWithoutVehicleInput
+}
+
+export type VehicleCreateOrConnectWithoutComponentInspectionsInput = {
+  where: Prisma.VehicleWhereUniqueInput
+  create: Prisma.XOR<Prisma.VehicleCreateWithoutComponentInspectionsInput, Prisma.VehicleUncheckedCreateWithoutComponentInspectionsInput>
+}
+
+export type VehicleUpsertWithoutComponentInspectionsInput = {
+  update: Prisma.XOR<Prisma.VehicleUpdateWithoutComponentInspectionsInput, Prisma.VehicleUncheckedUpdateWithoutComponentInspectionsInput>
+  create: Prisma.XOR<Prisma.VehicleCreateWithoutComponentInspectionsInput, Prisma.VehicleUncheckedCreateWithoutComponentInspectionsInput>
+  where?: Prisma.VehicleWhereInput
+}
+
+export type VehicleUpdateToOneWithWhereWithoutComponentInspectionsInput = {
+  where?: Prisma.VehicleWhereInput
+  data: Prisma.XOR<Prisma.VehicleUpdateWithoutComponentInspectionsInput, Prisma.VehicleUncheckedUpdateWithoutComponentInspectionsInput>
+}
+
+export type VehicleUpdateWithoutComponentInspectionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
+  engineType?: Prisma.StringFieldUpdateOperationsInput | string
+  transmission?: Prisma.StringFieldUpdateOperationsInput | string
+  ccOrKwh?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentMileage?: Prisma.IntFieldUpdateOperationsInput | number
+  lastOilChange?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastService?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tireConditionFront?: Prisma.IntFieldUpdateOperationsInput | number
+  tireConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  coolantCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  transmissionOilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coolantIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stnkTaxDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stnkFiveYearDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  annualTaxAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  swdklljAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutVehiclesNestedInput
+  serviceRecords?: Prisma.ServiceRecordUpdateManyWithoutVehicleNestedInput
+  taxRecords?: Prisma.TaxRecordUpdateManyWithoutVehicleNestedInput
+}
+
+export type VehicleUncheckedUpdateWithoutComponentInspectionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicleType?: Prisma.StringFieldUpdateOperationsInput | string
+  engineType?: Prisma.StringFieldUpdateOperationsInput | string
+  transmission?: Prisma.StringFieldUpdateOperationsInput | string
+  ccOrKwh?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentMileage?: Prisma.IntFieldUpdateOperationsInput | number
+  lastOilChange?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastService?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tireConditionFront?: Prisma.IntFieldUpdateOperationsInput | number
+  tireConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  brakePadConditionRear?: Prisma.IntFieldUpdateOperationsInput | number
+  coolantCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilCondition?: Prisma.IntFieldUpdateOperationsInput | number
+  oilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  transmissionOilIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coolantIntervalKm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stnkTaxDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stnkFiveYearDueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  annualTaxAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  swdklljAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  serviceRecords?: Prisma.ServiceRecordUncheckedUpdateManyWithoutVehicleNestedInput
+  taxRecords?: Prisma.TaxRecordUncheckedUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleCreateManyUserInput = {
@@ -1464,6 +1639,7 @@ export type VehicleUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   serviceRecords?: Prisma.ServiceRecordUpdateManyWithoutVehicleNestedInput
   taxRecords?: Prisma.TaxRecordUpdateManyWithoutVehicleNestedInput
+  componentInspections?: Prisma.ComponentInspectionUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleUncheckedUpdateWithoutUserInput = {
@@ -1495,6 +1671,7 @@ export type VehicleUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   serviceRecords?: Prisma.ServiceRecordUncheckedUpdateManyWithoutVehicleNestedInput
   taxRecords?: Prisma.TaxRecordUncheckedUpdateManyWithoutVehicleNestedInput
+  componentInspections?: Prisma.ComponentInspectionUncheckedUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleUncheckedUpdateManyWithoutUserInput = {
@@ -1534,11 +1711,13 @@ export type VehicleUncheckedUpdateManyWithoutUserInput = {
 export type VehicleCountOutputType = {
   serviceRecords: number
   taxRecords: number
+  componentInspections: number
 }
 
 export type VehicleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   serviceRecords?: boolean | VehicleCountOutputTypeCountServiceRecordsArgs
   taxRecords?: boolean | VehicleCountOutputTypeCountTaxRecordsArgs
+  componentInspections?: boolean | VehicleCountOutputTypeCountComponentInspectionsArgs
 }
 
 /**
@@ -1563,6 +1742,13 @@ export type VehicleCountOutputTypeCountServiceRecordsArgs<ExtArgs extends runtim
  */
 export type VehicleCountOutputTypeCountTaxRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TaxRecordWhereInput
+}
+
+/**
+ * VehicleCountOutputType without action
+ */
+export type VehicleCountOutputTypeCountComponentInspectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ComponentInspectionWhereInput
 }
 
 
@@ -1597,6 +1783,7 @@ export type VehicleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   serviceRecords?: boolean | Prisma.Vehicle$serviceRecordsArgs<ExtArgs>
   taxRecords?: boolean | Prisma.Vehicle$taxRecordsArgs<ExtArgs>
+  componentInspections?: boolean | Prisma.Vehicle$componentInspectionsArgs<ExtArgs>
   _count?: boolean | Prisma.VehicleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vehicle"]>
 
@@ -1697,6 +1884,7 @@ export type VehicleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   serviceRecords?: boolean | Prisma.Vehicle$serviceRecordsArgs<ExtArgs>
   taxRecords?: boolean | Prisma.Vehicle$taxRecordsArgs<ExtArgs>
+  componentInspections?: boolean | Prisma.Vehicle$componentInspectionsArgs<ExtArgs>
   _count?: boolean | Prisma.VehicleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type VehicleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1712,6 +1900,7 @@ export type $VehiclePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     user: Prisma.$UserPayload<ExtArgs>
     serviceRecords: Prisma.$ServiceRecordPayload<ExtArgs>[]
     taxRecords: Prisma.$TaxRecordPayload<ExtArgs>[]
+    componentInspections: Prisma.$ComponentInspectionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2138,6 +2327,7 @@ export interface Prisma__VehicleClient<T, Null = never, ExtArgs extends runtime.
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   serviceRecords<T extends Prisma.Vehicle$serviceRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vehicle$serviceRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   taxRecords<T extends Prisma.Vehicle$taxRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vehicle$taxRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaxRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  componentInspections<T extends Prisma.Vehicle$componentInspectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vehicle$componentInspectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ComponentInspectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2638,6 +2828,30 @@ export type Vehicle$taxRecordsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.TaxRecordScalarFieldEnum | Prisma.TaxRecordScalarFieldEnum[]
+}
+
+/**
+ * Vehicle.componentInspections
+ */
+export type Vehicle$componentInspectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ComponentInspection
+   */
+  select?: Prisma.ComponentInspectionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ComponentInspection
+   */
+  omit?: Prisma.ComponentInspectionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ComponentInspectionInclude<ExtArgs> | null
+  where?: Prisma.ComponentInspectionWhereInput
+  orderBy?: Prisma.ComponentInspectionOrderByWithRelationInput | Prisma.ComponentInspectionOrderByWithRelationInput[]
+  cursor?: Prisma.ComponentInspectionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ComponentInspectionScalarFieldEnum | Prisma.ComponentInspectionScalarFieldEnum[]
 }
 
 /**

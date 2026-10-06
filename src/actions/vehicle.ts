@@ -219,7 +219,7 @@ export async function deleteVehicle(id: string) {
       return { success: false, error: 'Kendaraan tidak ditemukan' }
     }
 
-    // Hapus rincian servis, catatan servis, dan catatan pajak terkait secara transaksional
+    // Hapus rincian servis, catatan servis, catatan pajak, dan inspeksi komponen terkait secara transaksional
     await prisma.$transaction([
       prisma.serviceDetail.deleteMany({
         where: { serviceRecord: { vehicleId: id } }
@@ -228,6 +228,9 @@ export async function deleteVehicle(id: string) {
         where: { vehicleId: id }
       }),
       prisma.taxRecord.deleteMany({
+        where: { vehicleId: id }
+      }),
+      prisma.componentInspection.deleteMany({
         where: { vehicleId: id }
       }),
       prisma.vehicle.delete({
@@ -245,3 +248,68 @@ export async function deleteVehicle(id: string) {
     return { success: false, error: 'Gagal menghapus data kendaraan' }
   }
 }
+
+export async function confirmComponentHealth(data: {
+  vehicleId: string
+  componentId: string
+  componentName: string
+  condition: number
+  inspectorRole?: string
+  notes?: string | null
+}) {
+  try {
+    const session = await auth()
+    if (!session?.user?.id) {
+      return { success: false, error: 'Unauthorized' }
+    }
+
+    const vehicle = await prisma.vehicle.findFirst({
+      where: { id: data.vehicleId, userId: session.user.id }
+    })
+    if (!vehicle) {
+      return { success: false, error: 'Kendaraan tidak ditemukan' }
+    }
+
+    const validCondition = Math.min(100, Math.max(0, Math.round(Number(data.condition))))
+
+    const inspection = await prisma.componentInspection.create({
+      data: {
+        vehicleId: data.vehicleId,
+        componentId: data.componentId,
+        componentName: data.componentName,
+        condition: validCondition,
+        mileageAtCheck: vehicle.currentMileage,
+        inspectorRole: data.inspectorRole || 'USER',
+        notes: data.notes?.trim() || null,
+        checkedAt: new Date()
+      }
+    })
+
+    // Sinkronkan ke kolom legacy vehicle jika komponen sesuai
+    const legacyUpdates: Record<string, number> = {}
+    if (data.componentId === 'oil') legacyUpdates.oilCondition = validCondition
+    if (data.componentId === 'coolant') legacyUpdates.coolantCondition = validCondition
+    if (data.componentId === 'brakePadFront') legacyUpdates.brakePadCondition = validCondition
+    if (data.componentId === 'brakePadRear') legacyUpdates.brakePadConditionRear = validCondition
+    if (data.componentId === 'tireFront') legacyUpdates.tireConditionFront = validCondition
+    if (data.componentId === 'tireRear') legacyUpdates.tireConditionRear = validCondition
+
+    if (Object.keys(legacyUpdates).length > 0) {
+      await prisma.vehicle.update({
+        where: { id: data.vehicleId },
+        data: legacyUpdates
+      })
+    }
+
+    revalidatePath('/')
+    revalidatePath('/dashboard')
+    revalidatePath('/vehicles')
+    revalidatePath('/vehicles/components')
+
+    return { success: true, inspection }
+  } catch (error) {
+    console.error('Failed to confirm component health:', error)
+    return { success: false, error: 'Gagal mengonfirmasi kelayakan komponen' }
+  }
+}
+

@@ -59,7 +59,8 @@ export const ModelName = {
   ServiceRecord: 'ServiceRecord',
   ServiceDetail: 'ServiceDetail',
   TaxRecord: 'TaxRecord',
-  Feedback: 'Feedback'
+  Feedback: 'Feedback',
+  ComponentInspection: 'ComponentInspection'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -216,6 +217,23 @@ export const FeedbackScalarFieldEnum = {
 } as const
 
 export type FeedbackScalarFieldEnum = (typeof FeedbackScalarFieldEnum)[keyof typeof FeedbackScalarFieldEnum]
+
+
+export const ComponentInspectionScalarFieldEnum = {
+  id: 'id',
+  vehicleId: 'vehicleId',
+  componentId: 'componentId',
+  componentName: 'componentName',
+  condition: 'condition',
+  mileageAtCheck: 'mileageAtCheck',
+  inspectorRole: 'inspectorRole',
+  notes: 'notes',
+  checkedAt: 'checkedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ComponentInspectionScalarFieldEnum = (typeof ComponentInspectionScalarFieldEnum)[keyof typeof ComponentInspectionScalarFieldEnum]
 
 
 export const SortOrder = {

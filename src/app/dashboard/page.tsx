@@ -79,6 +79,9 @@ export default async function DashboardPage({
       serviceRecords: {
         orderBy: { date: 'desc' },
         include: { details: true }
+      },
+      componentInspections: {
+        orderBy: { checkedAt: 'desc' }
       }
     }
   })
@@ -90,6 +93,9 @@ export default async function DashboardPage({
         serviceRecords: {
           orderBy: { date: 'desc' },
           include: { details: true }
+        },
+        componentInspections: {
+          orderBy: { checkedAt: 'desc' }
         }
       }
     })
@@ -100,8 +106,8 @@ export default async function DashboardPage({
   }
 
   // Logika Kalkulasi Servis & Komponen
-  const reminderInfo = calculateServiceReminder(vehicle, vehicle.serviceRecords)
-  const allComponents = calculateAllComponentsStatus(vehicle, vehicle.serviceRecords)
+  const reminderInfo = calculateServiceReminder(vehicle, vehicle.serviceRecords, vehicle.componentInspections)
+  const allComponents = calculateAllComponentsStatus(vehicle, vehicle.serviceRecords, vehicle.componentInspections)
   const estimatedCost = estimateNextServiceCost(vehicle.serviceRecords)
 
   // Overall Health Score (rata-rata kondisi komponen)

@@ -86,3 +86,8 @@ export type TaxRecord = Prisma.TaxRecordModel
  * 
  */
 export type Feedback = Prisma.FeedbackModel
+/**
+ * Model ComponentInspection
+ * 
+ */
+export type ComponentInspection = Prisma.ComponentInspectionModel

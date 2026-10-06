@@ -392,7 +392,8 @@ export const ModelName = {
   ServiceRecord: 'ServiceRecord',
   ServiceDetail: 'ServiceDetail',
   TaxRecord: 'TaxRecord',
-  Feedback: 'Feedback'
+  Feedback: 'Feedback',
+  ComponentInspection: 'ComponentInspection'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -408,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "session" | "verificationToken" | "vehicle" | "serviceRecord" | "serviceDetail" | "taxRecord" | "feedback"
+    modelProps: "user" | "account" | "session" | "verificationToken" | "vehicle" | "serviceRecord" | "serviceDetail" | "taxRecord" | "feedback" | "componentInspection"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1078,6 +1079,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ComponentInspection: {
+      payload: Prisma.$ComponentInspectionPayload<ExtArgs>
+      fields: Prisma.ComponentInspectionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ComponentInspectionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComponentInspectionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ComponentInspectionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComponentInspectionPayload>
+        }
+        findFirst: {
+          args: Prisma.ComponentInspectionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComponentInspectionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ComponentInspectionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComponentInspectionPayload>
+        }
+        findMany: {
+          args: Prisma.ComponentInspectionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComponentInspectionPayload>[]
+        }
+        create: {
+          args: Prisma.ComponentInspectionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComponentInspectionPayload>
+        }
+        createMany: {
+          args: Prisma.ComponentInspectionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ComponentInspectionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComponentInspectionPayload>[]
+        }
+        delete: {
+          args: Prisma.ComponentInspectionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComponentInspectionPayload>
+        }
+        update: {
+          args: Prisma.ComponentInspectionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComponentInspectionPayload>
+        }
+        deleteMany: {
+          args: Prisma.ComponentInspectionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ComponentInspectionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ComponentInspectionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComponentInspectionPayload>[]
+        }
+        upsert: {
+          args: Prisma.ComponentInspectionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComponentInspectionPayload>
+        }
+        aggregate: {
+          args: Prisma.ComponentInspectionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateComponentInspection>
+        }
+        groupBy: {
+          args: Prisma.ComponentInspectionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ComponentInspectionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ComponentInspectionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ComponentInspectionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1257,6 +1332,23 @@ export const FeedbackScalarFieldEnum = {
 export type FeedbackScalarFieldEnum = (typeof FeedbackScalarFieldEnum)[keyof typeof FeedbackScalarFieldEnum]
 
 
+export const ComponentInspectionScalarFieldEnum = {
+  id: 'id',
+  vehicleId: 'vehicleId',
+  componentId: 'componentId',
+  componentName: 'componentName',
+  condition: 'condition',
+  mileageAtCheck: 'mileageAtCheck',
+  inspectorRole: 'inspectorRole',
+  notes: 'notes',
+  checkedAt: 'checkedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ComponentInspectionScalarFieldEnum = (typeof ComponentInspectionScalarFieldEnum)[keyof typeof ComponentInspectionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1432,6 +1524,7 @@ export type GlobalOmitConfig = {
   serviceDetail?: Prisma.ServiceDetailOmit
   taxRecord?: Prisma.TaxRecordOmit
   feedback?: Prisma.FeedbackOmit
+  componentInspection?: Prisma.ComponentInspectionOmit
 }
 
 /* Types for Logging */
