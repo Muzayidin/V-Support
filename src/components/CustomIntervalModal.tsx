@@ -129,10 +129,15 @@ export default function CustomIntervalModal({
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3.5 sm:p-4 bg-overlay backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="bg-secondary-background rounded-[var(--radius-base)] max-w-md w-full p-5 sm:p-6 shadow-[6px_6px_0px_0px_var(--border)] border-2 border-border flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
+        <div 
+          className="fixed inset-0 z-[60] flex items-center justify-center p-3.5 sm:p-4 pb-[calc(5rem+env(safe-area-inset-bottom,0px))] bg-overlay backdrop-blur-xs animate-in fade-in duration-150"
+          onClick={(e) => {
+            if (e.target === e.currentTarget && !loading) handleClose()
+          }}
+        >
+          <div className="bg-secondary-background rounded-[var(--radius-base)] max-w-sm sm:max-w-md w-full shadow-[5px_5px_0px_0px_var(--border)] sm:shadow-[6px_6px_0px_0px_var(--border)] border-2 border-border flex flex-col max-h-[min(74dvh,560px)] overflow-hidden animate-in zoom-in-95 duration-150">
             {/* Header */}
-            <div className="flex justify-between items-center border-b-2 border-border pb-3">
+            <div className="flex justify-between items-center border-b-2 border-border p-3.5 sm:p-4 shrink-0 bg-secondary-background">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-[var(--radius-base)] bg-main border-2 border-border flex items-center justify-center text-black font-black shadow-[2px_2px_0px_0px_var(--border)]">
                   <SlidersHorizontal className="w-4 h-4 stroke-[2.5]" />
@@ -156,29 +161,31 @@ export default function CustomIntervalModal({
               </button>
             </div>
 
-            {/* Note & Info */}
-            <div className="p-3 bg-background border-2 border-border rounded-[var(--radius-base)] shadow-[2px_2px_0px_0px_var(--border)] flex items-start gap-2.5 text-xs text-foreground">
-              <Info className="w-4 h-4 shrink-0 text-foreground mt-0.5" />
-              <div className="leading-relaxed font-semibold text-[11px]">
-                Anda bebas menentukan interval penggantian oli dan pendingin sesuai kondisi medan jalan Anda, namun tetap mengacu pada patokan resmi pabrikan.
+            {/* Scrollable Body */}
+            <div className="flex-1 overflow-y-auto p-3.5 sm:p-5 space-y-4 overscroll-contain">
+              {/* Note & Info */}
+              <div className="p-3 bg-background border-2 border-border rounded-[var(--radius-base)] shadow-[2px_2px_0px_0px_var(--border)] flex items-start gap-2.5 text-xs text-foreground">
+                <Info className="w-4 h-4 shrink-0 text-foreground mt-0.5" />
+                <div className="leading-relaxed font-semibold text-[11px]">
+                  Anda bebas menentukan interval penggantian oli dan pendingin sesuai kondisi medan jalan Anda, namun tetap mengacu pada patokan resmi pabrikan.
+                </div>
               </div>
-            </div>
 
-            {error && (
-              <div className="p-3 rounded-[var(--radius-base)] bg-[#FF4D50] text-black border-2 border-border text-xs font-black flex items-center gap-2 shadow-[2px_2px_0px_0px_var(--border)]">
-                <AlertCircle className="w-4 h-4 shrink-0" />
-                <span>{error}</span>
-              </div>
-            )}
+              {error && (
+                <div className="p-3 rounded-[var(--radius-base)] bg-[#FF4D50] text-black border-2 border-border text-xs font-black flex items-center gap-2 shadow-[2px_2px_0px_0px_var(--border)]">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  <span>{error}</span>
+                </div>
+              )}
 
-            {successMsg && (
-              <div className="p-3 rounded-[var(--radius-base)] bg-[#8AE500] text-black border-2 border-border text-xs font-black flex items-center gap-2 shadow-[2px_2px_0px_0px_var(--border)]">
-                <Check className="w-4 h-4 stroke-[3]" />
-                <span>{successMsg}</span>
-              </div>
-            )}
+              {successMsg && (
+                <div className="p-3 rounded-[var(--radius-base)] bg-[#8AE500] text-black border-2 border-border text-xs font-black flex items-center gap-2 shadow-[2px_2px_0px_0px_var(--border)]">
+                  <Check className="w-4 h-4 stroke-[3]" />
+                  <span>{successMsg}</span>
+                </div>
+              )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4 pb-[calc(1rem+env(safe-area-inset-bottom,0px))]">
               {/* 1. Oli Mesin (Khusus ICE) */}
               {!isEV && (
                 <div className="bg-background p-3.5 border-2 border-border rounded-[var(--radius-base)] space-y-2 shadow-[2px_2px_0px_0px_var(--border)]">
@@ -330,6 +337,7 @@ export default function CustomIntervalModal({
                 </div>
               </div>
             </form>
+            </div>
           </div>
         </div>
       )}

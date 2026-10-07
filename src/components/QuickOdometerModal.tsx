@@ -126,8 +126,13 @@ export default function QuickOdometerModal({
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-overlay backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="bg-secondary-background rounded-[var(--radius-base)] max-w-sm w-full p-6 shadow-[6px_6px_0px_0px_var(--border)] border-2 border-border flex flex-col gap-4">
+        <div 
+          className="fixed inset-0 z-[60] flex items-center justify-center p-3.5 sm:p-4 pb-[calc(5rem+env(safe-area-inset-bottom,0px))] bg-overlay backdrop-blur-xs animate-in fade-in duration-150"
+          onClick={(e) => {
+            if (e.target === e.currentTarget && !loading) handleClose()
+          }}
+        >
+          <div className="bg-secondary-background rounded-[var(--radius-base)] max-w-sm w-full p-4 sm:p-5 shadow-[5px_5px_0px_0px_var(--border)] sm:shadow-[6px_6px_0px_0px_var(--border)] border-2 border-border flex flex-col gap-3.5 max-h-[min(72dvh,520px)] overflow-y-auto animate-in zoom-in-95 duration-150">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2 font-black text-base text-foreground">
                 <div className="w-7 h-7 rounded-[var(--radius-base)] bg-main border-2 border-border flex items-center justify-center text-black">

@@ -135,8 +135,13 @@ export default function NotificationModal({
 
       {/* Modal Overlay (Neo-Brutalist) */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-overlay backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="relative w-full max-w-lg bg-secondary-background border-2 border-border shadow-[6px_6px_0px_0px_var(--border)] rounded-[var(--radius-base)] max-h-[85vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-150">
+        <div 
+          className="fixed inset-0 z-[60] flex items-center justify-center p-3.5 sm:p-4 pb-[calc(5rem+env(safe-area-inset-bottom,0px))] bg-overlay backdrop-blur-xs animate-in fade-in duration-150"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsOpen(false)
+          }}
+        >
+          <div className="relative w-full max-w-sm sm:max-w-lg bg-secondary-background border-2 border-border shadow-[5px_5px_0px_0px_var(--border)] sm:shadow-[6px_6px_0px_0px_var(--border)] rounded-[var(--radius-base)] max-h-[min(74dvh,560px)] flex flex-col overflow-hidden animate-in zoom-in-95 duration-150">
             
             {/* Header (Neo-Brutalist Main Accent) */}
             <div className="flex items-center justify-between p-3.5 sm:p-4 border-b-2 border-border bg-main text-black">
@@ -413,7 +418,7 @@ export default function NotificationModal({
             </div>
 
             {/* Footer */}
-            <div className="p-3 border-t-2 border-border bg-background flex items-center justify-between text-xs">
+            <div className="p-2.5 sm:p-3 border-t-2 border-border bg-background shrink-0 flex items-center justify-between text-xs">
               <span className="text-[11px] font-black uppercase tracking-wider text-foreground/70">
                 Cruz Smart Reminder Engine
               </span>

@@ -17,16 +17,28 @@ export default auth((req) => {
     return
   }
 
-  // 1. Pengendalian Trafik & Request Rate Limiting
+  // Abaikan request prefetch Next.js dari rate limiting
+  const isPrefetch =
+    req.headers.get("next-router-prefetch") === "1" ||
+    req.headers.get("purpose") === "prefetch" ||
+    req.headers.get("sec-purpose") === "prefetch" ||
+    req.headers.get("x-nextjs-data") === "1"
+
+  if (isPrefetch) {
+    return
+  }
+
+  // 1. Pengendalian Trafik & Request Rate Limiting (Longgar agar tidak mengganggu navigasi pengguna)
   const ip =
-    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+    req.headers.get("cf-connecting-ip") ||
     req.headers.get("x-real-ip") ||
+    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
     "127.0.0.1"
 
   const isAuthRoute = pathname.startsWith('/login') || pathname.startsWith('/api/auth')
   const rateLimitConfig = isAuthRoute
-    ? { limit: 40, windowMs: 60_000 }  // 40 request per menit untuk rute login/auth
-    : { limit: 120, windowMs: 60_000 } // 120 request per menit untuk rute aplikasi umum
+    ? { limit: 60, windowMs: 60_000 }   // 60 request per menit untuk rute login/auth
+    : { limit: 600, windowMs: 60_000 }  // 600 request per menit untuk rute aplikasi umum
 
   const rateCheck = checkRateLimit(`${ip}:${isAuthRoute ? 'auth' : 'general'}`, rateLimitConfig)
 
