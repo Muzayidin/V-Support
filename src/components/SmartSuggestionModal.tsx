@@ -15,6 +15,7 @@ export default function SmartSuggestionModal({
 }: SmartSuggestionModalProps) {
   if (!isOpen) return null
 
+  return (
     <div 
       className="fixed inset-0 z-[60] flex items-center justify-center p-3.5 sm:p-4 pb-[calc(5rem+env(safe-area-inset-bottom,0px))] bg-overlay backdrop-blur-xs animate-in fade-in duration-150"
       onClick={(e) => {
