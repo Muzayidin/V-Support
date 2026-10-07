@@ -1,4 +1,4 @@
-import { ServiceRecord, ServiceDetail, Vehicle } from '@/generated/prisma/client'
+import { ServiceRecord, ServiceDetail, Vehicle, ComponentInspection } from '@/generated/prisma/client'
 
 export type RecordWithDetails = ServiceRecord & { details: ServiceDetail[] }
 
@@ -223,6 +223,11 @@ export interface ComponentStatus {
   traveledKm: number // KM yang sudah ditempuh sejak servis / baseline
   lastServiceDate?: Date | null
   lastServiceMileage?: number | null
+  lastInspectionDate?: Date | null
+  lastInspectionMileage?: number | null
+  lastInspectionRole?: string | null
+  lastInspectionNotes?: string | null
+  isConfirmedFit?: boolean
   status: 'EXCELLENT' | 'GOOD' | 'WARNING' | 'CRITICAL'
   statusText: string
   advice: string
@@ -303,7 +308,8 @@ function findLatestServiceForComponent(
  */
 export function calculateAllComponentsStatus(
   vehicle: Vehicle,
-  serviceRecords: RecordWithDetails[] = []
+  serviceRecords: RecordWithDetails[] = [],
+  inspections: ComponentInspection[] = []
 ): ComponentStatus[] {
   const isEV = vehicle.engineType === 'EV'
   const isAutomatic = vehicle.transmission === 'AUTOMATIC'
@@ -313,6 +319,10 @@ export function calculateAllComponentsStatus(
 
   const sortedRecords = [...serviceRecords].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
+
+  const sortedInspections = [...inspections].sort(
+    (a, b) => new Date(b.checkedAt).getTime() - new Date(a.checkedAt).getTime()
   )
 
   const components: ComponentStatus[] = []
@@ -329,11 +339,31 @@ export function calculateAllComponentsStatus(
     dbDate?: Date | null
   ) => {
     const lastService = findLatestServiceForComponent(sortedRecords, keywords)
+    const lastInspection = sortedInspections.find((insp) => insp.componentId === id)
+
     let traveledKm: number
     let remainingKm: number
     let condition: number
+    let isConfirmedFit = false
 
-    if (lastService) {
+    const inspectionDate = lastInspection ? new Date(lastInspection.checkedAt).getTime() : 0
+    const serviceDate = lastService ? new Date(lastService.date).getTime() : 0
+    const inspectionMileage = lastInspection ? lastInspection.mileageAtCheck : -1
+    const serviceMileage = lastService ? lastService.mileage : -1
+
+    // Pemeriksaan fisik lebih prioritas bila dilakukan setelah servis terakhir
+    const isInspectionMoreRecent =
+      lastInspection !== undefined &&
+      (!lastService || inspectionMileage >= serviceMileage || inspectionDate >= serviceDate)
+
+    if (isInspectionMoreRecent && lastInspection) {
+      isConfirmedFit = true
+      const kmDelta = Math.max(0, currentMileage - lastInspection.mileageAtCheck)
+      const wearPercent = (kmDelta / activeIntervalKm) * 100
+      condition = Math.max(0, Math.min(100, Math.round(lastInspection.condition - wearPercent)))
+      remainingKm = Math.round((condition / 100) * activeIntervalKm)
+      traveledKm = activeIntervalKm - remainingKm
+    } else if (lastService) {
       traveledKm = Math.max(0, currentMileage - lastService.mileage)
       remainingKm = activeIntervalKm - traveledKm
       condition = Math.max(0, Math.min(100, Math.round((remainingKm / activeIntervalKm) * 100)))
@@ -348,7 +378,12 @@ export function calculateAllComponentsStatus(
       condition = cycle.condition
     }
 
-    const { status, statusText, advice } = getStatusDetails(remainingKm, condition, spec.name)
+    const { status, statusText, advice } = getStatusDetails(
+      remainingKm,
+      condition,
+      spec.name,
+      isConfirmedFit ? lastInspection : undefined
+    )
 
     components.push({
       id,
@@ -362,6 +397,11 @@ export function calculateAllComponentsStatus(
       traveledKm,
       lastServiceDate: lastService?.date || dbDate,
       lastServiceMileage: lastService?.mileage,
+      lastInspectionDate: lastInspection?.checkedAt,
+      lastInspectionMileage: lastInspection?.mileageAtCheck,
+      lastInspectionRole: lastInspection?.inspectorRole,
+      lastInspectionNotes: lastInspection?.notes,
+      isConfirmedFit,
       status,
       statusText,
       advice
@@ -588,7 +628,12 @@ export function calculateAllComponentsStatus(
   return components
 }
 
-function getStatusDetails(remainingKm: number, condition: number, componentName: string) {
+function getStatusDetails(
+  remainingKm: number, 
+  condition: number, 
+  componentName: string,
+  inspection?: ComponentInspection
+) {
   if (remainingKm <= 0 || condition <= 10) {
     return {
       status: 'CRITICAL' as const,
@@ -600,20 +645,26 @@ function getStatusDetails(remainingKm: number, condition: number, componentName:
     return {
       status: 'WARNING' as const,
       statusText: `Sisa ${remainingKm.toLocaleString('id-ID')} KM`,
-      advice: `Masa pakai ${componentName} mendekati batas rekomendasi pabrikan. Jadwalkan servis dalam waktu dekat.`
+      advice: inspection
+        ? `${componentName} mendekati batas keausan (${condition}%). Pantau ketat dan jadwalkan servis.`
+        : `Masa pakai ${componentName} mendekati batas rekomendasi pabrikan. Jadwalkan servis dalam waktu dekat.`
     }
   }
   if (condition >= 70) {
     return {
       status: 'EXCELLENT' as const,
-      statusText: `Sisa ${remainingKm.toLocaleString('id-ID')} KM`,
-      advice: `Kondisi ${componentName} sangat baik dan berada dalam toleransi prima.`
+      statusText: inspection ? `Layak Pakai (${condition}%)` : `Sisa ${remainingKm.toLocaleString('id-ID')} KM`,
+      advice: inspection
+        ? `${componentName} telah dikonfirmasi masih layak pakai oleh ${inspection.inspectorRole === 'MECHANIC' ? 'Mekanik' : 'Pengguna'} (${condition}%).`
+        : `Kondisi ${componentName} sangat baik dan berada dalam toleransi prima.`
     }
   }
   return {
     status: 'GOOD' as const,
-    statusText: `Sisa ${remainingKm.toLocaleString('id-ID')} KM`,
-    advice: `Kondisi ${componentName} dalam batas wajar pemakaian operasional harian.`
+    statusText: inspection ? `Cukup Layak (${condition}%)` : `Sisa ${remainingKm.toLocaleString('id-ID')} KM`,
+    advice: inspection
+      ? `${componentName} masih layak pakai dengan pantauan berkala (${condition}%).`
+      : `Kondisi ${componentName} dalam batas wajar pemakaian operasional harian.`
   }
 }
 
@@ -622,9 +673,10 @@ function getStatusDetails(remainingKm: number, condition: number, componentName:
  */
 export function calculateServiceReminder(
   vehicle: Vehicle,
-  serviceRecords: RecordWithDetails[] = []
+  serviceRecords: RecordWithDetails[] = [],
+  inspections: ComponentInspection[] = []
 ) {
-  const components = calculateAllComponentsStatus(vehicle, serviceRecords)
+  const components = calculateAllComponentsStatus(vehicle, serviceRecords, inspections)
   
   // Cari komponen yang paling kritis (remainingKm paling sedikit / kondisi paling rendah)
   const sortedByUrgency = [...components].sort((a, b) => a.remainingKm - b.remainingKm)
@@ -692,7 +744,8 @@ export interface NextServiceSchedule {
  */
 export function calculateNextServiceSchedule(
   vehicle: Vehicle,
-  serviceRecords: RecordWithDetails[] = []
+  serviceRecords: RecordWithDetails[] = [],
+  inspections: ComponentInspection[] = []
 ): NextServiceSchedule {
   const currentMileage = vehicle.currentMileage || 0
   const isEV = vehicle.engineType === 'EV'
@@ -704,6 +757,10 @@ export function calculateNextServiceSchedule(
   const sortedRecords = [...serviceRecords].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
+  const sortedInspections = [...inspections].sort(
+    (a, b) => new Date(b.checkedAt).getTime() - new Date(a.checkedAt).getTime()
+  )
+
   if (sortedRecords.length >= 2) {
     const r1 = sortedRecords[0]
     const r2 = sortedRecords[1]
@@ -728,9 +785,21 @@ export function calculateNextServiceSchedule(
     keywords: string[]
   ) => {
     const lastService = findLatestServiceForComponent(sortedRecords, keywords)
+    const lastInspection = sortedInspections.find((insp) => insp.componentId === id)
     let targetMileage: number
 
-    if (lastService) {
+    const inspectionDate = lastInspection ? new Date(lastInspection.checkedAt).getTime() : 0
+    const serviceDate = lastService ? new Date(lastService.date).getTime() : 0
+    const inspectionMileage = lastInspection ? lastInspection.mileageAtCheck : -1
+    const serviceMileage = lastService ? lastService.mileage : -1
+
+    const isInspectionMoreRecent =
+      lastInspection !== undefined &&
+      (!lastService || inspectionMileage >= serviceMileage || inspectionDate >= serviceDate)
+
+    if (isInspectionMoreRecent && lastInspection) {
+      targetMileage = lastInspection.mileageAtCheck + Math.round((lastInspection.condition / 100) * intervalKm)
+    } else if (lastService) {
       targetMileage = lastService.mileage + intervalKm
     } else {
       targetMileage = Math.ceil((currentMileage + 1) / intervalKm) * intervalKm

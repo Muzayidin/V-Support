@@ -103,6 +103,7 @@ model Vehicle {
   
   serviceRecords     ServiceRecord[]
   taxRecords         TaxRecord[]
+  componentInspections ComponentInspection[]
   createdAt          DateTime        @default(now())
   updatedAt          DateTime        @updatedAt
 }
@@ -151,5 +152,23 @@ model Feedback {
   rating    Int?     @default(5)
   createdAt DateTime @default(now())
 }
+
+model ComponentInspection {
+  id             String   @id @default(cuid())
+  vehicleId      String
+  vehicle        Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  componentId    String   // e.g. "oil", "vBelt", "sparkPlug", "tireFront", etc.
+  componentName  String   // e.g. "V-Belt CVT"
+  condition      Int      // 0 - 100
+  mileageAtCheck Int      // Odometer saat pengecekan
+  inspectorRole  String   @default("USER") // "USER" atau "MECHANIC"
+  notes          String?
+  checkedAt      DateTime @default(now())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([vehicleId, componentId])
+}
+
 
 

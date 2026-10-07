@@ -3,7 +3,7 @@
  * Menyimpan mutasi data saat tidak ada internet dan menyinkronkannya kembali ke server.
  */
 
-export type OfflineActionType = 'UPDATE_ODOMETER' | 'ADD_SERVICE_RECORD'
+export type OfflineActionType = 'UPDATE_ODOMETER' | 'ADD_SERVICE_RECORD' | 'CONFIRM_COMPONENT_HEALTH'
 
 export interface OfflineQueueItem {
   id: string
@@ -59,10 +59,14 @@ export function enqueueOfflineAction(
   }
 
   const currentQueue = getOfflineQueue()
-  // Jika ada update odometer untuk kendaraan yang sama, gantikan dengan yang terbaru
   if (type === 'UPDATE_ODOMETER') {
     const filtered = currentQueue.filter(
       (q) => !(q.type === 'UPDATE_ODOMETER' && q.payload?.vehicleId === payload.vehicleId)
+    )
+    setOfflineQueue([...filtered, item])
+  } else if (type === 'CONFIRM_COMPONENT_HEALTH') {
+    const filtered = currentQueue.filter(
+      (q) => !(q.type === 'CONFIRM_COMPONENT_HEALTH' && q.payload?.vehicleId === payload.vehicleId && q.payload?.componentId === payload.componentId)
     )
     setOfflineQueue([...filtered, item])
   } else {

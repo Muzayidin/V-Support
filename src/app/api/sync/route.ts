@@ -75,6 +75,44 @@ export async function POST(req: Request) {
             })
             processedCount++
           }
+        } else if (item.type === 'CONFIRM_COMPONENT_HEALTH') {
+          const { vehicleId, componentId, componentName, condition, inspectorRole, notes } = item.payload
+          const vehicle = await prisma.vehicle.findFirst({
+            where: { id: vehicleId, userId: session.user.id }
+          })
+
+          if (vehicle) {
+            const validCondition = Math.min(100, Math.max(0, Math.round(Number(condition))))
+            await prisma.componentInspection.create({
+              data: {
+                vehicleId,
+                componentId,
+                componentName,
+                condition: validCondition,
+                mileageAtCheck: vehicle.currentMileage,
+                inspectorRole: inspectorRole || 'USER',
+                notes: notes ? String(notes).trim() : null,
+                checkedAt: new Date(item.timestamp || Date.now())
+              }
+            })
+
+            const legacyUpdates: Record<string, number> = {}
+            if (componentId === 'oil') legacyUpdates.oilCondition = validCondition
+            if (componentId === 'coolant') legacyUpdates.coolantCondition = validCondition
+            if (componentId === 'brakePadFront') legacyUpdates.brakePadCondition = validCondition
+            if (componentId === 'brakePadRear') legacyUpdates.brakePadConditionRear = validCondition
+            if (componentId === 'tireFront') legacyUpdates.tireConditionFront = validCondition
+            if (componentId === 'tireRear') legacyUpdates.tireConditionRear = validCondition
+
+            if (Object.keys(legacyUpdates).length > 0) {
+              await prisma.vehicle.update({
+                where: { id: vehicleId },
+                data: legacyUpdates
+              })
+            }
+
+            processedCount++
+          }
         }
       } catch (itemErr: any) {
         console.error(`Error processing sync item ${item.id}:`, itemErr)
@@ -85,6 +123,7 @@ export async function POST(req: Request) {
     revalidatePath('/dashboard')
     revalidatePath('/history')
     revalidatePath('/vehicles')
+    revalidatePath('/vehicles/components')
 
     return NextResponse.json({
       success: true,

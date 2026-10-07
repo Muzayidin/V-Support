@@ -46,7 +46,12 @@ export default async function VehicleComponentsPage({
     orderBy: { date: 'desc' }
   })
 
-  const componentsStatus = calculateAllComponentsStatus(vehicle, serviceRecords)
+  const inspections = await prisma.componentInspection.findMany({
+    where: { vehicleId: vehicle.id },
+    orderBy: { checkedAt: 'desc' }
+  })
+
+  const componentsStatus = calculateAllComponentsStatus(vehicle, serviceRecords, inspections)
 
   return (
     <>

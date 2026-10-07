@@ -69,9 +69,14 @@ export default async function Vehicles({
     orderBy: { date: 'desc' }
   })
 
-  const reminderInfo = calculateServiceReminder(vehicle, serviceRecords)
-  const componentsStatus = calculateAllComponentsStatus(vehicle, serviceRecords)
-  const nextSchedule = calculateNextServiceSchedule(vehicle, serviceRecords)
+  const inspections = await prisma.componentInspection.findMany({
+    where: { vehicleId: vehicle.id },
+    orderBy: { checkedAt: 'desc' }
+  })
+
+  const reminderInfo = calculateServiceReminder(vehicle, serviceRecords, inspections)
+  const componentsStatus = calculateAllComponentsStatus(vehicle, serviceRecords, inspections)
+  const nextSchedule = calculateNextServiceSchedule(vehicle, serviceRecords, inspections)
   const isEV = vehicle.engineType === 'EV'
 
   // Ringkasan Kondisi Komponen

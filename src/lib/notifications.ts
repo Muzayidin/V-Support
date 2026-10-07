@@ -43,6 +43,9 @@ export async function getUserNotifications(userId: string): Promise<{
           serviceRecords: {
             include: { details: true },
             orderBy: { date: 'desc' }
+          },
+          componentInspections: {
+            orderBy: { checkedAt: 'desc' }
           }
         }
       }
@@ -95,7 +98,11 @@ export async function getUserNotifications(userId: string): Promise<{
 
     // 2. PENGECEKAN STATUS KOMPONEN (AUS / KRITIS)
     if (user.componentReminderEnabled) {
-      const components = calculateAllComponentsStatus(vehicle as any, vehicle.serviceRecords as any)
+      const components = calculateAllComponentsStatus(
+        vehicle as any, 
+        vehicle.serviceRecords as any, 
+        (vehicle as any).componentInspections as any
+      )
 
       for (const comp of components) {
         if (comp.status === 'CRITICAL') {
