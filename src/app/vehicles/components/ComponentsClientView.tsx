@@ -146,42 +146,33 @@ export default function ComponentsClientView({ components, currentMileage, vehic
             return (
               <div 
                 key={comp.id} 
-                className="p-3.5 sm:p-4 bg-secondary-background border-2 border-border rounded-[var(--radius-base)] shadow-[3px_3px_0px_0px_var(--border)] sm:shadow-[4px_4px_0px_0px_var(--border)] space-y-2.5 text-foreground"
+                className="p-3 bg-secondary-background border-2 border-border rounded-[var(--radius-base)] shadow-[3px_3px_0px_0px_var(--border)] space-y-2 text-foreground transition-all"
               >
-                {/* Header Komponen */}
-                <div className="flex justify-between items-start gap-2">
-                  <div>
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-6 h-6 rounded-[var(--radius-base)] bg-background border border-border flex items-center justify-center text-foreground shrink-0 shadow-[1px_1px_0px_0px_var(--border)]">
-                        {getCategoryIcon(comp.category)}
-                      </div>
-                      <h3 className="text-xs sm:text-sm font-black text-foreground">{comp.name}</h3>
+                {/* Header Komponen: Kiri (Icon + Nama + Info Interval), Kanan (Badge % & Sisa KM) */}
+                <div className="flex justify-between items-center gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-8 h-8 rounded-[var(--radius-base)] bg-background border-2 border-border flex items-center justify-center text-foreground shrink-0 shadow-[1px_1px_0px_0px_var(--border)]">
+                      {getCategoryIcon(comp.category)}
                     </div>
-
-                    <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
-                      <span className="text-[10px] font-bold text-foreground/75 bg-background border border-border px-1.5 py-0.5 rounded-[var(--radius-base)]">
-                        Kategori: {comp.category}
-                      </span>
-                      <span className="text-[10px] font-bold text-foreground/75 bg-background border border-border px-1.5 py-0.5 rounded-[var(--radius-base)]">
-                        Interval: {comp.intervalKm.toLocaleString('id-ID')} KM
-                      </span>
-                      {comp.isCustomInterval ? (
-                        <span className="text-[9px] font-black px-1.5 py-0.5 bg-[#0099FF] text-white border border-border rounded-[var(--radius-base)]">
-                          Kustom
+                    <div className="min-w-0">
+                      <h3 className="text-xs sm:text-sm font-black text-foreground truncate leading-tight">
+                        {comp.name}
+                      </h3>
+                      <div className="flex items-center gap-1.5 text-[10px] font-bold text-foreground/65 mt-0.5">
+                        <span>Interval {comp.intervalKm.toLocaleString('id-ID')} KM</span>
+                        <span>•</span>
+                        <span className={comp.isCustomInterval ? 'text-[#0099FF] font-black' : ''}>
+                          {comp.isCustomInterval ? 'Kustom' : 'Pabrikan'}
                         </span>
-                      ) : (
-                        <span className="text-[9px] font-black px-1.5 py-0.5 bg-[#FACC00] text-black border border-border rounded-[var(--radius-base)]">
-                          Pabrikan
-                        </span>
-                      )}
+                      </div>
                     </div>
                   </div>
 
-                  <div className="text-right flex flex-col items-end gap-1 shrink-0">
-                    <span className={`px-2.5 py-0.5 rounded-[var(--radius-base)] text-xs font-black ${getConditionBadge(comp.currentCondition)}`}>
+                  <div className="text-right flex items-center gap-1.5 shrink-0">
+                    <span className={`px-2 py-0.5 rounded-[var(--radius-base)] text-xs font-black ${getConditionBadge(comp.currentCondition)}`}>
                       {comp.currentCondition}%
                     </span>
-                    <span className={`text-[10px] font-black px-2 py-0.5 rounded-[var(--radius-base)] border border-border ${
+                    <span className={`text-[10px] font-black px-1.5 py-0.5 rounded-[var(--radius-base)] border border-border ${
                       isOverdue 
                         ? 'bg-[#FF4D50] text-black font-black' 
                         : comp.remainingKm <= 500 
@@ -197,57 +188,49 @@ export default function ComponentsClientView({ components, currentMileage, vehic
                 </div>
 
                 {/* Progress Bar Kondisi */}
-                <div className="w-full h-3 bg-background border-2 border-border rounded-[var(--radius-base)] overflow-hidden">
+                <div className="w-full h-2.5 bg-background border-2 border-border rounded-full overflow-hidden">
                   <div 
-                    className={`h-full ${getConditionBarColor(comp.currentCondition)} border-r-2 border-border transition-all duration-500`} 
+                    className={`h-full ${getConditionBarColor(comp.currentCondition)} transition-all duration-500`} 
                     style={{ width: `${comp.currentCondition}%` }}
                   />
                 </div>
 
-                {/* Deskripsi & Saran */}
-                <div className="p-2.5 bg-background border border-border rounded-[var(--radius-base)] text-[11px] leading-relaxed font-bold text-foreground/85">
-                  <p>{comp.advice}</p>
-                  {comp.lastServiceDate && (
-                    <span className="text-[10px] text-foreground/60 block mt-1 pt-1 border-t border-border/50">
-                      Terakhir servis: {new Date(comp.lastServiceDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })} 
-                      {comp.lastServiceMileage ? ` (di KM ${comp.lastServiceMileage.toLocaleString('id-ID')})` : ''}
-                    </span>
-                  )}
-                </div>
-
-                {/* Riwayat Pengecekan Fisik Terakhir (Jika ada) */}
-                {comp.lastInspectionDate && (
-                  <div className="p-2.5 bg-main/20 border-2 border-border rounded-[var(--radius-base)] text-[10px] font-bold flex items-start gap-2 shadow-[1px_1px_0px_0px_var(--border)]">
-                    <ShieldCheck className="w-4 h-4 text-black shrink-0 mt-0.5 stroke-[2.5]" />
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className="font-black text-[9px] uppercase tracking-wider bg-black text-white px-1.5 py-0.2 rounded-[var(--radius-base)]">
-                          Terverifikasi Fisik
-                        </span>
-                        <span className="font-black text-foreground">
-                          {comp.lastInspectionRole === 'MECHANIC' ? 'Mekanik Bengkel' : 'Pengguna'}
-                        </span>
-                        <span className="text-foreground/70">
-                          • {new Date(comp.lastInspectionDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
-                          {comp.lastInspectionMileage ? ` (KM ${comp.lastInspectionMileage.toLocaleString('id-ID')})` : ''}
-                        </span>
-                      </div>
+                {/* Status Khusus: Peringatan Kritis/Aus ATAU Hasil Cek Fisik */}
+                {comp.lastInspectionDate ? (
+                  <div className="p-1.5 px-2 bg-main/20 border border-border rounded-[var(--radius-base)] text-[10px] font-bold flex items-center justify-between gap-1.5">
+                    <div className="flex items-center gap-1.5 min-w-0 truncate">
+                      <ShieldCheck className="w-3.5 h-3.5 text-black shrink-0 stroke-[2.5]" />
+                      <span className="font-black truncate">
+                        Terverifikasi Layak ({comp.currentCondition}%) oleh {comp.lastInspectionRole === 'MECHANIC' ? 'Mekanik' : 'User'}
+                      </span>
                       {comp.lastInspectionNotes && (
-                        <p className="text-[10px] font-bold text-foreground/90 mt-1 pl-1.5 border-l-2 border-border italic">
-                          "{comp.lastInspectionNotes}"
-                        </p>
+                        <span className="text-foreground/75 truncate italic">
+                          - "{comp.lastInspectionNotes}"
+                        </span>
                       )}
                     </div>
+                    <span className="text-[9px] text-foreground/60 shrink-0">
+                      KM {comp.lastInspectionMileage ? comp.lastInspectionMileage.toLocaleString('id-ID') : '-'}
+                    </span>
                   </div>
-                )}
+                ) : (comp.status === 'CRITICAL' || comp.status === 'WARNING') ? (
+                  <div className={`p-1.5 px-2 rounded-[var(--radius-base)] text-[10px] font-black flex items-center gap-1.5 border ${
+                    comp.status === 'CRITICAL' 
+                      ? 'bg-[#FF4D50]/15 text-[#991b1b] border-[#FF4D50]' 
+                      : 'bg-[#FACC00]/25 text-[#78350f] border-[#FACC00]'
+                  }`}>
+                    <AlertTriangle className="w-3.5 h-3.5 shrink-0 stroke-[2.5]" />
+                    <span className="truncate">{comp.advice}</span>
+                  </div>
+                ) : null}
 
-                {/* Aksi Tombol Komponen: Cek Kelayakan & Catat Servis */}
+                {/* Tombol Aksi: Cek Kelayakan & Catat Servis */}
                 <div className="flex items-center gap-2 pt-1 border-t border-border/40">
                   <button
                     type="button"
                     onClick={() => setSelectedCompForCheck(comp)}
-                    className="flex-1 py-2 px-2.5 bg-main hover:bg-[#8AE500] text-black border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] rounded-[var(--radius-base)] text-[11px] font-black flex items-center justify-center gap-1.5 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
-                    title="Konfirmasi kelayakan fisik komponen dan sesuaikan persentase kondisi"
+                    className="flex-1 py-1.5 px-2.5 bg-main hover:bg-[#8AE500] text-black border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] rounded-[var(--radius-base)] text-xs font-black flex items-center justify-center gap-1.5 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+                    title="Konfirmasi kelayakan fisik & atur persentase kondisi"
                   >
                     <ClipboardCheck className="w-3.5 h-3.5 stroke-[2.5]" />
                     <span>Cek Kelayakan (Atur %)</span>
@@ -255,8 +238,8 @@ export default function ComponentsClientView({ components, currentMileage, vehic
 
                   <Link
                     href={`/add-service?vehicleId=${vehicleId}`}
-                    className="py-2 px-3 bg-background hover:bg-main/30 text-foreground border-2 border-border shadow-[2px_2px_0px_0px_var(--border)] rounded-[var(--radius-base)] text-[11px] font-black flex items-center justify-center gap-1.5 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer shrink-0"
-                    title="Catat servis penggantian komponen ini"
+                    className="py-1.5 px-3 bg-background hover:bg-main/30 text-foreground border-2 border-border shadow-[1.5px_1.5px_0px_0px_var(--border)] rounded-[var(--radius-base)] text-xs font-black flex items-center justify-center gap-1 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer shrink-0"
+                    title="Catat servis komponen ini"
                   >
                     <Plus className="w-3 h-3 stroke-[3]" />
                     <span>Servis</span>
